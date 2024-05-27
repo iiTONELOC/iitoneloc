@@ -29,3 +29,9 @@
   border-radius: 6px;
   border: 3px solid rgb(15 23 42);
 }
+
+embed {
+  filter: invert(0.8) brightness(1) contrast(1.2) sepia(0.2) saturate(1.5)
+    hue-rotate(180deg);
+  width: 100%;
+}
