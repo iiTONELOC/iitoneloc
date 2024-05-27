@@ -1,5 +1,3 @@
-"use server";
-
 import { JSX } from "react";
 import Image from "next/image";
 import { Footer } from "@/components";
@@ -29,7 +27,7 @@ const imgDetails = {
   priority: true,
 };
 
-export default async function Home(): Promise<JSX.Element> {
+export default function Home(): JSX.Element {
   return (
     <main className={styles.main}>
       <header className={styles.header}>
