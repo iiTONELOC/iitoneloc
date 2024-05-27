@@ -1,12 +1,9 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { Header } from "@/components";
-import { Inter } from "next/font/google";
-
-const inter = Inter({ subsets: ["latin"] });
 
 const styles = {
-  body: "w-full h-screen flex flex-col justify-start items-center",
+  body: "w-full h-screen flex flex-col justify-start items-center bg-gradient-to-l from-slate-950 via-slate-900 to-slate-950 text-gray-100",
 };
 
 export const metadata: Metadata = {
@@ -21,9 +18,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className + " " + styles.body}>
+      <body className={styles.body}>
         <Header />
-
         {children}
       </body>
     </html>

@@ -13,7 +13,7 @@ import { usePathname } from "next/navigation";
 const getLinkClasses = (isTitle: boolean, isCurrentLink: boolean): string => {
   let classes = "";
   if (isTitle) {
-    classes += "text-green-600 hover:text-green-500 text-xl xl:text-2xl ";
+    classes += "text-green-500 hover:text-emerald-500 text-xl xl:text-2xl ";
   } else {
     classes += "text-sm  xl:text-base ";
   }
