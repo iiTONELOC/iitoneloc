@@ -1,3 +1,5 @@
+"use server";
+
 import { JSX } from "react";
 import Image from "next/image";
 import { Footer } from "@/components";
@@ -5,21 +7,12 @@ import { Footer } from "@/components";
 const styles = {
   main: "flex h-full w-full flex-col items-center justify-between ",
   header: "w-full flex flex-col items-center justify-center px-4",
-  h1: "text-center text-2xl md:text-3xl xl:text-4xl font-bold mt-12",
+  h1: "text-center text-2xl md:text-3xl xl:text-4xl font-bold mt-8",
   h2: "text-center text-xl xl:text-2xl font-bold text-green-400 mt-6 -mb-8",
   h3: "w-full text-center text-xl md:text-2xl font-bold ",
   section: "w-full flex flex-col items-center justify-start py-4",
-  avatarDiv:
-    `relative z-[-1] flex place-items-center before:absolute before:h-[300px] before:w-full 
-  before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent
-   before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full after:translate-x-1/3
-    after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br
-     before:dark:from-transparent before:dark:to-green-700 before:dark:opacity-10 after:dark:from-emerald-900 after:dark:via-[#22c55e]
-      after:dark:opacity-40 sm:before:w-[480px] sm:after:w-[240px] before:lg:h-[360px]`.replace(
-      "/n",
-      " "
-    ),
-  avatarImg: "relative dark:drop-shadow-[0_0_0.3rem_#0F592A]",
+
+  avatarImg: "rounded-full  shadow-lg mt-4",
   aboutMeSection:
     "w-full h-full max-w-[900px] flex flex-col-reverse md:justify-center items-center p-2 mt-4 gap-4",
   aboutMeDiv:
@@ -36,7 +29,7 @@ const imgDetails = {
   priority: true,
 };
 
-export default function Home(): JSX.Element {
+export default async function Home(): Promise<JSX.Element> {
   return (
     <main className={styles.main}>
       <header className={styles.header}>
@@ -46,16 +39,14 @@ export default function Home(): JSX.Element {
         </h2>
       </header>
       <section className={styles.section}>
-        <div className={styles.avatarDiv}>
-          <Image
-            className={styles.avatarImg}
-            src={imgDetails.src}
-            alt={imgDetails.alt}
-            width={imgDetails.width}
-            height={imgDetails.height}
-            priority={imgDetails.priority}
-          />
-        </div>
+        <Image
+          className={styles.avatarImg}
+          src={imgDetails.src}
+          alt={imgDetails.alt}
+          width={imgDetails.width}
+          height={imgDetails.height}
+          priority={imgDetails.priority}
+        />
 
         <div className={styles.aboutMeDiv}>
           <h3 className={styles.h3}>About Me</h3>

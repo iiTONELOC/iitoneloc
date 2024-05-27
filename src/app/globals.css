@@ -3,31 +3,29 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Targets FireFox */
+  scrollbar-width: thin;
+  scrollbar-color: rgb(51 65 85) rgb(15 23 42);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+/* Scrollbar Styling Chrome, Edge, Safari*/
+*::-webkit-scrollbar {
+  width: 12px;
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+*::-webkit-scrollbar-track {
+  background: rgb(15 23 42);
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+*::-webkit-scrollbar-thumb {
+  background-color: rgb(51 65 85);
+  border-radius: 6px;
+  border: 3px solid rgb(15 23 42);
 }
