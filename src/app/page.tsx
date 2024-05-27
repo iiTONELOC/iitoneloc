@@ -9,7 +9,6 @@ const styles = {
   h2: "text-center text-xl xl:text-2xl font-bold text-green-400 mt-6 -mb-8",
   h3: "w-full text-center text-xl md:text-2xl font-bold ",
   section: "w-full flex flex-col items-center justify-start py-4",
-
   avatarImg: "rounded-full  shadow-lg mt-4",
   aboutMeSection:
     "w-full h-full max-w-[900px] flex flex-col-reverse md:justify-center items-center p-2 mt-4 gap-4",

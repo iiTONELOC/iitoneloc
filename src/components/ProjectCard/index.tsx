@@ -6,7 +6,7 @@ import { ProjectCardFooter } from "./ProjectCardFooter";
 import { RepoData, formatRepoName } from "@/server-utils";
 
 const cardStyles = {
-  li: "w-full min-w-min max-w-[350px] h-auto hover:bg-slate-600/75 bg-slate-800/75  rounded-lg p-2 flex flex-col justify-start items-center",
+  li: "w-full min-w-min max-w-[450px] lg:max-w-[355px] h-auto hover:bg-slate-600/75 bg-slate-800/75 rounded-lg p-2 flex flex-col justify-start items-center",
   h2: "decoration-gray-300 underline underline-offset-4 text-gray-100 my-2 text-2xl font-bold",
   article:
     "h-full bg-slate-900/80 w-full flex flex-wrap flex-row justify-center items-center rounded-md text-gray-200",
