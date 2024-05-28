@@ -62,7 +62,7 @@ export function Input(props: Readonly<inputTypes>): JSX.Element {
           <p className="text-red-600 text-shadow">{error}</p>
         </div>
       )}
-      <label htmlFor={name} className="sr-only">
+      <label htmlFor={id} className="sr-only">
         {description}
       </label>
       {

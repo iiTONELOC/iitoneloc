@@ -7,7 +7,8 @@ import { JSX, Suspense, createRef, useEffect, useState } from "react";
 const styles = {
   section:
     "w-full max-w-4xl h-full flex flex-row items-center justify-start px-8 embed-responsive",
-  embed: "rounded-lg shadow-lg w-auto h-full w-full",
+  embed: "rounded-lg shadow-lg h-full  w-full",
+  object: "w-full h-full max-h-[1125px]",
   downloadDiv:
     "w-full h-full flex flex-col items-center justify-center gap-16 -mt-28",
   h3: "text-center text-2xl md:text-3xl xl:text-4xl font-bold mt-8",
@@ -45,7 +46,7 @@ export const ResumeComponent = (): JSX.Element => {
   }, []);
   return canShowPdf ? (
     <Suspense fallback={<div>Loading...</div>}>
-      <object className={styles.embed}>
+      <object className={styles.object}>
         {!resize && (
           <embed
             ref={pdfRef}

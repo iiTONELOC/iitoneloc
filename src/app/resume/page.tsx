@@ -7,7 +7,7 @@ const styles = {
   header: "w-full flex flex-col items-center justify-center px-4",
   h1: "text-center text-2xl md:text-3xl xl:text-4xl font-bold mt-8",
   section:
-    "w-full max-w-4xl h-full flex flex-row items-center justify-start p-8 embed-responsive",
+    "w-full max-w-4xl h-full flex flex-row items-center justify-start px-8 py-2",
   embed: "rounded-lg shadow-lg w-auto h-full w-full",
 };
 
