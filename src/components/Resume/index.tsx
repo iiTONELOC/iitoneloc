@@ -5,10 +5,8 @@ import { MdCloudDownload } from "react-icons/md";
 import { JSX, Suspense, createRef, useEffect, useState } from "react";
 
 const styles = {
-  section:
-    "w-full max-w-4xl h-full flex flex-row items-center justify-start px-8 embed-responsive",
-  embed: "rounded-lg shadow-lg h-full  w-full",
-  object: "w-full h-full max-h-[1125px]",
+  embed: "rounded-lg shadow-lg h-full w-full max-h-[1125px]",
+  object: "w-full h-full flex items-center justify-center",
   downloadDiv:
     "w-full h-full flex flex-col items-center justify-center gap-16 -mt-28",
   h3: "text-center text-2xl md:text-3xl xl:text-4xl font-bold mt-8",
