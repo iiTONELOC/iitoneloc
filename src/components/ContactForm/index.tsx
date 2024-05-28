@@ -1,12 +1,13 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
-import EmailInput from "./inputs/EmailInput";
-import ReCAPTCHA from "react-google-recaptcha";
-import ContactMessage from "./ContactMessage";
-import ContactNameInput from "./ContactName";
+import { sendEmail } from "./actions";
+import { useFormState } from "react-dom";
 import FormContainer from "./FormContainer";
-import emailjs from "@emailjs/browser";
+import ContactNameInput from "./ContactName";
+import EmailInput from "./inputs/EmailInput";
+import ContactMessage from "./ContactMessage";
+import ReCAPTCHA from "react-google-recaptcha";
+import { useState, useEffect, useRef } from "react";
 
 const styles = {
   title: "text-center text-2xl text-shadow",
@@ -29,6 +30,10 @@ const defaultFormState = {
   g_recaptcha_response: "",
 };
 
+const defaultEmailSentState = {
+  message: "",
+};
+
 type formButton = {
   name: string;
   type: "submit" | "reset";
@@ -47,6 +52,10 @@ export function ContactForm() {
   const [sendError, setSendError] = useState<boolean | null>(null);
   const [showMessage, setShowMessage] = useState<boolean>(false);
   const [message, setMessage] = useState<string | null>(null);
+  const [emailSent, formAction] = useFormState(
+    sendEmail,
+    defaultEmailSentState
+  );
 
   const isFormValidated = () =>
     [messageValidated, emailValidated, nameValidated].every(Boolean);
@@ -82,43 +91,18 @@ export function ContactForm() {
   };
 
   const handleSubmitForm = (e: React.SyntheticEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-
-    console.log("Handling form submit", {
-      formState,
-      formValidated,
-      capResponse,
-    });
-    if (formValidated) {
+    if (formValidated && capResponse && capResponse !== "") {
       try {
-        //NOSONAR
-
-        // Add the captcha response token to the form data
-        formState.g_recaptcha_response = capResponse || "";
-
-        // Send the form data to emailjs
-        // TODO: fix this to
-        emailjs
-          .sendForm(
-            process.env.NEXT_PUBLIC_EMAIL_SERVICE_ID || "",
-            process.env.NEXT_PUBLIC_EMAIL_TEMPLATE_ID || "",
-            emailJsFormRef.current || "",
-            process.env.NEXT_PUBLIC_EMAIL_PUB_TOKEN || ""
-          )
-          .then(() => {
-            displayMessage("Email sent successfully!");
-            resetState();
-            setTimeout(() => {
-              window.location.assign("/");
-            }, 2000);
-          });
+        displayMessage("Sending email...");
       } catch (error) {
         setSendError(true);
         displayMessage(
           "There was an error sending your email. Please try again later."
         );
       }
+    } else {
+      e.preventDefault();
+      e.stopPropagation();
     }
   };
 
@@ -132,6 +116,26 @@ export function ContactForm() {
     setFormValidated(isFormValidated());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [formState]);
+
+  useEffect(() => {
+    emailSent.message !== "" && console.log("Email sent", emailSent);
+    emailSent.message === "Email sent successfully!" &&
+      (() => {
+        displayMessage("Email sent successfully!");
+        resetState();
+        setTimeout(() => {
+          window.location.assign("/");
+        }, 750);
+      })();
+    emailSent.message === "Error" &&
+      (() => {
+        setSendError(true);
+        displayMessage(
+          "There was an error sending your email. Please try again later."
+        );
+        setCapResponse(null);
+      })();
+  }, [emailSent]);
 
   const formButtons: formButton[] = [
     {
@@ -166,7 +170,7 @@ export function ContactForm() {
   };
 
   return (
-    <FormContainer _ref={emailJsFormRef}>
+    <FormContainer _ref={emailJsFormRef} onAction={formAction}>
       <h1 className={styles.title}>{`Let's get in touch!`}</h1>
       {showMessage ? (
         <h2 className={!sendError ? "text-emerald-500" : "text-red-500"}>
