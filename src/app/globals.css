@@ -34,4 +34,9 @@ embed {
   filter: invert(0.8) brightness(1) contrast(1.2) sepia(0.2) saturate(1.5)
     hue-rotate(180deg);
   width: 100%;
+  max-height: 1125px;
+}
+
+pdf-viewer {
+  max-height: 1125px;
 }
