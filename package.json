@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "node -r ts-node/register --env-file=.env.local server/index.ts",
     "build": "next build && tsc -p tsconfig.server.json",
-    "start": "NODE_ENV=production node --env-file=.env.local dist/server/index.js",
+    "start": "node dist/server/index.js",
     "lint": "next lint"
   },
   "dependencies": {
