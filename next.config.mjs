@@ -10,8 +10,7 @@ const cspHeader = `
   object-src 'self';
   base-uri 'self';
   form-action 'self';
-  frame-ancestors 'self';
-  ${process.env.USE_SSL === 'true' ? 'upgrade-insecure-requests;' : ''}
+  frame-ancestors 'self';}
   `;
 
 const nextConfig = {
