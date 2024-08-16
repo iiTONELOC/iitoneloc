@@ -1,7 +1,7 @@
 /**
  * Error message prefix
  */
-export const creationErrorPrefix = "GitHubAPI Creation error:";
+export const creationErrorPrefix = 'GitHubAPI Creation error:';
 
 /**
  * Generates the REST endpoint for a repo
@@ -15,9 +15,9 @@ export const restRepoEndPoint = (owner: string, repo: string): string =>
 /**
  * The base URL for the GitHub API
  */
-export const gitHubAPIUrl = "https://api.github.com/";
+export const gitHubAPIUrl = 'https://api.github.com/';
 
 /**
  * The URL for the GraphQL endpoint
  */
-export const graphQLRequestURL = gitHubAPIUrl + "graphql";
+export const graphQLRequestURL = gitHubAPIUrl + 'graphql';
