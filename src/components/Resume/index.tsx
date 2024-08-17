@@ -53,7 +53,7 @@ export const ResumeComponent = (): JSX.Element => {
           <embed
             ref={pdfRef}
             aria-label="resume"
-            src="./documents/resume.pdf"
+            src="./documents/anthony_tropeano_resume.pdf"
             type="application/pdf"
           />
         )}
@@ -64,7 +64,11 @@ export const ResumeComponent = (): JSX.Element => {
       <BiSolidError className={styles.errorIcon} />
       <h3 className={styles.h3}>Oh No! Your browser does not support PDFs!</h3>
 
-      <a className={styles.p} href="./documents/resume.pdf" target="_blank">
+      <a
+        className={styles.p}
+        href="./documents/anthony_tropeano_resume.pdf"
+        target="_blank"
+      >
         <span className={styles.downloadSpan}>
           <MdCloudDownload className={styles.cloudIcon} />
         </span>{" "}
