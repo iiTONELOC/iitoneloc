@@ -33,7 +33,7 @@ const footerLinks: footerLink[] = [
   },
   {
     name: "Email",
-    href: `mailto:anthonytropeano@protonmail.com`,
+    href: `mailto:anthony@atropeano.com`,
     //@ts-ignore
     icon: <BsEnvelope className={componentStyles.linkIcon} />,
   },

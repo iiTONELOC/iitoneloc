@@ -8,10 +8,10 @@ export const formatRepoName: Function = (repoName: string): string => {
   // split the name on any hyphens or underscores
   // and capitalize the first letter of each word
 
-  const delimiter: "_" | "-" = repoName.includes("_") ? "_" : "-";
+  const delimiter: '_' | '-' = repoName.includes('_') ? '_' : '-';
   const splitName: string[] = repoName.split(delimiter);
 
   return splitName
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(" ");
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ');
 };

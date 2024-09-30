@@ -1,9 +1,9 @@
-import { ContactForm, Footer } from "@/components";
+import { ContactForm, Footer } from '@/components';
 
 const styles = {
-  main: "w-full h-full flex flex-col items-center justify-center p-4",
-  header: "w-full flex flex-col items-center justify-center px-4",
-  h1: "text-center text-3xl md:text-4xl font-bold mt-6",
+  main: 'w-full h-full flex flex-col items-center justify-center p-4',
+  header: 'w-full flex flex-col items-center justify-center px-4',
+  h1: 'text-center text-3xl md:text-4xl font-bold mt-6',
 };
 
 export default function Contact(): JSX.Element {

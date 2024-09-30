@@ -1,13 +1,13 @@
-"use server";
-import { JSX } from "react";
-import { Footer, ResumeComponent } from "@/components";
+'use server';
+import { JSX } from 'react';
+import { Footer, ResumeComponent } from '@/components';
 
 const styles = {
-  main: "flex h-full w-full flex-col items-center justify-start ",
-  header: "w-full flex flex-col items-center justify-center px-4",
-  h1: "text-center text-2xl md:text-3xl xl:text-4xl font-bold mt-8",
+  main: 'flex h-full w-full flex-col items-center justify-start ',
+  header: 'w-full flex flex-col items-center justify-center px-4',
+  h1: 'text-center text-2xl md:text-3xl xl:text-4xl font-bold mt-8',
   section:
-    "w-full max-w-4xl h-full flex flex-row items-center justify-start px-8 py-2",
+    'w-full max-w-4xl h-full flex flex-row items-center justify-start px-8 py-2',
 };
 
 export default async function Resume(): Promise<JSX.Element> {
