@@ -1,6 +1,6 @@
 export type authHeaders = {
   Authorization: string;
-  "Content-Type": string;
+  'Content-Type': string;
 };
 
 export type repoByName = {

@@ -1,42 +1,42 @@
-"use client";
+'use client';
 
-import { sendEmail } from "./actions";
-import { useFormState } from "react-dom";
-import FormContainer from "./FormContainer";
-import ContactNameInput from "./ContactName";
-import EmailInput from "./inputs/EmailInput";
-import ContactMessage from "./ContactMessage";
-import ReCAPTCHA from "react-google-recaptcha";
-import { useState, useEffect, useRef } from "react";
+import { sendEmail } from './actions';
+import { useFormState } from 'react-dom';
+import FormContainer from './FormContainer';
+import ContactNameInput from './ContactName';
+import EmailInput from './inputs/EmailInput';
+import ContactMessage from './ContactMessage';
+import ReCAPTCHA from 'react-google-recaptcha';
+import { useState, useEffect, useRef } from 'react';
 
 const styles = {
-  title: "text-center text-2xl text-shadow",
-  buttonSection: "flex flex-col flex-wrap items-center justify-center gap-8",
-  buttonContainer: "flex flex-row items-center justify-between gap-8",
-  button: "text-white font-bold py-2 px-4 rounded text-shadow p-3 ",
+  title: 'text-center text-2xl text-shadow',
+  buttonSection: 'flex flex-col flex-wrap items-center justify-center gap-8',
+  buttonContainer: 'flex flex-row items-center justify-between gap-8',
+  button: 'text-white font-bold py-2 px-4 rounded text-shadow p-3 ',
   submitButton: {
-    regular: "bg-slate-800 hover:cursor-not-allowed",
+    regular: 'bg-slate-800 hover:cursor-not-allowed',
     verified:
-      "bg-green-700 hover:bg-green-600 hover:cursor:pointer transition duration-300 ease-in-out",
+      'bg-green-700 hover:bg-green-600 hover:cursor:pointer transition duration-300 ease-in-out',
   },
   cancelButton:
-    "bg-slate-700 hover:bg-red-700 hover:cursor-pointer transition duration-300 ease-in-out",
+    'bg-slate-700 hover:bg-red-700 hover:cursor-pointer transition duration-300 ease-in-out',
 };
 
 const defaultFormState = {
-  user_name: "",
-  user_email: "",
-  message: "",
-  g_recaptcha_response: "",
+  user_name: '',
+  user_email: '',
+  message: '',
+  g_recaptcha_response: '',
 };
 
 const defaultEmailSentState = {
-  message: "",
+  message: '',
 };
 
 type formButton = {
   name: string;
-  type: "submit" | "reset";
+  type: 'submit' | 'reset';
   className: string;
   onClick: (e: React.SyntheticEvent) => void;
 };
@@ -91,13 +91,13 @@ export function ContactForm() {
   };
 
   const handleSubmitForm = (e: React.SyntheticEvent) => {
-    if (formValidated && capResponse && capResponse !== "") {
+    if (formValidated && capResponse && capResponse !== '') {
       try {
-        displayMessage("Sending email...");
+        displayMessage('Sending email...');
       } catch (error) {
         setSendError(true);
         displayMessage(
-          "There was an error sending your email. Please try again later."
+          'There was an error sending your email. Please try again later.'
         );
       }
     } else {
@@ -118,20 +118,20 @@ export function ContactForm() {
   }, [formState]);
 
   useEffect(() => {
-    emailSent.message !== "" && console.log("Email sent", emailSent);
-    emailSent.message === "Email sent successfully!" &&
+    emailSent.message !== '' && console.log('Email sent', emailSent);
+    emailSent.message === 'Email sent successfully!' &&
       (() => {
-        displayMessage("Email sent successfully!");
+        displayMessage('Email sent successfully!');
         resetState();
         setTimeout(() => {
-          window.location.assign("/");
+          window.location.assign('/');
         }, 750);
       })();
-    emailSent.message === "Error" &&
+    emailSent.message === 'Error' &&
       (() => {
         setSendError(true);
         displayMessage(
-          "There was an error sending your email. Please try again later."
+          'There was an error sending your email. Please try again later.'
         );
         setCapResponse(null);
       })();
@@ -139,19 +139,18 @@ export function ContactForm() {
 
   const formButtons: formButton[] = [
     {
-      name: "Cancel",
-      type: "reset",
-      className: [styles.button, styles.cancelButton].join(" "),
+      name: 'Cancel',
+      type: 'reset',
+      className: [styles.button, styles.cancelButton].join(' '),
       onClick: handleResetForm,
     },
     {
-      name: "Submit",
-      type: "submit",
-      className: `${styles.button} ${
-        formValidated
+      name: 'Submit',
+      type: 'submit',
+      className: `${styles.button} ${formValidated
           ? styles.submitButton.verified
           : styles.submitButton.regular
-      }`,
+        }`,
       onClick: handleSubmitForm,
     },
   ];
@@ -159,12 +158,12 @@ export function ContactForm() {
   const renderButtons = () => {
     return (
       <div className={styles.buttonContainer}>
-        {" "}
+        {' '}
         {formButtons.map(({ name, type, className, onClick }, i) => (
           <button key={i} type={type} className={className} onClick={onClick}>
             {name}
           </button>
-        ))}{" "}
+        ))}{' '}
       </div>
     );
   };
@@ -173,9 +172,9 @@ export function ContactForm() {
     <FormContainer _ref={emailJsFormRef} onAction={formAction}>
       <h1 className={styles.title}>{`Let's get in touch!`}</h1>
       {showMessage ? (
-        <h2 className={!sendError ? "text-emerald-500" : "text-red-500"}>
-          {" "}
-          {message}{" "}
+        <h2 className={!sendError ? 'text-emerald-500' : 'text-red-500'}>
+          {' '}
+          {message}{' '}
         </h2>
       ) : (
         <></>
@@ -201,9 +200,9 @@ export function ContactForm() {
       {formValidated ? (
         <section className={styles.buttonSection}>
           <ReCAPTCHA
-            sitekey={process.env.NEXT_PUBLIC_CAPTCHA_SITE_KEY || ""}
+            sitekey={process.env.NEXT_PUBLIC_CAPTCHA_SITE_KEY || ''}
             onChange={setCapResponse}
-            theme="dark"
+            theme='dark'
           />
 
           {renderButtons()}

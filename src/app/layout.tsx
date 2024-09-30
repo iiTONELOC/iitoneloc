@@ -7,7 +7,7 @@ const styles = {
 };
 
 export const metadata: Metadata = {
-  title: "Anthony T",
+  title: "Anthony Tropeano",
   description: "Software Developer and aspiring Cybersecurity Engineer",
 };
 

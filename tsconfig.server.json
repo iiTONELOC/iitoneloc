@@ -1,0 +1,32 @@
+{
+    "compilerOptions": {
+        "lib": [
+            "dom",
+            "dom.iterable",
+            "esnext"
+        ],
+        "allowJs": true,
+        "skipLibCheck": true,
+        "strict": true,
+        "esModuleInterop": true,
+        "target": "ESNext",
+        "module": "CommonJS",
+        "moduleResolution": "Node",
+        "resolveJsonModule": true,
+        "isolatedModules": true,
+        "jsx": "preserve",
+        "incremental": true,
+        "baseUrl": "./",
+        "outDir": "./dist",
+        "rootDir": "./",
+        "tsBuildInfoFile": "./dist/.tsbuildinfo",
+        "forceConsistentCasingInFileNames": true
+    },
+    "include": [
+        "./server/**/*"
+    ],
+    "exclude": [
+        "./node_modules",
+        "./src"
+    ]
+}
