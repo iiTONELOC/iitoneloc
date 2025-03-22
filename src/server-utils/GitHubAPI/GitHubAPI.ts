@@ -2,9 +2,9 @@ import {
   gitHubAPIUrl,
   restRepoEndPoint,
   graphQLRequestURL,
-  creationErrorPrefix
-} from './constants';
-import { headers, readmeParser } from './helpers';
+  creationErrorPrefix,
+} from "./constants";
+import { headers, readmeParser } from "./helpers";
 
 export interface APIResponseData {
   data: [] | any; //NOSONAR
@@ -20,9 +20,9 @@ interface DemoOptions {
 }
 
 export const demoOptions: DemoOptions = {
-  GITHUB: 'GITHUB',
-  DEMO: 'DEMO',
-  NONE: 'NONE'
+  GITHUB: "GITHUB",
+  DEMO: "DEMO",
+  NONE: "NONE",
 };
 
 class GitHubAPI {
@@ -34,21 +34,21 @@ class GitHubAPI {
     const authenticate = process.env.GITHUB_ACCESS_TOKEN;
 
     if (!username && authenticate) {
-      throw new Error(creationErrorPrefix + ' A username is required');
+      throw new Error(creationErrorPrefix + " A username is required");
     }
 
     if (!authenticate && username) {
-      throw new Error(creationErrorPrefix + ' An auth token is required');
+      throw new Error(creationErrorPrefix + " An auth token is required");
     }
 
     if (!authenticate && !username) {
       throw new Error(
-        creationErrorPrefix + ' A username and auth token are required'
+        creationErrorPrefix + " A username and auth token are required"
       );
     }
 
-    this.user = username ?? '';
-    this.#auth = authenticate ?? '';
+    this.user = username ?? "";
+    this.#auth = authenticate ?? "";
   }
 
   /**
@@ -71,30 +71,32 @@ class GitHubAPI {
             }}`;
 
       const graphRes = await fetch(graphQLRequestURL, {
-        method: 'POST',
+        method: "POST",
         headers: headers(this.#auth),
         body: JSON.stringify({ query }),
         // revalidate: every 10 minutes
-        next: { revalidate: 600 }
+        next: { revalidate: 600 },
       });
 
       const graphData = await graphRes.json();
       const { data, errors } = graphData;
 
-      const repoNames = data?.user?.pinnedItems?.nodes?.map((node: { name: string }) => node.name);
+      const repoNames = data?.user?.pinnedItems?.nodes?.map(
+        (node: { name: string }) => node.name
+      );
 
       return {
         data: repoNames || [],
         status: graphRes.status,
         ok: graphRes.ok,
-        errors
+        errors,
       };
     } catch (error) {
       return {
         data: [],
         status: 500,
         ok: false,
-        errors: [error]
+        errors: [error],
       };
     }
   }
@@ -117,10 +119,10 @@ class GitHubAPI {
       const query = `query{user(login:"${this.user}"){repositories(first:100) {nodes{name}}}}`;
 
       const graphRes = await fetch(graphQLRequestURL, {
-        method: 'POST',
+        method: "POST",
         headers: headers(this.#auth),
         body: JSON.stringify({ query }),
-        next: { revalidate: 600 }
+        next: { revalidate: 600 },
       });
 
       const graphData = await graphRes.json();
@@ -135,14 +137,14 @@ class GitHubAPI {
         data: repoNames,
         status: graphRes.status,
         ok: graphRes.ok,
-        errors
+        errors,
       };
     } catch (error) {
       return {
         data: [],
         status: 500,
         ok: false,
-        errors: [error]
+        errors: [error],
       };
     }
   }
@@ -176,9 +178,9 @@ class GitHubAPI {
       const URL = gitHubAPIUrl + restRepoEndPoint(this.user, repoName);
       /* istanbul ignore next */
       const res = await fetch(URL, {
-        method: 'GET',
+        method: "GET",
         headers: headers(this.#auth),
-        next: { revalidate: 600 }
+        next: { revalidate: 600 },
       });
 
       const data = await res.json();
@@ -204,20 +206,20 @@ class GitHubAPI {
           updatedAt: data.updated_at,
           openIssues: data.open_issues,
           cloneUrl: data.clone_url,
-          liveUrl: data.homepage || '',
+          liveUrl: data.homepage || "",
           screenshotUrl: repoScreenshot.data.screenshotUrl,
-          demoUrl: demoUrl.data.demoUrl || ''
+          demoUrl: demoUrl.data.demoUrl || "",
         },
         status: res.status,
         ok: res.ok,
-        errors: []
+        errors: [],
       };
     } catch (error) {
       return {
         data: {},
         status: 500,
         ok: false,
-        errors: [error]
+        errors: [error],
       };
     }
   }
@@ -229,12 +231,12 @@ class GitHubAPI {
   async getRepoContents(repoName: string): Promise<APIResponseData> {
     try {
       const URL =
-        gitHubAPIUrl + restRepoEndPoint(this.user, repoName) + '/contents';
+        gitHubAPIUrl + restRepoEndPoint(this.user, repoName) + "/contents";
       /* istanbul ignore next */
       const res = await fetch(URL, {
-        method: 'GET',
+        method: "GET",
         headers: headers(this.#auth),
-        next: { revalidate: 600 }
+        next: { revalidate: 600 },
       });
 
       const data = await res.json();
@@ -243,14 +245,14 @@ class GitHubAPI {
         data,
         status: res.status,
         ok: res.ok,
-        errors: []
+        errors: [],
       };
     } catch (error) {
       return {
         data: [],
         status: 500,
         ok: false,
-        errors: [error]
+        errors: [error],
       };
     }
   }
@@ -280,24 +282,24 @@ class GitHubAPI {
         repoContents ?? (await this.getRepoContents(repoName));
 
       const readme = contents.data.find((file: { name: string }) =>
-        file.name.includes('README')
+        file.name.includes("README")
       );
 
       return {
         data: {
           html_url: readme?.html_url,
-          download_url: readme?.download_url
+          download_url: readme?.download_url,
         },
         status: contents.status,
         ok: contents.ok,
-        errors: contents.errors
+        errors: contents.errors,
       };
     } catch (error) {
       return {
         data: {},
         status: 500,
         ok: false,
-        errors: [error]
+        errors: [error],
       };
     }
   }
@@ -338,25 +340,25 @@ class GitHubAPI {
        */
       if (readme.ok) {
         const readmeData = await fetch(readme.data.download_url, {
-          next: { revalidate: 600 }
+          next: { revalidate: 600 },
         });
         const readmeText = await readmeData.text();
 
         return {
           data: {
             readme: readmeText,
-            download_url: readme.data.download_url
+            download_url: readme.data.download_url,
           },
           status: readme.status,
           ok: readme.ok,
-          errors: readme.errors
+          errors: readme.errors,
         };
       } else {
         return {
           data: {},
           status: readme.status,
           ok: readme.ok,
-          errors: readme.errors
+          errors: readme.errors,
         };
       }
     } catch (error) {
@@ -364,7 +366,7 @@ class GitHubAPI {
         data: {},
         status: 500,
         ok: false,
-        errors: [error]
+        errors: [error],
       };
     }
   }
@@ -390,12 +392,12 @@ class GitHubAPI {
       // README screenshots should contain a relative path only
       // we need to build the full URL
       const SCREENSHOT_URL_BASE_PATH = screenShotBasePath.replace(
-        'README.md',
-        ''
+        "README.md",
+        ""
       );
 
       // parse the README for a screenshot
-      const readmeURL = readmeParser('screenshot', readme);
+      const readmeURL = readmeParser("screenshot", readme);
 
       // return a placeholder if no screenshot is found
       const screenshotUrl = readmeURL
@@ -403,17 +405,17 @@ class GitHubAPI {
         : undefined;
 
       return {
-        data: { screenshotUrl: screenshotUrl?.replace(/README.MD/g, '') },
+        data: { screenshotUrl: screenshotUrl?.replace(/README.MD/g, "") },
         status: 200,
         ok: true,
-        errors: []
+        errors: [],
       };
     } catch (error) {
       return {
         data: {},
         status: 500,
         ok: false,
-        errors: [error]
+        errors: [error],
       };
     }
   }
@@ -435,21 +437,21 @@ class GitHubAPI {
     try {
       // should pull a cached readme if it exists or fetch a new one
 
-      const demoUrl = readmeParser('demo', readme ?? '');
+      const demoUrl = readmeParser("demo", readme ?? "");
 
       return {
         data: { demoUrl },
         status: 200,
         ok: true,
-        errors: []
+        errors: [],
       };
     } catch (error) {
-      console.error('Failed to get demo URL', error);
+      console.error("Failed to get demo URL", error);
       return {
-        data: { demoUrl: '' },
+        data: { demoUrl: "" },
         status: 500,
         ok: false,
-        errors: [error]
+        errors: [error],
       };
     }
   }
@@ -468,30 +470,30 @@ class GitHubAPI {
     */
   async getAvatarURL(): Promise<APIResponseData> {
     try {
-      const URL = gitHubAPIUrl + 'users/' + this.user;
+      const URL = gitHubAPIUrl + "users/" + this.user;
       /* istanbul ignore next */
       const res = await fetch(URL, {
-        method: 'GET',
+        method: "GET",
         headers: headers(this.#auth),
-        next: { revalidate: 600 }
+        next: { revalidate: 600 },
       });
 
       const data = await res.json();
 
       return {
         data: {
-          avatar_url: data.avatar_url
+          avatar_url: data.avatar_url,
         },
         status: res.status,
         ok: res.ok,
-        errors: []
+        errors: [],
       };
     } catch (error) {
       return {
         data: {},
         status: 500,
         ok: false,
-        errors: [error]
+        errors: [error],
       };
     }
   }
