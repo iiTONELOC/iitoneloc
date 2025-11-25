@@ -1,6 +1,6 @@
 # Hello, my name is Anthony
 
-## I&apos;m an Aspiring Cybersecurity Engineer & Fullstack Web Developer
+## I&apos;m Cybersecurity Engineer & Fullstack Web Developer
 
 I am a Cybersecurity Engineering senior at the University of Arizona
 and hold a Full Stack Web Development certificate from the
@@ -10,10 +10,9 @@ skills. I have experience with various technologies, including
 networking, cloud computing, virtualization, software development,
 and low-level programming. I am proficient in Python, JavaScript,
 TypeScript, and C. I am finishing my bachelor&apos;s degree in Cyber
-Operations while working on cybersecurity certifications such as
-CompTIA&apos;s Network+, Security+, and CySA+. I am currently
-seeking internships and/or entry-level positions in cybersecurity or
-software development.
+Operations, and preparing to begin an M.S. in Computer Science with a
+Cyber Operations concentration at Dakota State University. I am currently
+seeking internships and/or entry-level positions in cybersecurity or software development.
 
 ## View Portfolio
 
