@@ -2,7 +2,7 @@
 
 ## I&apos;m a Cybersecurity Engineer & Fullstack Web Developer
 
-Cybersecurity and systems engineer with experience in Linux, networking, virtualization, and automation, along with additional full-stack development work (React/Next.js, Node.js, SQL) and low-level programming in C; currently completing a B.A.S. in Cyber Operations and beginning an M.S. in Computer Science at Dakota State University
+Cybersecurity and systems engineer with experience in Linux, networking, virtualization, and automation, along with additional full-stack development work (React/Next.js, Node.js, SQL/NoSQL) and low-level programming in C; currently completing a B.A.S. in Cyber Operations and beginning an M.S. in Computer Science at Dakota State University
 
 ## View Portfolio
 
