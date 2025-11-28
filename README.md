@@ -2,17 +2,7 @@
 
 ## I&apos;m Cybersecurity Engineer & Fullstack Web Developer
 
-I am a Cybersecurity Engineering senior at the University of Arizona
-and hold a Full Stack Web Development certificate from the
-University of Central Florida. I enjoy creating secure, performant,
-and user-friendly web applications and strengthening my cyber
-skills. I have experience with various technologies, including
-networking, cloud computing, virtualization, software development,
-and low-level programming. I am proficient in Python, JavaScript,
-TypeScript, and C. I am finishing my bachelor&apos;s degree in Cyber
-Operations, and preparing to begin an M.S. in Computer Science with a
-Cyber Operations concentration at Dakota State University. I am currently
-seeking internships and/or entry-level positions in cybersecurity or software development.
+Cybersecurity and systems engineer with experience in Linux, networking, virtualization, and automation, along with additional full-stack development work (React/Next.js, Node.js, SQL) and low-level programming in C; currently completing a B.A.S. in Cyber Operations and beginning an M.S. in Computer Science at Dakota State University
 
 ## View Portfolio
 
