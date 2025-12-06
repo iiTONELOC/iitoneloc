@@ -32,7 +32,7 @@ const FooterIcon = ({ icon, href, name }: FooterIcons): JSX.Element => {
   );
 };
 
-export const ProjectCardFooter = ({
+export const ProjectCardFooter = async ({
   liveUrl,
   demoUrl,
   repoUrl,
@@ -40,7 +40,7 @@ export const ProjectCardFooter = ({
   liveUrl: string;
   demoUrl: string;
   repoUrl: string;
-}): JSX.Element => {
+}): Promise<JSX.Element> => {
   const footerIcons: FooterIcons[] = [
     {
       name: "deployment",
