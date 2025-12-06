@@ -21,7 +21,9 @@ const cardStyles = {
     "text-2xl text-gray-300 hover:text-emerald-400 hover:scale-110 transition duration-300 ease-in-out",
 };
 
-export const ProjectCard = (props: { data: RepoData }): JSX.Element | null => {
+export const ProjectCard = async (props: {
+  data: RepoData;
+}): Promise<JSX.Element | null> => {
   const { data } = props;
   const { screenshotUrl, description, demoUrl, liveUrl, repoUrl, name } =
     data || {};
