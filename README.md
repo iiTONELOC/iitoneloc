@@ -1,6 +1,6 @@
 # Anthony Tropeano
 
-### From Construction Management to Cybersecurity Engineering
+## From Construction Management to Cybersecurity Engineering
 
 In 2020, I made a calculated career change from construction project management to cybersecurity. 
 With zero coding experience, I taught myself programming and earned my B.A.S. in Cyber Operations 
@@ -33,4 +33,4 @@ personal experiments, and production systems. Every repo is a step in the journe
 - SOHO security appliance framework (SAFE-PC)
 - Client solutions at Defend I.T. Solutions
 
-📫 **Let's Connect**: [Portfolio](https://atropeano.com) | anthony@wedefendit.com
+📫 **Let's Connect**: [Portfolio](https://atropeano.com) | [anthony@wedefendit.com](mailto:anthony@wedefendit.com)
