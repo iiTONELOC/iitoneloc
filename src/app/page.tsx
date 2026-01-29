@@ -32,7 +32,7 @@ export default function Home(): JSX.Element {
       <header className={styles.header}>
         <h1 className={styles.h1}>Hello, my name is Anthony.</h1>
         <h2 className={styles.h2}>
-          Cybersecurity Engineer | Software Engineer | Full-Stack Developer
+          Security Engineer | Full-Stack Developer | Systems Programmer
         </h2>
       </header>
       <section className={styles.section}>
@@ -48,15 +48,28 @@ export default function Home(): JSX.Element {
         <div className={styles.aboutMeDiv}>
           <h3 className={styles.h3}>About Me</h3>
           <p className={styles.aboutP}>
-            I&apos;m a cybersecurity and software engineer who works across
-            security engineering, networking, virtualization, automation, and
-            full-stack development, with additional experience building
-            production applications and low-level systems. I&apos;ve launched my
-            own security-focused projects, built modern web solutions, and
-            developed practical tools that emphasize reliability, performance,
-            and secure design. I&apos;m completing my Cyber Operations degree
-            and beginning graduate work in computer science while continuing to
-            build well-engineered, security-driven projects.
+            I&apos;m a security engineer and full-stack developer who builds
+            secure, automated systems.
+            <br />
+            <br />
+            In 2020, I made a calculated career change from construction project
+            management to cybersecurity—with zero coding experience. Five years
+            later, I&apos;ve earned my B.A.S. in Cyber Operations from the
+            University of Arizona (summa cum laude, 4.0 GPA, NSA-designated
+            program) and founded Defend I.T. Solutions, providing security
+            consulting and IT services to small businesses.
+            <br />
+            <br />
+            I specialize in security operations (SIEM deployment, vulnerability
+            assessment, network hardening), infrastructure automation (reducing
+            manual work by 60-87%), and full-stack development (React/Next.js,
+            Node.js, TypeScript). My work spans Python, Rust, C, and modern web
+            technologies—always with a security-first mindset.
+            <br />
+            <br />
+            Currently pursuing my M.S. in Computer Science - Cyber Operations at
+            Dakota State University while building production systems that solve
+            real problems.
           </p>
         </div>
       </section>
