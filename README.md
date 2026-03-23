@@ -1,36 +1,29 @@
 # Anthony Tropeano
 
-## From Construction Management to Cybersecurity Engineering
+Security engineer and toolmaker. I build OSINT platforms, infrastructure automation, and systems-level software.
 
-In 2020, I made a calculated career change from construction project management to cybersecurity. 
-With zero coding experience, I taught myself programming and earned my B.A.S. in Cyber Operations 
-from the University of Arizona (summa cum laude, 4.0 GPA). Now pursuing my M.S. in Computer Science - 
-Cyber Operations at Dakota State University.
+## What I'm Working On
 
-## 🚀 The Journey (2020-Present)
+**SIGINT** - Open-source real-time OSINT intelligence dashboard. 7 live data sources on a 3D globe, correlation engine with cross-source spatial matching and anomaly detection, 8-pane layout system. Bun + React 19 + Canvas 2D + Web Workers.
+[Live Demo](https://sigint-5154d935429b.herokuapp.com) | [Repo](https://github.com/iiTONELOC/sigint)
 
-**2020-2021**: Started UCF's Full-Stack Web Development bootcamp (MERN stack) and enrolled at SNHU  
-**2021-2023**: Taught coding while learning - bootcamp grader (edX/2U)  
-**2023-2025**: Transferred to UA for a deep dive into systems programming (C), security (NSA Cyber Ops program), 
-and automation (Rust) while tutoring students in Python  
-**2025-Present**: Founded Defend I.T. Solutions - applying everything I've learned to real client problems  
-**2026-Present**: Started M.S. in Computer Science - Cyber Operations at Dakota State University
+**Defend I.T. Solutions** - My cybersecurity and IT services company. Network security architecture, SIEM deployment, and infrastructure automation for small business clients.
+[wedefendit.com](https://wedefendit.com)
 
-**This GitHub represents 5 years of continuous learning** - bootcamp projects, coursework, 
-personal experiments, and production systems. Every repo is a step in the journey from 
-"never wrote code" to "building secure, automated infrastructure."
+## Published
 
-## 💼 What I Do Now
+- [0xDL](https://crates.io/crates/oxdl) - Rust library for async file downloads with cryptographic integrity validation
+- [pveauto](https://crates.io/crates/pveauto) - Rust CLI for automated Proxmox VE ISO verification
 
-- **Security Engineering**: Network hardening, SIEM deployment, vulnerability assessment
-- **Infrastructure Automation**: Proxmox, OPNsense, VPN architecture, deployment tooling
-- **Full-Stack Development**: React/Next.js, Node.js, TypeScript, production web applications
-- **Systems Programming**: C, Rust, low-level security tooling
+## Other Work
 
-## 🔧 Currently Building
+- **SAFE-PC** - Python framework automating SOHO security appliance deployment (Proxmox, OPNsense, Suricata)
+- **THREADS Kernel** - OS kernel components in C: scheduling, IPC, system calls, interrupt handling, disk I/O
 
-- Rust-based security automation tools (0xDL, pveauto)
-- SOHO security appliance framework (SAFE-PC)
-- Client solutions at Defend I.T. Solutions
+## Background
 
-📫 **Let's Connect**: [Portfolio](https://atropeano.com) | [anthony@wedefendit.com](mailto:anthony@wedefendit.com)
+B.A.S. Cyber Operations, Cyber Engineering (4.0, summa cum laude) - University of Arizona, NSA CAE-CO program
+
+Python, Rust, C/C++, JavaScript/TypeScript, SQL, Bash
+
+[atropeano.com](https://atropeano.com) | [anthony@wedefendit.com](mailto:anthony@wedefendit.com)
