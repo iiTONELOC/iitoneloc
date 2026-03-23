@@ -48,18 +48,18 @@ export function Input(props: Readonly<inputTypes>): JSX.Element {
     onChange: handleOnChange,
     className:
       className ||
-      `appearance-none rounded-lg relative 
-                block w-full px-3 py-2 bg-slate-900 border-slate-500
-                border placeholder-gray-500 text-gray-300 focus:outline-none 
-                focus:ring-indigo-500 focus:border-indigo-600 focus:z-10
-                sm:text-sm text-shadow`.replace(/\n/g, " "),
+      `appearance-none rounded-md relative block w-full px-3 py-2.5
+       bg-sig-dark border border-sig-border placeholder-sig-dim
+       text-gray-300 font-mono text-sm
+       focus:outline-none focus:ring-1 focus:ring-sig-green/40
+       focus:border-sig-green/40 transition-colors duration-200`.replace(/\n/g, " "),
   };
 
   return (
     <div className="relative">
       {error !== null && (
         <div className="absolute bottom-0 right-0 z-40 mb-1 mr-1">
-          <p className="text-red-600 text-shadow">{error}</p>
+          <p className="text-red-500 text-xs font-mono">{error}</p>
         </div>
       )}
       <label htmlFor={id} className="sr-only">

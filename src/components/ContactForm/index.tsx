@@ -1,7 +1,7 @@
 'use client';
 
 import { sendEmail } from './actions';
-import { useFormState } from 'react-dom';
+import { useActionState } from 'react';
 import FormContainer from './FormContainer';
 import ContactNameInput from './ContactName';
 import EmailInput from './inputs/EmailInput';
@@ -10,17 +10,17 @@ import ReCAPTCHA from 'react-google-recaptcha';
 import { useState, useEffect, useRef } from 'react';
 
 const styles = {
-  title: 'text-center text-2xl text-shadow',
-  buttonSection: 'flex flex-col flex-wrap items-center justify-center gap-8',
-  buttonContainer: 'flex flex-row items-center justify-between gap-8',
-  button: 'text-white font-bold py-2 px-4 rounded text-shadow p-3 ',
+  title: 'text-center text-xl font-mono text-gray-100',
+  buttonSection: 'flex flex-col flex-wrap items-center justify-center gap-6',
+  buttonContainer: 'flex flex-row items-center justify-between gap-4',
+  button: 'font-mono text-sm py-2 px-5 rounded-md transition-all duration-200 ',
   submitButton: {
-    regular: 'bg-slate-800 hover:cursor-not-allowed',
+    regular: 'bg-sig-dark border border-sig-border text-sig-dim cursor-not-allowed',
     verified:
-      'bg-green-700 hover:bg-green-600 hover:cursor:pointer transition duration-300 ease-in-out',
+      'bg-sig-green/10 border border-sig-green/40 text-sig-green hover:bg-sig-green/20 hover:border-sig-green/60 cursor-pointer',
   },
   cancelButton:
-    'bg-slate-700 hover:bg-red-700 hover:cursor-pointer transition duration-300 ease-in-out',
+    'bg-sig-dark border border-sig-border text-sig-dim hover:border-red-500/40 hover:text-red-400 cursor-pointer',
 };
 
 const defaultFormState = {
@@ -52,7 +52,7 @@ export function ContactForm() {
   const [sendError, setSendError] = useState<boolean | null>(null);
   const [showMessage, setShowMessage] = useState<boolean>(false);
   const [message, setMessage] = useState<string | null>(null);
-  const [emailSent, formAction] = useFormState(
+  const [emailSent, formAction] = useActionState(
     sendEmail,
     defaultEmailSentState
   );
@@ -170,9 +170,9 @@ export function ContactForm() {
 
   return (
     <FormContainer _ref={emailJsFormRef} onAction={formAction}>
-      <h1 className={styles.title}>{`Let's get in touch!`}</h1>
+      <h1 className={styles.title}>{`Let's get in touch`}</h1>
       {showMessage ? (
-        <h2 className={!sendError ? 'text-emerald-500' : 'text-red-500'}>
+        <h2 className={`text-sm font-mono ${!sendError ? 'text-sig-green' : 'text-red-400'}`}>
           {' '}
           {message}{' '}
         </h2>

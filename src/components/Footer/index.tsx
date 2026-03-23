@@ -1,5 +1,5 @@
 import { JSX } from "react";
-import { BsGithub, BsLinkedin, BsEnvelope } from "react-icons/bs";
+import { BsGithub, BsLinkedin, BsEnvelope, BsGlobe } from "react-icons/bs";
 
 type footerLink = {
   href: string;
@@ -9,19 +9,19 @@ type footerLink = {
 
 const componentStyles = {
   footer:
-    "w-full h-auto flex flex-wrap flex-row justify-center items-center gap-2 p-3",
+    "w-full h-auto flex flex-wrap flex-col justify-center items-center gap-2 p-3 border-t border-sig-border",
   linkSection:
     "w-full h-auto flex flex-wrap flex-row justify-center items-center gap-8",
-  footerLink: "text-gray-400 hover:text-green-600 hover:cursor-pointer",
-  copyWrite: "text-gray-400 text-xs 2xl:text-sm text-shadow",
+  footerLink: "text-sig-dim hover:text-sig-green hover:cursor-pointer transition-colors duration-200",
+  copyWrite: "text-sig-dim text-xs 2xl:text-sm",
   linkIcon: "w-6 h-6 2xl:h-8 2xl:w-8",
-  link: "text-green-400 hover:text-green-400 underline hover:cursor-pointer",
+  link: "text-sig-green-dim hover:text-sig-green underline hover:cursor-pointer transition-colors duration-200",
 };
 
 const footerLinks: footerLink[] = [
   {
     name: "GitHub",
-    href: `https://github.com/iitoneloc`,
+    href: `https://github.com/iiTONELOC`,
     //@ts-ignore
     icon: <BsGithub className={componentStyles.linkIcon} />,
   },
@@ -32,8 +32,14 @@ const footerLinks: footerLink[] = [
     icon: <BsLinkedin className={componentStyles.linkIcon} />,
   },
   {
+    name: "Defend I.T. Solutions",
+    href: `https://wedefendit.com`,
+    //@ts-ignore
+    icon: <BsGlobe className={componentStyles.linkIcon} />,
+  },
+  {
     name: "Email",
-    href: `mailto:anthony@atropeano.com`,
+    href: `mailto:anthony@wedefendit.com`,
     //@ts-ignore
     icon: <BsEnvelope className={componentStyles.linkIcon} />,
   },
@@ -42,7 +48,7 @@ const footerLinks: footerLink[] = [
 export const Footer = (): JSX.Element => {
   // NOSONAR
   const currentYear = new Date().getFullYear();
-  const copyWriteText = `© ${currentYear} Anthony Tropeano. Built with`;
+  const copyWriteText = `\u00A9 ${currentYear} Anthony Tropeano. Built with`;
 
   return (
     <footer className={componentStyles.footer}>

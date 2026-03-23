@@ -3,39 +3,44 @@ import Image from "next/image";
 import { Footer } from "@/components";
 
 const styles = {
-  main: "flex h-full w-full flex-col items-center justify-between ",
-  header: "w-full flex flex-col items-center justify-center px-4",
-  h1: "text-center text-2xl md:text-3xl xl:text-4xl font-bold mt-8",
-  h2: "text-center text-xl xl:text-2xl font-bold text-green-400 mt-6 -mb-8",
-  h3: "w-full text-center text-xl md:text-2xl font-bold ",
-  section: "w-full flex flex-col items-center justify-start py-4",
-  avatarImg: "rounded-full  shadow-lg mt-4",
-  aboutMeSection:
-    "w-full h-full max-w-[900px] flex flex-col-reverse md:justify-center items-center p-2 mt-4 gap-4",
-  aboutMeDiv:
-    "w-full h-full flex flex-col items-center justify-start mt-2 py-2 px-12 max-w-[850px] ",
-  aboutP:
-    "text-left text-sm sm:text-md md:text-base font-medium md:font-regular mt-2 tracking-wide leading-relaxed",
+  main: "flex h-full w-full flex-col items-center justify-between",
+  heroSection:
+    "w-full flex flex-col items-center justify-center px-4 pt-12 pb-8",
+  avatarImg:
+    "rounded-full shadow-lg shadow-sig-green/10 border-2 border-sig-border-bright",
+  nameRow: "flex flex-col items-center gap-4 mt-6",
+  h1: "text-3xl md:text-4xl xl:text-5xl font-bold text-gray-100 tracking-tight",
+  tagline:
+    "text-sig-green font-mono text-sm md:text-base tracking-widest uppercase",
+  divider: "w-16 h-[2px] bg-sig-green/30 mt-4",
+  aboutSection:
+    "w-full max-w-[800px] flex flex-col items-start px-8 md:px-12 py-8 gap-6",
+  sectionLabel:
+    "text-xs font-mono text-sig-green-muted uppercase tracking-[0.2em]",
+  aboutP: "text-sm md:text-base leading-relaxed text-gray-400",
+  highlight: "text-gray-200",
+  inlineLink:
+    "text-sig-green hover:text-sig-green-dim underline underline-offset-4 decoration-sig-green/30 hover:decoration-sig-green/60 transition-colors",
+  linksRow:
+    "w-full max-w-[800px] flex flex-wrap gap-3 px-8 md:px-12 py-6 justify-start",
+  linkBtn:
+    "text-xs font-mono px-5 py-2.5 border border-sig-border rounded-md text-sig-dim hover:text-sig-green hover:border-sig-green/40 transition-all duration-200",
+  linkBtnPrimary:
+    "text-xs font-mono px-5 py-2.5 border border-sig-green/40 bg-sig-green/5 rounded-md text-sig-green hover:bg-sig-green/10 hover:border-sig-green/60 transition-all duration-200",
 };
 
 const imgDetails = {
   src: "/avatar.png",
-  alt: "Anthony T",
-  width: 250,
-  height: 250,
+  alt: "Anthony Tropeano",
+  width: 160,
+  height: 160,
   priority: true,
 };
 
 export default function Home(): JSX.Element {
   return (
     <main className={styles.main}>
-      <header className={styles.header}>
-        <h1 className={styles.h1}>Hello, my name is Anthony.</h1>
-        <h2 className={styles.h2}>
-          Security Engineer | Full-Stack Developer | Systems Programmer
-        </h2>
-      </header>
-      <section className={styles.section}>
+      <section className={styles.heroSection}>
         <Image
           className={styles.avatarImg}
           src={imgDetails.src}
@@ -44,35 +49,96 @@ export default function Home(): JSX.Element {
           height={imgDetails.height}
           priority={imgDetails.priority}
         />
-
-        <div className={styles.aboutMeDiv}>
-          <h3 className={styles.h3}>About Me</h3>
-          <p className={styles.aboutP}>
-            I&apos;m a security engineer and full-stack developer who builds
-            secure, automated systems.
-            <br />
-            <br />
-            In 2020, I made a calculated career change from construction project
-            management to cybersecurity—with zero coding experience. Five years
-            later, I&apos;ve earned my B.A.S. in Cyber Operations from the
-            University of Arizona (summa cum laude, 4.0 GPA, NSA-designated
-            program) and founded Defend I.T. Solutions, providing security
-            consulting and IT services to small businesses.
-            <br />
-            <br />
-            I specialize in security operations (SIEM deployment, vulnerability
-            assessment, network hardening), infrastructure automation (reducing
-            manual work by 60-87%), and full-stack development (React/Next.js,
-            Node.js, TypeScript). My work spans Python, Rust, C, and modern web
-            technologies—always with a security-first mindset.
-            <br />
-            <br />
-            Currently pursuing my M.S. in Computer Science - Cyber Operations at
-            Dakota State University while building production systems that solve
-            real problems.
-          </p>
+        <div className={styles.nameRow}>
+          <h1 className={styles.h1}>Anthony Tropeano</h1>
+          <p className={styles.tagline}>Security Engineer & Toolmaker</p>
+          <div className={styles.divider} />
         </div>
       </section>
+
+      <section className={styles.aboutSection}>
+        <p className={styles.sectionLabel}>About</p>
+        <p className={styles.aboutP}>
+          I&apos;m a security engineer based in Ocala, FL. I{" "}
+          <span className={styles.highlight}>build tools</span>,{" "}
+          <span className={styles.highlight}>automate infrastructure</span>, and{" "}
+          <span className={styles.highlight}>
+            write software across the stack
+          </span>
+          . My primary languages are{" "}
+          <span className={styles.highlight}>Python</span>,{" "}
+          <span className={styles.highlight}>Rust</span>,{" "}
+          <span className={styles.highlight}>C</span>, and{" "}
+          <span className={styles.highlight}>TypeScript</span>.
+        </p>
+        <p className={styles.aboutP}>
+          I run{" "}
+          <a
+            href="https://wedefendit.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.inlineLink}
+          >
+            Defend I.T. Solutions
+          </a>
+          , a cybersecurity and IT services company, and I&apos;m currently
+          building{" "}
+          <a
+            href="https://sigint-5154d935429b.herokuapp.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.inlineLink}
+          >
+            SIGINT
+          </a>
+          , an open-source real-time OSINT dashboard.
+        </p>
+        <p className={styles.aboutP}>
+          I recently graduated summa cum laude from the{" "}
+          <span className={styles.highlight}>
+            University of Arizona&apos;s NSA CAE-CO Cyber Operations program
+          </span>
+          , and I&apos;m open to security engineering, DevSecOps, or software
+          engineering roles.
+        </p>
+        <p className={styles.aboutP}>Remote or willing to relocate.</p>
+      </section>
+
+      <div className={styles.linksRow}>
+        <a
+          href="https://sigint-5154d935429b.herokuapp.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          className={styles.linkBtnPrimary}
+        >
+          SIGINT Demo
+        </a>
+        <a
+          href="https://wedefendit.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          className={styles.linkBtn}
+        >
+          wedefendit.com
+        </a>
+        <a
+          href="https://github.com/iiTONELOC"
+          target="_blank"
+          rel="noopener noreferrer"
+          className={styles.linkBtn}
+        >
+          GitHub
+        </a>
+        <a
+          href="https://linkedin.com/in/anthony-t-29353b201/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className={styles.linkBtn}
+        >
+          LinkedIn
+        </a>
+      </div>
+
       <Footer />
     </main>
   );

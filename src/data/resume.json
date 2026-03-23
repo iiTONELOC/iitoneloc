@@ -1,0 +1,120 @@
+{
+  "name": "Anthony Tropeano",
+  "contact": {
+    "email": "anthony@wedefendit.com",
+    "phone": "352.709.3931",
+    "location": "Ocala, FL",
+    "portfolio": "atropeano.com",
+    "github": "github.com/iiTONELOC"
+  },
+  "openTo": "Open to Remote / Relocation",
+  "summary": "Security engineer and toolmaker. I build tools, automate infrastructure, and write systems-level software. Founded Defend I.T. Solutions, delivering network security architecture, secure deployment pipelines, and infrastructure automation for small business clients. Work spans systems programming (C, Rust), full-stack development (React/Next.js, Node.js, Bun), and security operations (SIEM, IDS/IPS, vulnerability assessment). B.A.S. in Cyber Operations, Cyber Engineering emphasis (4.0 GPA, summa cum laude) from an NSA CAE-CO designated program. Currently building SIGINT, an open-source real-time OSINT intelligence dashboard with live multi-source data fusion and 3D globe visualization.",
+  "skills": [
+    { "label": "Languages", "items": "Python, Rust, C/C++, JavaScript/TypeScript, SQL, Bash/PowerShell" },
+    { "label": "Security", "items": "Metasploit, Burp Suite, Nmap, Wireshark, tcpdump, Suricata, Snort, Security Onion, Wazuh, Nessus, OWASP ZAP, FLARE, IDA, Ghidra, Autopsy, FTK, NIST CSF, OWASP Top 10" },
+    { "label": "Infrastructure", "items": "Proxmox VE, VMware, Hyper-V, Docker/Docker Compose, Ansible, Linux hardening (UFW, SSH key-based auth), AWS (EC2), Azure (App Services), Heroku, Vercel, network segmentation, VPN architecture" },
+    { "label": "Development", "items": "React/Next.js, Node.js, Express, Flask, Bun, Vite, Electron, REST/GraphQL APIs, Canvas 2D, Web Workers, IndexedDB, HLS.js, Jest, PyTest, TDD, Git/GitHub Actions, GDB" },
+    { "label": "Databases & Networking", "items": "MySQL/MariaDB, PostgreSQL, MongoDB, TCP/IP, DNS, DHCP, VPN protocols (OpenVPN, WireGuard), subnetting, routing, firewall policy design" }
+  ],
+  "experience": [
+    {
+      "company": "Defend I.T. Solutions",
+      "title": "Founder & Security Engineer",
+      "date": "May 2025 - Present",
+      "location": "Ocala, FL",
+      "bullets": [
+        "Engineered Windows 11 migration strategy for business with unsupported legacy hardware, eliminating hardware replacement through virtualization and automation while maintaining security compliance",
+        "Architected and deployed secure remote services infrastructure with VPN, automated client deployment, and centralized management for distributed IT operations",
+        "Designed segmented network architecture with firewall policies preventing lateral movement, deployed SIEM monitoring (Security Onion/Wazuh), and conducted vulnerability assessments using Nessus",
+        "Built network security appliance automation framework (Proxmox, OPNsense, Suricata) reducing manual deployment from 2+ hours to 15-47 minutes (60-87% reduction)",
+        "Developed production company website and service platform using React, Next.js, TypeScript with automated CI/CD pipeline"
+      ]
+    },
+    {
+      "company": "University of Arizona",
+      "title": "Python Course Assistant",
+      "date": "Nov 2024 - Dec 2025",
+      "location": null,
+      "bullets": [
+        "Provided technical mentorship for students debugging Python code, resolving development environment issues, and improving code quality",
+        "Identified recurring technical patterns and created targeted educational content to improve student outcomes"
+      ]
+    },
+    {
+      "company": "Freelance",
+      "title": "Full-Stack Developer",
+      "date": "Mar 2025 - Apr 2025",
+      "location": null,
+      "bullets": [
+        "Rebuilt legacy website using modern stack (React, TypeScript, Next.js) with automated deployment pipeline to Vercel, improving performance and eliminating hosting costs (www.petedejesse.com)"
+      ]
+    },
+    {
+      "company": "edX | 2U",
+      "title": "Full-Stack Web Development Grader",
+      "date": "Aug 2021 - Nov 2023",
+      "location": null,
+      "bullets": [
+        "Reviewed MERN stack applications (MongoDB, Express, React, Node.js), providing technical feedback on code quality, architecture, and best practices",
+        "Verified assignment integrity, documented plagiarism cases, and maintained consistent evaluation standards across curriculum updates"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "school": "University of Arizona",
+      "date": "Dec 2025",
+      "degree": "Bachelor of Applied Science in Cyber Operations: Cyber Engineering Emphasis",
+      "details": "Summa Cum Laude | GPA: 4.0 | NSA Designated Cyber Operations Program (CAE-CO)"
+    }
+  ],
+  "certifications": [
+    "NSA Designated Cyber Operations Program Certificate - University of Arizona (Dec 2025)",
+    "Full-Stack Web Development Certificate - University of Central Florida (Aug 2021)"
+  ],
+  "projects": [
+    {
+      "name": "SIGINT (In Development)",
+      "tech": "Bun, React 19, Canvas 2D, Web Workers, IndexedDB, Docker, Heroku",
+      "description": "Open-source real-time OSINT intelligence dashboard with interactive 3D globe visualization. Ingests live data from 7 sources: OpenSky Network (aircraft), aisstream.io (AIS vessels via persistent server-side WebSocket), USGS (seismic), GDELT 2.0 (geolocated conflict/crisis events), NASA FIRMS (fire hotspots), NOAA (severe weather alerts), and aggregated RSS news feeds. All rendering offloaded to a dedicated Web Worker with OffscreenCanvas for 60fps performance. Features a correlation engine performing cross-source spatial-temporal matching with grid-indexed O(n) queries, anomaly detection against rolling 7-day regional baselines, and composite-scored alerting. Multi-pane layout system (binary split tree, drag-to-swap, named presets) with 8 pane types including entity dossier, intel feed, alert log, and live HLS video. HMAC-SHA256 token auth (HttpOnly cookies), per-IP rate limiting, IndexedDB caching with staleness management, and PWA with offline support.",
+      "links": "Demo: sigint-5154d935429b.herokuapp.com | github.com/iiTONELOC/sigint"
+    },
+    {
+      "name": "SAFE-PC",
+      "tech": "Python, Proxmox VE, OPNsense, Suricata, Unbound DNS, RESTful API",
+      "description": "BASCO Capstone Project that became the foundation for Defend I.T. Solutions. Automated conversion of end-of-life x86_64 hardware into fully configured SOHO security appliances with integrated firewall, IDS/IPS, and DNS filtering. Reduces manual setup from 2+ hours to 15-47 minutes through Python-driven orchestration and RESTful API integration.",
+      "links": "github.com/iitoneloc/safe-pc"
+    },
+    {
+      "name": "0xDL & pveauto",
+      "tech": "Rust, Async Programming, Cryptographic Verification",
+      "description": "Published production-grade Rust library for reliable, asynchronous file downloads with cryptographic integrity validation. CLI tool (pveauto) auto-downloads and verifies Proxmox VE ISOs, ensuring supply chain security for infrastructure deployments. Published on crates.io.",
+      "links": "github.com/iitoneloc/0xDL | github.com/iitoneloc/pveauto | crates.io/crates/oxdl | crates.io/crates/pveauto"
+    },
+    {
+      "name": "THREADS Kernel",
+      "tech": "C, Operating Systems",
+      "description": "Implemented core OS kernel components including thread scheduling, inter-process communication, system call interface, interrupt handling, and disk I/O operations.",
+      "links": "github.com/iitoneloc/threads-kernel"
+    },
+    {
+      "name": "Network Security Lab Environment",
+      "tech": "Security Onion, Wazuh, Suricata, OPNsense, Proxmox",
+      "description": "Comprehensive home lab for security operations. SIEM deployment with custom detection rules, IDS/IPS with tuned rulesets, network segmentation with firewall policies, malware analysis sandboxing, and incident response workflows.",
+      "links": null
+    },
+    {
+      "name": "Defend I.T. Solutions Website",
+      "tech": "React, Next.js, TypeScript, Tailwind CSS, Vercel",
+      "description": "Designed, developed, and deployed professional company website with responsive design, SEO optimization, secure contact forms with CAPTCHA protection, and accessibility compliance.",
+      "links": "www.wedefendit.com | github.com/defendit/defendit"
+    },
+    {
+      "name": "Dependability Tracker",
+      "tech": "React, Next.js, TypeScript, Express, MariaDB",
+      "description": "Full-stack internal business application for attendance tracking with user authentication, role-based access control, automated alerting, and data visualization. Deployed with secure database architecture and RESTful API.",
+      "links": "dependability-tracker.atropeano.com | github.com/iitoneloc/dependability-tracker"
+    }
+  ],
+  "honors": "Outstanding Senior Award Nominee, Distinguished Undergraduate Scholar, Dean's List with Distinction (multiple semesters) - University of Arizona"
+}

@@ -7,11 +7,11 @@ export default function FormContainer(
 ) {
   const { children, _ref } = props;
   return (
-    <div className="w-full max-w-lg bg-slate-800 rounded-lg p-3">
+    <div className="w-full max-w-lg border border-sig-border rounded-lg bg-sig-dark-card p-6">
       {_ref ? (
         <form
           ref={_ref}
-          className="mt-8 space-y-6"
+          className="space-y-5"
           autoComplete="off"
           action={props?.onAction}
         >
@@ -19,7 +19,7 @@ export default function FormContainer(
         </form>
       ) : (
         <form
-          className="mt-8 space-y-6"
+          className="space-y-5"
           autoComplete="off"
           action={props?.onAction}
         >

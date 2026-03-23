@@ -4,7 +4,7 @@ import { NavLink } from "../NavLink";
 
 const headerStyles = {
   header:
-    "w-full h-auto flex flex-wrap flex-row justify-between items-center px-5 py-2 border-b-[1px] border-gray-500",
+    "w-full h-auto flex flex-wrap flex-row justify-between items-center px-5 py-2 border-b-[1px] border-sig-border bg-sig-dark/80 backdrop-blur-sm",
 };
 
 /**

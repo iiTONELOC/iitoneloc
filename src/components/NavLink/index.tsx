@@ -13,17 +13,17 @@ import { usePathname } from "next/navigation";
 const getLinkClasses = (isTitle: boolean, isCurrentLink: boolean): string => {
   let classes = "";
   if (isTitle) {
-    classes += "text-green-500 hover:text-emerald-500 text-xl xl:text-2xl ";
+    classes += "text-sig-green hover:text-sig-green-dim text-xl xl:text-2xl font-mono font-bold ";
   } else {
-    classes += "text-sm  xl:text-base ";
+    classes += "text-sm xl:text-base font-mono ";
   }
   if (isCurrentLink && !isTitle) {
     classes +=
-      "text-green-500 hover:text-green-400 border-[1px] border-green-400 p-2 rounded-md hover:border-green-400 ";
+      "text-sig-green hover:text-sig-green-dim border-[1px] border-sig-green/40 p-2 rounded-md hover:border-sig-green/60 ";
   }
   if (!isCurrentLink && !isTitle) {
     classes +=
-      "text-gray-400 hover:text-gray-300 pr-2 hover:underline underline-offset-8 ";
+      "text-sig-dim hover:text-gray-300 pr-2 hover:underline underline-offset-8 ";
   }
   classes += "transition-colors duration-250 ease-in-out";
   return classes;
