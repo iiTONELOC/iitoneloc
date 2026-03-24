@@ -57,7 +57,7 @@ body::after {
     0deg,
     transparent,
     transparent 2px,
-    rgba(0, 255, 136, 0.008) 2px,
-    rgba(0, 255, 136, 0.008) 4px
+    rgba(0, 255, 136, 0.003) 2px,
+    rgba(0, 255, 136, 0.003) 4px
   );
 }

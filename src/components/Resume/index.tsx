@@ -1,8 +1,9 @@
+import { JSX } from "react";
 import resumeData from "@/data/resume.json";
 
 const s = {
   resume:
-    "w-full max-w-[900px] border border-sig-border rounded-lg bg-sig-dark-card p-6 md:p-10 flex flex-col gap-1",
+    "w-full max-w-[900px] border border-sig-border rounded-lg bg-sig-dark-card p-6 md:p-10 flex flex-col gap-1 relative z-10",
   name: "text-2xl md:text-3xl font-bold text-gray-100 text-center",
   contactRow:
     "text-xs md:text-sm text-sig-dim font-mono text-center mt-1 flex flex-wrap justify-center gap-x-2",
@@ -34,9 +35,64 @@ const s = {
   projName: "text-sm font-bold text-gray-200",
   projTech: "text-xs italic text-sig-dim",
   projDesc: "text-sm text-gray-400 leading-relaxed mt-1",
-  projLinks: "text-xs font-mono text-sig-green-dim mt-1",
+  projLinks: "text-xs font-mono mt-1 flex flex-wrap gap-x-1",
+  projLink:
+    "text-sig-green-dim hover:text-sig-green transition-colors duration-200 underline underline-offset-2",
+  projLinkSep: "text-sig-border",
   honorsText: "text-sm text-gray-400 mt-2",
+  inlineLink:
+    "text-sig-green-dim hover:text-sig-green transition-colors duration-200 underline underline-offset-2",
 };
+
+/**
+ * Auto-links URLs found in text. Handles both http(s):// and bare domain patterns.
+ */
+function linkifyText(text: string): (string | JSX.Element)[] {
+  const urlRegex =
+    /(https?:\/\/[^\s,)]+|(?:www\.|github\.com|crates\.io|[a-z0-9-]+\.herokuapp\.com)[^\s,)]*)/gi;
+  const parts: (string | JSX.Element)[] = [];
+  let lastIndex = 0;
+  let match;
+
+  while ((match = urlRegex.exec(text)) !== null) {
+    if (match.index > lastIndex) {
+      parts.push(text.slice(lastIndex, match.index));
+    }
+    const url = match[0];
+    const href = url.startsWith("http") ? url : `https://${url}`;
+    parts.push(
+      <a
+        key={match.index}
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={s.inlineLink}
+      >
+        {url}
+      </a>,
+    );
+    lastIndex = match.index + match[0].length;
+  }
+
+  if (lastIndex < text.length) {
+    parts.push(text.slice(lastIndex));
+  }
+
+  return parts.length > 0 ? parts : [text];
+}
+
+/**
+ * Parses pipe-delimited link strings into clickable links.
+ */
+function parseLinks(linksStr: string) {
+  const parts = linksStr.split("|").map((p) => p.trim());
+  return parts.map((part) => {
+    const cleaned = part.replace(/^Demo:\s*/i, "").trim();
+    const url = cleaned.startsWith("http") ? cleaned : `https://${cleaned}`;
+    const label = part.trim();
+    return { url, label };
+  });
+}
 
 export const ResumeComponent = () => {
   const {
@@ -117,7 +173,7 @@ export const ResumeComponent = () => {
           <div className="flex flex-col gap-1 mt-1.5">
             {job.bullets.map((b, i) => (
               <p key={i} className={s.bullet}>
-                {b}
+                {linkifyText(b)}
               </p>
             ))}
           </div>
@@ -151,8 +207,26 @@ export const ResumeComponent = () => {
             {" | "}
             {proj.tech}
           </span>
-          <p className={s.projDesc}>{proj.description}</p>
-          {proj.links && <p className={s.projLinks}>{proj.links}</p>}
+          <p className={s.projDesc}>{linkifyText(proj.description)}</p>
+          {proj.links && (
+            <p className={s.projLinks}>
+              {parseLinks(proj.links).map((link, i, arr) => (
+                <span key={link.url}>
+                  <a
+                    href={link.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={s.projLink}
+                  >
+                    {link.label}
+                  </a>
+                  {i < arr.length - 1 && (
+                    <span className={s.projLinkSep}>{" | "}</span>
+                  )}
+                </span>
+              ))}
+            </p>
+          )}
         </div>
       ))}
 

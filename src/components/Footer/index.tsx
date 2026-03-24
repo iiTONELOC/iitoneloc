@@ -13,9 +13,8 @@ const componentStyles = {
   linkSection:
     "w-full h-auto flex flex-wrap flex-row justify-center items-center gap-8",
   footerLink: "text-sig-dim hover:text-sig-green hover:cursor-pointer transition-colors duration-200",
-  copyWrite: "text-sig-dim text-xs 2xl:text-sm",
+  copyWrite: "text-sig-dim text-xs 2xl:text-sm font-mono",
   linkIcon: "w-6 h-6 2xl:h-8 2xl:w-8",
-  link: "text-sig-green-dim hover:text-sig-green underline hover:cursor-pointer transition-colors duration-200",
 };
 
 const footerLinks: footerLink[] = [
@@ -46,9 +45,7 @@ const footerLinks: footerLink[] = [
 ];
 
 export const Footer = (): JSX.Element => {
-  // NOSONAR
   const currentYear = new Date().getFullYear();
-  const copyWriteText = `\u00A9 ${currentYear} Anthony Tropeano. Built with`;
 
   return (
     <footer className={componentStyles.footer}>
@@ -65,17 +62,8 @@ export const Footer = (): JSX.Element => {
           </a>
         ))}
       </section>
-
       <p className={componentStyles.copyWrite}>
-        {copyWriteText}{" "}
-        <a
-          href={"https://nextjs.org/"}
-          rel={"noopener noreferrer"}
-          className={componentStyles.link}
-          target={"_blank"}
-        >
-          Next.js.
-        </a>
+        {`\u00A9 ${currentYear} Anthony Tropeano`}
       </p>
     </footer>
   );

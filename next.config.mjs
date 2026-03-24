@@ -1,11 +1,11 @@
 /** @type {import('next').NextConfig} */
 const cspHeader = `
   default-src 'self';
-  img-src 'self' https://raw.githubusercontent.com;
-  script-src 'self' 'unsafe-inline' 'unsafe-eval' ;
+  img-src 'self' data: https://raw.githubusercontent.com;
+  script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.google.com https://www.gstatic.com;
   style-src 'self' 'unsafe-inline';
   connect-src 'self' https://api.github.com;
-  frame-src 'self';
+  frame-src 'self' https://www.google.com;
   font-src 'self';
   object-src 'self';
   base-uri 'self';
