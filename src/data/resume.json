@@ -10,11 +10,26 @@
   "openTo": "Open to Remote / Relocation",
   "summary": "Security engineer and toolmaker. I build tools, automate infrastructure, and write systems-level software. Founded Defend I.T. Solutions, delivering network security architecture, secure deployment pipelines, and infrastructure automation for small business clients. Work spans systems programming (C, Rust), full-stack development (React/Next.js, Node.js, Bun), and security operations (SIEM, IDS/IPS, vulnerability assessment). B.A.S. in Cyber Operations, Cyber Engineering emphasis (4.0 GPA, summa cum laude) from an NSA CAE-CO designated program. Currently building SIGINT, an open-source real-time OSINT intelligence dashboard with live multi-source data fusion and 3D globe visualization.",
   "skills": [
-    { "label": "Languages", "items": "Python, Rust, C/C++, JavaScript/TypeScript, SQL, Bash/PowerShell" },
-    { "label": "Security", "items": "Metasploit, Burp Suite, Nmap, Wireshark, tcpdump, Suricata, Snort, Security Onion, Wazuh, Nessus, OWASP ZAP, FLARE, IDA, Ghidra, Autopsy, FTK, NIST CSF, OWASP Top 10" },
-    { "label": "Infrastructure", "items": "Proxmox VE, VMware, Hyper-V, Docker/Docker Compose, Ansible, Linux hardening (UFW, SSH key-based auth), AWS (EC2), Azure (App Services), Heroku, Vercel, network segmentation, VPN architecture" },
-    { "label": "Development", "items": "React/Next.js, Node.js, Express, Flask, Bun, Vite, Electron, REST/GraphQL APIs, Canvas 2D, Web Workers, IndexedDB, HLS.js, Jest, PyTest, TDD, Git/GitHub Actions, GDB" },
-    { "label": "Databases & Networking", "items": "MySQL/MariaDB, PostgreSQL, MongoDB, TCP/IP, DNS, DHCP, VPN protocols (OpenVPN, WireGuard), subnetting, routing, firewall policy design" }
+    {
+      "label": "Languages",
+      "items": "Python, Rust, C/C++, JavaScript/TypeScript, SQL, Bash/PowerShell"
+    },
+    {
+      "label": "Security",
+      "items": "Metasploit, Burp Suite, Nmap, Wireshark, tcpdump, Suricata, Snort, Security Onion, Wazuh, Nessus, OWASP ZAP, FLARE, IDA, Ghidra, Autopsy, FTK, NIST CSF, OWASP Top 10"
+    },
+    {
+      "label": "Infrastructure",
+      "items": "Proxmox VE, VMware, Hyper-V, Docker/Docker Compose, Ansible, Linux hardening (UFW, SSH key-based auth), AWS (EC2), Azure (App Services), Heroku, Vercel, network segmentation, VPN architecture"
+    },
+    {
+      "label": "Development",
+      "items": "React/Next.js, Node.js, Express, Flask, Bun, Vite, Electron, REST/GraphQL APIs, Canvas 2D, Web Workers, IndexedDB, HLS.js, Jest, PyTest, TDD, Git/GitHub Actions, GDB"
+    },
+    {
+      "label": "Databases & Networking",
+      "items": "MySQL/MariaDB, PostgreSQL, MongoDB, TCP/IP, DNS, DHCP, VPN protocols (OpenVPN, WireGuard), subnetting, routing, firewall policy design"
+    }
   ],
   "experience": [
     {
@@ -107,7 +122,7 @@
       "name": "Defend I.T. Solutions Website",
       "tech": "React, Next.js, TypeScript, Tailwind CSS, Vercel",
       "description": "Designed, developed, and deployed professional company website with responsive design, SEO optimization, secure contact forms with CAPTCHA protection, and accessibility compliance.",
-      "links": "www.wedefendit.com | github.com/defendit/defendit"
+      "links": "www.wedefendit.com | github.com/wedefendit"
     },
     {
       "name": "Dependability Tracker",
