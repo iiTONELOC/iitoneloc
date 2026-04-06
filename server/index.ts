@@ -2,6 +2,30 @@ import next from 'next';
 import { parse } from 'url';
 import { createServer } from 'http';
 
+const canonicalHost = 'atropeano.com';
+const wwwHost = `www.${canonicalHost}`;
+const strictTransportSecurity = 'max-age=31536000; includeSubDomains';
+
+const getHeaderValue = (
+    header: string | string[] | undefined
+): string | undefined => Array.isArray(header) ? header[0] : header;
+
+const getRequestHost = (
+    header: string | string[] | undefined
+): string | undefined =>
+    getHeaderValue(header)
+        ?.split(',')[0]
+        .trim()
+        .toLowerCase()
+        .replace(/:\d+$/, '');
+
+const getForwardedProto = (
+    header: string | string[] | undefined
+): string | undefined =>
+    getHeaderValue(header)
+        ?.split(',')[0]
+        .trim()
+        .toLowerCase();
 
 const startServer = async () => {
     const port = parseInt(process.env.PORT ?? '3000', 10);
@@ -14,6 +38,29 @@ const startServer = async () => {
 
     app.prepare().then(() => {
         createServer((req, res) => {
+            const requestHost = getRequestHost(
+                req.headers['x-forwarded-host'] ?? req.headers.host
+            );
+            const forwardedProto = getForwardedProto(req.headers['x-forwarded-proto']);
+            const shouldRedirectHost = requestHost === wwwHost;
+            const shouldRedirectProto =
+                requestHost === canonicalHost && forwardedProto === 'http';
+
+            if (!dev && (shouldRedirectHost || shouldRedirectProto)) {
+                const location = new URL(req.url ?? '/', `https://${canonicalHost}`);
+
+                res.statusCode = 308;
+                res.setHeader('Location', location.toString());
+                res.setHeader('Vary', 'Host, X-Forwarded-Proto');
+
+                if (forwardedProto !== 'http') {
+                    res.setHeader('Strict-Transport-Security', strictTransportSecurity);
+                }
+
+                res.end();
+                return;
+            }
+
             const parsedUrl = parse(req.url!, true)
             handle(req, res, parsedUrl)
         }).listen(port)

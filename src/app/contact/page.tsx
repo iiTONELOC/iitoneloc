@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import { Footer } from "@/components";
 import { BsGithub, BsLinkedin, BsEnvelope, BsGlobe } from "react-icons/bs";
@@ -20,6 +21,12 @@ const styles = {
     "flex flex-col items-center gap-2 py-4 px-3 border border-sig-border rounded-md text-sig-dim hover:text-sig-green hover:border-sig-green/40 hover:bg-sig-green/5 transition-all duration-200",
   linkIcon: "w-5 h-5",
   linkLabel: "text-xs font-mono uppercase tracking-wider",
+};
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: "/contact",
+  },
 };
 
 export default function Contact(): JSX.Element {

@@ -1,4 +1,5 @@
 "use server";
+import type { Metadata } from "next";
 import { JSX } from "react";
 import { MdCloudDownload } from "react-icons/md";
 import { Footer, ResumeComponent } from "@/components";
@@ -14,6 +15,14 @@ const styles = {
   section:
     "w-full max-w-4xl flex-1 flex flex-col items-center justify-start px-8 py-4",
 };
+
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    alternates: {
+      canonical: "/resume",
+    },
+  };
+}
 
 export default async function Resume(): Promise<JSX.Element> {
   return (

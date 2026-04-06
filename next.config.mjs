@@ -13,6 +13,22 @@ const cspHeader = `
   frame-ancestors 'self';
   `;
 
+const isProduction = process.env.NODE_ENV === "production";
+const securityHeaders = [
+  {
+    key: "Content-Security-Policy",
+    value: cspHeader.replace(/\n/g, "").trim(),
+  },
+  ...(isProduction
+    ? [
+        {
+          key: "Strict-Transport-Security",
+          value: "max-age=31536000; includeSubDomains",
+        },
+      ]
+    : []),
+];
+
 const nextConfig = {
   images: {
     remotePatterns: [
@@ -26,12 +42,7 @@ const nextConfig = {
     return [
       {
         source: "/(.*)",
-        headers: [
-          {
-            key: "Content-Security-Policy",
-            value: cspHeader.replace(/\n/g, "").trim(),
-          },
-        ],
+        headers: securityHeaders,
       },
     ];
   },

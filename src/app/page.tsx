@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { JSX } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -36,6 +37,12 @@ const imgDetails = {
   width: 160,
   height: 160,
   priority: true,
+};
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: "/",
+  },
 };
 
 export default function Home(): JSX.Element {

@@ -7,6 +7,7 @@ const styles = {
 };
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://atropeano.com"),
   title: "Anthony Tropeano | Security Engineer",
   description:
     "Security engineer and toolmaker. OSINT platforms, infrastructure automation, systems-level software.",

@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { JSX } from "react";
 import { Footer, ProjectCard } from "@/components";
 import { RepoData, getPinnedRepos } from "@/server-utils";
@@ -9,6 +10,12 @@ const styles = {
   subtitle: "text-sm font-mono text-sig-dim mt-2",
   ul: `flex flex-wrap flex-row justify-center items-stretch gap-8 w-full
         max-w-[1200px] p-0 sm-p4 mt-8 p-8`,
+};
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: "/projects",
+  },
 };
 
 export default async function Projects(): Promise<JSX.Element> {
