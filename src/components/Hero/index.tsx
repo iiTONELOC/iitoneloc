@@ -1,9 +1,10 @@
 import { JSX } from "react";
 import { externalLinks } from "@/constants/links";
+import { GlobeMount } from "../Globe/GlobeMount";
 
 const styles = {
   hero: "relative py-[70px] pb-[80px]",
-  wrap: "mx-auto grid max-w-wrap grid-cols-1 items-center gap-[30px] px-[30px] md:grid-cols-[1.05fr_0.95fr]",
+  wrap: "mx-auto grid max-w-wrap grid-cols-1 items-center gap-[30px] px-5 sm:px-[30px] md:grid-cols-[1.05fr_0.95fr]",
   left: "order-1 md:order-none",
   designation:
     "mb-5 flex items-center gap-[10px] font-mono text-[12px] tracking-[1.5px] text-op-accent before:h-px before:w-[26px] before:bg-op-accent",
@@ -19,11 +20,6 @@ const styles = {
   btn: "inline-flex items-center gap-[9px] rounded-[6px] border border-op-border-bright bg-op-surface px-[19px] py-[11px] font-mono text-[13px] font-medium text-op-text transition-all duration-150 hover:-translate-y-px hover:border-op-accent hover:text-op-accent",
   btnPrimary:
     "inline-flex items-center gap-[9px] rounded-[6px] border border-op-accent bg-op-accent px-[19px] py-[11px] font-mono text-[13px] font-bold text-[#1a1206] transition-all duration-150 hover:-translate-y-px hover:border-op-accent-hi hover:bg-op-accent-hi",
-  // Globe slot. Real renderer is wired in Phase 4; this is the styled frame.
-  globeWrap:
-    "relative order-[-1] h-[340px] overflow-hidden rounded-[12px] border border-op-border md:order-none md:h-[440px] bg-op-surface bg-[radial-gradient(circle_at_50%_45%,rgba(255,180,84,0.04),transparent_60%)]",
-  hud: "pointer-events-none absolute font-mono text-[10.5px] text-op-dim",
-  hudB: "font-medium text-op-muted",
 };
 
 /**
@@ -81,15 +77,7 @@ export const Hero = (): JSX.Element => {
           </div>
         </div>
 
-        <div className={styles.globeWrap}>
-          {/* Phase 4: <Globe /> renders the canvas + data-bound HUD here. */}
-          <div className={`${styles.hud} left-4 top-[14px]`}>
-            <b className={styles.hudB}>SIGINT engine</b>
-          </div>
-          <div className={`${styles.hud} bottom-[14px] left-4`}>
-            proj: orthographic
-          </div>
-        </div>
+        <GlobeMount />
       </div>
     </header>
   );

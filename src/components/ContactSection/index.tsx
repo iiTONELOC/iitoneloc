@@ -5,7 +5,7 @@ import { externalLinks } from "@/constants/links";
 
 const styles = {
   sec: "pb-16 pt-[30px]",
-  wrap: "mx-auto max-w-wrap px-[30px]",
+  wrap: "mx-auto max-w-wrap px-5 sm:px-[30px]",
   grid: "grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-7",
   // flex-col so the info rows can stretch to match the form column's height.
   card: "reveal flex flex-col rounded-[10px] border border-op-border bg-op-surface p-5 sm:p-[26px]",

@@ -1,7 +1,6 @@
 /**
  * Curated featured-work data. Rendered as datasheet blocks independent of any
- * repo's visibility, so closed / private projects present fully. Copy is taken
- * verbatim from the ref.html mockup.
+ * repo's visibility, so closed / private projects present fully.
  */
 
 export type ProjectStatus =
@@ -34,8 +33,6 @@ export interface Project {
   links: ProjectLink[];
 }
 
-// NOTE: hrefs marked "#" below are not yet confirmed real URLs (DIS-Crypto
-// source/docs). Replace with live links when available.
 export const projects: Project[] = [
   {
     designation: "01 / dis-crypto",
@@ -44,17 +41,17 @@ export const projects: Project[] = [
     statusLabel: "open source · early dev",
     hook: "Authenticated, post-quantum-safe cryptography with a correct-by-construction API, for developers who are not cryptographers.",
     description:
-      "Composes vetted, audited primitives into a small, opinionated API where the caller picks a security posture and level, not individual parameters; it rolls no cryptography of its own. Every asymmetric operation is a classical and post-quantum hybrid, and every encryption is authenticated, holding a 128-bit floor after quantum effects. There is no unauthenticated mode, no anonymous-sender mode, and no insecure-default escape hatch: the unsafe choice is not reachable through the API. An optional identity layer adds self-rooted certificates, a trust store, a revocation list, and an audit chain.",
+      "Composes vetted, audited primitives into a small, opinionated API where the caller picks a security posture and level, not individual parameters; it rolls no cryptography of its own. Every asymmetric operation is a classical and post-quantum hybrid, and every encryption is authenticated and key-committing, holding a 128-bit floor after quantum effects. There is no unauthenticated mode, no anonymous-sender mode, and no insecure-default escape hatch: the unsafe choice is not reachable through the API. An optional identity layer adds self-rooted certificates, a trust store, a revocation list, and an audit chain.",
     stack: ["Rust", "Python", "Node/Bun", "C++"],
     meta: [
       { label: "KEM", value: "P-256 + ML-KEM (hybrid)" },
-      { label: "Signatures", value: "Ed25519 + ML-DSA (hybrid)" },
-      { label: "AEAD", value: "AES-256-GCM-SIV" },
+      { label: "Signatures", value: "Ed25519 + ML-DSA / SLH-DSA (hybrid)" },
+      {
+        label: "AEAD",
+        value: "AES-256-GCM-SIV / AES-256-GCM / ChaCha20-Poly1305",
+      },
     ],
-    links: [
-      { label: "source", href: "#" },
-      { label: "docs", href: "#" },
-    ],
+    links: [{ label: "source", href: "https://github.com/wedefendit/dis-crypto" }],
   },
   {
     designation: "02 / sigint",
@@ -104,8 +101,3 @@ export const projects: Project[] = [
     links: [],
   },
 ];
-
-/** Lowercased featured names, for de-duping the github strip against this set. */
-export const featuredNames: string[] = projects.map((p) =>
-  p.name.toLowerCase()
-);

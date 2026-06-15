@@ -1,24 +1,23 @@
 # Anthony Tropeano
 
-I'm a security engineer based in Ocala, FL. I build tools, automate infrastructure, and write software across the stack. My primary languages are Python, Rust, C, and TypeScript.
+I'm a security engineer focused on applied cryptography and secure systems. I build tools and infrastructure end-to-end, mostly in Rust and TypeScript, and I run [Defend I.T. Solutions](https://wedefendit.com).
 
-I run [Defend I.T. Solutions](https://wedefendit.com), a cybersecurity and IT services company, and I'm currently building [SIGINT](https://github.com/iiTONELOC/sigint), an open-source real-time OSINT dashboard.
+Graduated summa cum laude from the University of Arizona's NSA CAE-CO Cyber Operations program.
 
-I recently graduated summa cum laude from the University of Arizona's NSA CAE-CO Cyber Operations program.
+I'm starting an M.S. in Artificial Intelligence (Data Science) at Nova Southeastern in fall 2026.
 
-## What I'm Working On
+**Live demos, writeups, and the rest of my work: [atropeano.com](https://atropeano.com)**
 
-**[SIGINT](https://github.com/iiTONELOC/sigint)** -- Real-time OSINT intelligence dashboard. Multiple live data sources on an interactive 3D globe, correlation engine with cross-source spatial matching and anomaly detection, 8-pane layout system. Bun + React 19 + Canvas 2D + Web Workers.
-[Live Demo](https://sigint-5154d935429b.herokuapp.com)
+### Building
 
-## Published
+- **[DIS-Crypto](https://github.com/wedefendit/dis-crypto)** -- hybrid classical/post-quantum cryptography, correct-by-construction API
+- **[SIGINT](https://github.com/iiTONELOC/sigint)** -- real-time OSINT dashboard on a live data globe
+- **[O-Tether](https://wedefendit.com/services/custom-solutions/o-tether)** -- five-layer inline UTM appliance that turns any router into a secure travel network (shipped)
+- **TrashScanner** -- zero-trust SaaS reference implementation (in development)
 
-- [0xDL](https://crates.io/crates/oxdl) -- Rust library for async file downloads with cryptographic integrity validation
-- [pveauto](https://crates.io/crates/pveauto) -- Rust CLI for automated Proxmox VE ISO verification
+### On crates.io
 
-## Other Work
+- **[0xDL](https://crates.io/crates/oxdl)** -- async downloads with cryptographic integrity validation
+- **[pveauto](https://crates.io/crates/pveauto)** -- automated Proxmox VE ISO verification
 
-- **SAFE-PC** -- Python framework automating SOHO security appliance deployment (Proxmox, OPNsense, Suricata)
-- **THREADS Kernel** -- OS kernel components in C: scheduling, IPC, system calls, interrupt handling, disk I/O
-
-[atropeano.com](https://atropeano.com) | [anthony@wedefendit.com](mailto:anthony@wedefendit.com)
+[anthony@wedefendit.com](mailto:anthony@wedefendit.com)

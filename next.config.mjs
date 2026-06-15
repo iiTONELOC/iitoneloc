@@ -1,10 +1,10 @@
 /** @type {import('next').NextConfig} */
 const cspHeader = `
   default-src 'self';
-  img-src 'self' data: https://raw.githubusercontent.com;
+  img-src 'self' data:;
   script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.google.com https://www.gstatic.com;
   style-src 'self' 'unsafe-inline';
-  connect-src 'self' https://api.github.com;
+  connect-src 'self' https://earthquake.usgs.gov https://eonet.gsfc.nasa.gov;
   frame-src 'self' https://www.google.com;
   font-src 'self';
   object-src 'self';
@@ -17,7 +17,7 @@ const isProduction = process.env.NODE_ENV === "production";
 const securityHeaders = [
   {
     key: "Content-Security-Policy",
-    value: cspHeader.replace(/\n/g, "").trim(),
+    value: cspHeader.replaceAll("\n", "").trim(),
   },
   ...(isProduction
     ? [
@@ -30,14 +30,6 @@ const securityHeaders = [
 ];
 
 const nextConfig = {
-  images: {
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "raw.githubusercontent.com",
-      },
-    ],
-  },
   headers: async () => {
     return [
       {

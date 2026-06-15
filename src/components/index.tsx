@@ -1,6 +1,5 @@
 export { TelemetryBar } from "./TelemetryBar";
 export { SiteNav } from "./SiteNav";
-export { SectionHead } from "./SectionHead";
 export { RevealObserver } from "./RevealObserver";
 export { Hero } from "./Hero";
 export { FeaturedWork } from "./FeaturedWork";
@@ -8,5 +7,3 @@ export { GithubStrip } from "./GithubStrip";
 export { AboutSection } from "./AboutSection";
 export { ContactSection } from "./ContactSection";
 export { Footer } from "./Footer";
-export { ContactForm } from "./ContactForm";
-export { ResumeComponent } from "./Resume";

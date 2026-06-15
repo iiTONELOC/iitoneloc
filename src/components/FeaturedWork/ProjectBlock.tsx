@@ -10,7 +10,7 @@ const statusClass: Record<ProjectStatus, string> = {
 };
 
 const styles = {
-  proj: "group relative overflow-hidden rounded-[10px] border border-op-border bg-op-surface px-[28px] py-6 transition-[border-color,transform] duration-200 hover:-translate-y-[2px] hover:border-op-border-bright",
+  proj: "group relative overflow-hidden rounded-[10px] border border-op-border bg-op-surface px-5 py-5 transition-[border-color,transform] duration-200 hover:-translate-y-[2px] hover:border-op-border-bright sm:px-[28px] sm:py-6",
   bar: "absolute inset-y-0 left-0 w-[2px] bg-op-accent opacity-0 transition-opacity duration-200 group-hover:opacity-100",
   desig: "mb-[9px] font-mono text-[11px] tracking-[1.5px] text-op-dim",
   top: "mb-[6px] flex flex-wrap items-baseline justify-between gap-4",
@@ -28,10 +28,6 @@ const styles = {
   arrow: "text-[10px] text-op-dim",
 };
 
-/**
- * One datasheet project block: designation, name, status pill, hook,
- * description, and a spec grid (Stack tags, meta fields, links).
- */
 export const ProjectBlock = (props: { project: Project }): JSX.Element => {
   const { project } = props;
 

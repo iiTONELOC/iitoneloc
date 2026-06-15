@@ -1,6 +1,6 @@
 import next from 'next';
-import { parse } from 'url';
 import { createServer } from 'http';
+import type { UrlWithParsedQuery } from 'url';
 
 const canonicalHost = 'atropeano.com';
 const wwwHost = `www.${canonicalHost}`;
@@ -61,8 +61,17 @@ const startServer = async () => {
                 return;
             }
 
-            const parsedUrl = parse(req.url!, true)
-            handle(req, res, parsedUrl)
+            // WHATWG URL parsing (legacy url.parse is deprecated, DEP0169). The
+            // base is only used to satisfy the parser; we read path/query only.
+            const url = new URL(req.url ?? '/', `http://${req.headers.host ?? 'localhost'}`);
+            const parsedUrl = {
+                pathname: url.pathname,
+                search: url.search,
+                path: url.pathname + url.search,
+                href: url.pathname + url.search,
+                query: Object.fromEntries(url.searchParams),
+            } as unknown as UrlWithParsedQuery;
+            handle(req, res, parsedUrl);
         }).listen(port)
 
         console.log(

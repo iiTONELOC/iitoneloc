@@ -9,7 +9,7 @@ function pad2(n: number): string {
 
 const styles = {
   sec: "pb-16 pt-[30px]",
-  wrap: "mx-auto max-w-wrap px-[30px]",
+  wrap: "mx-auto max-w-wrap px-5 sm:px-[30px]",
   list: "flex flex-col gap-[18px]",
 };
 

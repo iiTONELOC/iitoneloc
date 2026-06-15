@@ -29,9 +29,6 @@ function updatedYear(date: string): string | null {
   return /^\d{4}$/.test(year) ? `updated '${year.slice(-2)}` : null;
 }
 
-/**
- * Compact repository card for the demoted `// from github` strip.
- */
 export const RepoCard = (props: { repo: GithubRepo }): JSX.Element => {
   const { repo } = props;
   const dot = langColors[repo.language] ?? "#888d99";
