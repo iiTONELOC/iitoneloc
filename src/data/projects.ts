@@ -39,9 +39,9 @@ export const projects: Project[] = [
     name: "DIS-Crypto",
     status: "open-source",
     statusLabel: "open source · early dev",
-    hook: "Authenticated, post-quantum-safe cryptography with a correct-by-construction API, for developers who are not cryptographers.",
+    hook: "Post-quantum + classical cryptography you can't get wrong. Built for developers, not cryptographers.",
     description:
-      "Composes vetted, audited primitives into a small, opinionated API where the caller picks a security posture and level, not individual parameters; it rolls no cryptography of its own. Every asymmetric operation is a classical and post-quantum hybrid, and every encryption is authenticated and key-committing, holding a 128-bit floor after quantum effects. There is no unauthenticated mode, no anonymous-sender mode, and no insecure-default escape hatch: the unsafe choice is not reachable through the API. An optional identity layer adds self-rooted certificates, a trust store, a revocation list, and an audit chain.",
+      "Forged in Rust. Pick a security level, not parameters. The API can't express an unsafe combination. Every exchange and signature is a classical + post-quantum hybrid; every encryption is authenticated and key-committing. An optional identity layer adds self-rooted certs, a trust store, revocation, a tamper-evident audit chain, and signed release manifests.",
     stack: ["Rust", "Python", "Node/Bun", "C++"],
     meta: [
       { label: "KEM", value: "P-256 + ML-KEM (hybrid)" },
@@ -51,7 +51,9 @@ export const projects: Project[] = [
         value: "AES-256-GCM-SIV / AES-256-GCM / ChaCha20-Poly1305",
       },
     ],
-    links: [{ label: "source", href: "https://github.com/wedefendit/dis-crypto" }],
+    links: [
+      // { label: "source", href: "https://github.com/wedefendit/dis-crypto" },
+    ],
   },
   {
     designation: "02 / sigint",
@@ -60,7 +62,7 @@ export const projects: Project[] = [
     statusLabel: "live",
     hook: "Real-time OSINT intelligence dashboard on an interactive globe.",
     description:
-      "Eight live data sources (aircraft, vessels, seismic, fires, weather, cyclones, GDELT events, news) rendered with a custom Canvas 2D + Web Worker engine. Cross-source correlation engine produces scored alerts and watch-mode notifications; PWA with offline support.",
+      "Incorporates eight live data sources (aircraft, vessels, seismic, fires, weather, cyclones, GDELT events, news). Rendered with a custom Canvas 2D + Web Worker engine, SIGINT uses a cross-source correlation engine to produce scored alerts and watch-mode notifications. PWA with offline support.",
     stack: ["TypeScript", "React 19", "Bun", "Canvas 2D", "Web Workers"],
     meta: [{ label: "Type", value: "OSINT platform" }],
     links: [
@@ -75,7 +77,7 @@ export const projects: Project[] = [
     statusLabel: "closed source · shipped",
     hook: "A five-layer inline UTM appliance that turns any router into a secure travel network.",
     description:
-      "Runs on low-cost ARM single-board hardware: automatic phone-tether bridge, default-deny firewall, threat-intelligence filtering, flow classification, and inline intrusion prevention. Ships signed releases and is fail-closed. If protection can't be enforced, the connection drops with it.",
+      "Runs on low-cost ARM single-board computer. Features automatic phone-tether bridge, default-deny firewall, threat-intelligence filtering, flow classification, and inline intrusion prevention. Ships signed releases and is fail-closed.",
     stack: ["ARM", "UTM", "IPS", "signed releases"],
     meta: [{ label: "Type", value: "Security appliance" }],
     links: [
@@ -90,9 +92,9 @@ export const projects: Project[] = [
     name: "TrashScanner",
     status: "in-development",
     statusLabel: "in development",
-    hook: "A zero-trust SaaS reference implementation.",
+    hook: "Scan it before you can it™. A zero-trust SaaS reference implementation.",
     description:
-      "Six-gate per-request verification (identity, freshness, device, possession, entitlement, ownership); Ed25519 JWT with single-use jti rotation; dual-path device auth (mTLS + Web Crypto challenge-response); GPG-signed code manifest verified at boot; least-privilege DB roles isolating billing writes.",
+      "Every request clears six independent gates: identity, freshness, device, possession, entitlement, ownership; before any data is touched. Signed code manifest verified at boot: hard-fail, no override. Per-service, append-only Ed25519 audit hash chains, trigger-enforced at the database. Ed25519 JWTs with single-use refresh rotation and family-based replay detection; dual-path device auth (mTLS + Web Crypto challenge-response). Least-privilege DB roles with column-scoped grants, isolating billing writes and GDPR erasure behind locked DEFINER procedures.",
     stack: ["TypeScript", "Bun", "Hono", "React", "Zitadel"],
     meta: [
       { label: "Target", value: "OWASP ASVS L2 · AAL2" },
