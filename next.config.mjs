@@ -4,7 +4,8 @@ const cspHeader = `
   img-src 'self' data:;
   script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.google.com https://www.gstatic.com;
   style-src 'self' 'unsafe-inline';
-  connect-src 'self' https://earthquake.usgs.gov https://eonet.gsfc.nasa.gov;
+  connect-src 'self' https://earthquake.usgs.gov;
+  worker-src 'self' blob:;
   frame-src 'self' https://www.google.com;
   font-src 'self';
   object-src 'self';

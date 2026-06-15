@@ -29,7 +29,7 @@ export const GlobeSkeleton = (): JSX.Element => {
       <div className={GLOBE_HUD} style={{ top: 14, left: 16 }}>
         <b className="font-medium text-op-muted">SIGINT</b>
         <br />
-        USGS + NASA EONET
+        USGS + NASA FIRMS
       </div>
       <div
         className={GLOBE_HUD}
