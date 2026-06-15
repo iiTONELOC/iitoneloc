@@ -1,16 +1,28 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import { Header } from "@/components";
+import { JetBrains_Mono, Hanken_Grotesk } from "next/font/google";
+import { TelemetryBar, SiteNav } from "@/components";
 
-const styles = {
-  body: "w-full h-screen flex flex-col justify-start items-center bg-sig-dark text-gray-100",
-};
+// Self-hosted via next/font (no external request; satisfies CSP font-src 'self').
+const mono = JetBrains_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500", "700"],
+  variable: "--font-mono",
+  display: "swap",
+});
+
+const sans = Hanken_Grotesk({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  variable: "--font-sans",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://atropeano.com"),
   title: "Anthony Tropeano | Security Engineer",
   description:
-    "Security engineer and toolmaker. OSINT platforms, infrastructure automation, systems-level software.",
+    "Security engineer who ships code. Applied cryptography and secure systems: cryptography in Rust, zero-trust architecture, and SOC/NOC infrastructure.",
   icons: {
     icon: [
       { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
@@ -26,9 +38,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={styles.body}>
-        <Header />
+    <html lang="en" className={`${mono.variable} ${sans.variable}`}>
+      <body className="min-h-screen bg-op-bg font-sans text-op-text antialiased">
+        <TelemetryBar />
+        <SiteNav />
         {children}
       </body>
     </html>

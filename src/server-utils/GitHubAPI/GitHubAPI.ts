@@ -225,6 +225,46 @@ class GitHubAPI {
   }
 
   /**
+   * Lightweight repo lookup for the demoted github strip: a single REST call,
+   * mapping only the fields the compact card needs (name, description, language,
+   * updated, url). Unlike getRepoByName it does not fetch contents or parse the
+   * README, so a repo can never be dropped over a README-parsing hiccup.
+   * @param repoName the name of the repo to look up
+   */
+  async getRepoSummary(repoName: string): Promise<APIResponseData> {
+    try {
+      const URL = gitHubAPIUrl + restRepoEndPoint(this.user, repoName);
+      const res = await fetch(URL, {
+        method: "GET",
+        headers: headers(this.#auth),
+        next: { revalidate: 600 },
+      });
+
+      const data = await res.json();
+
+      return {
+        data: {
+          name: data.name,
+          description: data.description ?? "",
+          topLanguage: data.language ?? "",
+          updatedAt: data.updated_at ?? "",
+          repoUrl: data.html_url ?? "",
+        },
+        status: res.status,
+        ok: res.ok,
+        errors: [],
+      };
+    } catch (error) {
+      return {
+        data: {},
+        status: 500,
+        ok: false,
+        errors: [error],
+      };
+    }
+  }
+
+  /**
    * Retrieves an array of objects containing the contents of the repository
    * @param repoName the name of the repo to look up
    */
@@ -399,10 +439,16 @@ class GitHubAPI {
       // parse the README for a screenshot
       const readmeURL = readmeParser("screenshot", readme);
 
-      // return a placeholder if no screenshot is found
-      const screenshotUrl = readmeURL
-        ? SCREENSHOT_URL_BASE_PATH + readmeURL
-        : undefined;
+      // Absolute URLs are used as-is; relative paths are resolved against the
+      // repo's raw base path as before.
+      let screenshotUrl: string | undefined;
+      if (!readmeURL) {
+        screenshotUrl = undefined;
+      } else if (/^https?:\/\//.test(readmeURL)) {
+        screenshotUrl = readmeURL;
+      } else {
+        screenshotUrl = SCREENSHOT_URL_BASE_PATH + readmeURL;
+      }
 
       return {
         data: { screenshotUrl: screenshotUrl?.replace(/README.MD/g, "") },

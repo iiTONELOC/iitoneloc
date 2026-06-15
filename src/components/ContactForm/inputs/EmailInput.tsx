@@ -47,7 +47,7 @@ export default function EmailInput({
       validate={validate}
       currentValue={currentValue}
       setValidated={setValidated}
-      placeholder={`What's your email?`}
+      placeholder={`you@example.com`}
       description="Your email"
     />
   );

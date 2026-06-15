@@ -49,10 +49,10 @@ export function Input(props: Readonly<inputTypes>): JSX.Element {
     className:
       className ||
       `appearance-none rounded-md relative block w-full px-3 py-2.5
-       bg-sig-dark border border-sig-border placeholder-sig-dim
-       text-gray-300 font-mono text-sm
-       focus:outline-none focus:ring-1 focus:ring-sig-green/40
-       focus:border-sig-green/40 transition-colors duration-200`.replace(/\n/g, " "),
+       bg-op-bg border border-op-border placeholder-op-dim
+       text-op-text font-mono text-[13px]
+       focus:outline-none focus:ring-1 focus:ring-op-accent/50
+       focus:border-op-accent transition-colors duration-200`.replaceAll("\n", " "),
   };
 
   return (

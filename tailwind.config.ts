@@ -1,5 +1,6 @@
 import type { Config } from "tailwindcss";
 
+// Operator / intelligence palette, pulled verbatim from ref.html :root.
 const config: Config = {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
@@ -9,25 +10,26 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        sig: {
-          green: "#00ff88",
-          "green-dim": "#00cc6a",
-          "green-muted": "#00994f",
-          dark: "#0a0f0d",
-          "dark-card": "#0d1411",
-          "dark-surface": "#111a16",
-          border: "#1a2f25",
-          "border-bright": "#2a4f3a",
-          dim: "#6b8f7b",
+        op: {
+          bg: "#08090b",
+          surface: "#101318",
+          border: "#20232b",
+          "border-bright": "#34384180",
+          text: "#e9eaed",
+          muted: "#888d99",
+          dim: "#565b67",
+          accent: "#ffb454",
+          "accent-hi": "#ffc77d",
+          live: "#74cf86",
+          cyan: "#69c2d6",
         },
       },
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+      maxWidth: {
+        wrap: "1120px",
       },
       fontFamily: {
-        mono: ['"JetBrains Mono"', '"Fira Code"', '"SF Mono"', 'Consolas', 'monospace'],
+        mono: ["var(--font-mono)", "ui-monospace", "monospace"],
+        sans: ["var(--font-sans)", "system-ui", "sans-serif"],
       },
     },
   },

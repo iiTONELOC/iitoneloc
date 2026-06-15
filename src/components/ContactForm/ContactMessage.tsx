@@ -46,7 +46,7 @@ export default function ContactMessage({
       validate={validate}
       currentValue={currentValue}
       setValidated={setValidated}
-      placeholder={`Message: `}
+      placeholder={`What can I help with?`}
       description="Enter your message"
     />
   );

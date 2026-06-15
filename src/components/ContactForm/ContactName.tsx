@@ -41,7 +41,7 @@ export default function ContactNameInput({
       validate={validate}
       currentValue={currentValue}
       setValidated={setValidated}
-      placeholder={`What's your name?`}
+      placeholder={`Your full name`}
       description="Your name"
     />
   );

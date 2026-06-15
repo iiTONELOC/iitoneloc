@@ -2,62 +2,162 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Operator / intelligence design tokens (verbatim from ref.html :root). */
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+  --bg: #08090b;
+  --surface: #101318;
+  --border: #20232b;
+  --border-bright: #34384180;
+  --text: #e9eaed;
+  --muted: #888d99;
+  --dim: #565b67;
+  --accent: #ffb454;
+  --live: #74cf86;
+  --cyan: #69c2d6;
+
+  color-scheme: dark;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* Targets FireFox */
+
   scrollbar-width: thin;
-  scrollbar-color: #1a2f25 #0a0f0d;
+  scrollbar-color: var(--border) var(--bg);
 }
 
-/* Scrollbar Styling Chrome, Edge, Safari*/
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  line-height: 1.65;
+  overflow-x: hidden;
+  /* Faint dot-grid page background. */
+  background-image: radial-gradient(
+    circle at 1px 1px,
+    rgba(255, 255, 255, 0.02) 1px,
+    transparent 0
+  );
+  background-size: 40px 40px;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Scrollbar (Chrome, Edge, Safari). */
 *::-webkit-scrollbar {
   width: 12px;
 }
-
 *::-webkit-scrollbar-track {
-  background: #0a0f0d;
+  background: var(--bg);
 }
-
 *::-webkit-scrollbar-thumb {
-  background-color: #1a2f25;
+  background-color: var(--border);
   border-radius: 6px;
-  border: 3px solid #0a0f0d;
+  border: 3px solid var(--bg);
 }
 
+/* Globe canvas (hero signature, wired in a later phase). */
+#globe {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Status pill (featured-work blocks). Color set per status modifier. */
+.status {
+  font-size: 11.5px;
+  font-weight: 500;
+  padding: 3px 11px;
+  border-radius: 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+.status::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+.status-live {
+  color: var(--live);
+  background: #74cf8615;
+}
+.status-live::before {
+  background: var(--live);
+}
+.status-dev {
+  color: var(--accent);
+  background: #ffb45415;
+}
+.status-dev::before {
+  background: var(--accent);
+}
+.status-oss {
+  color: var(--live);
+  background: #74cf8612;
+}
+.status-oss::before {
+  background: var(--live);
+}
+.status-closed {
+  color: var(--cyan);
+  background: #69c2d615;
+}
+.status-closed::before {
+  background: var(--cyan);
+}
+
+/* Blinking live indicator (telemetry feed tag, hero availability dot). */
+@keyframes op-blink {
+  50% {
+    opacity: 0.35;
+  }
+}
+.op-blink::before {
+  animation: op-blink 1.4s ease-in-out infinite;
+}
+
+/* Scroll reveal. */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.6s,
+    transform 0.6s;
+}
+.reveal.in {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .op-blink::before {
+    animation: none;
+  }
+}
+
+/* Resume PDF embed (kept from prior build, used by /resume). */
 embed {
-  filter: invert(0.8) brightness(1) contrast(1.2) sepia(0.2) saturate(1.5)
-    hue-rotate(180deg);
+  filter: invert(0.9) hue-rotate(180deg) contrast(0.95);
   width: 100%;
   height: 100%;
   max-height: 1125px;
   border-radius: 10px;
 }
-
 pdf-viewer {
   max-height: 1150px;
-}
-
-/* Subtle scanline effect on body */
-body::after {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 9999;
-  background: repeating-linear-gradient(
-    0deg,
-    transparent,
-    transparent 2px,
-    rgba(0, 255, 136, 0.003) 2px,
-    rgba(0, 255, 136, 0.003) 4px
-  );
 }

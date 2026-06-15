@@ -10,17 +10,23 @@ import ReCAPTCHA from 'react-google-recaptcha';
 import { useState, useEffect, useRef } from 'react';
 
 const styles = {
-  title: 'text-center text-xl font-mono text-gray-100',
-  buttonSection: 'flex flex-col flex-wrap items-center justify-center gap-6',
-  buttonContainer: 'flex flex-row items-center justify-between gap-4',
-  button: 'font-mono text-sm py-2 px-5 rounded-md transition-all duration-200 ',
+  header: 'flex flex-col gap-1 border-b border-op-border pb-4',
+  title: 'font-mono text-[15px] font-medium text-op-text',
+  sub: 'font-mono text-[12px] text-op-dim',
+  status: 'font-mono text-[12.5px]',
+  field: 'flex flex-col gap-[7px]',
+  label: 'font-mono text-[10.5px] uppercase tracking-[1px] text-op-dim',
+  buttonSection: 'flex flex-col flex-wrap gap-4',
+  buttonContainer: 'flex flex-row items-center gap-3',
+  button:
+    'font-mono text-[13px] font-medium py-[10px] px-[19px] rounded-[6px] transition-all duration-150 ',
   submitButton: {
-    regular: 'bg-sig-dark border border-sig-border text-sig-dim cursor-not-allowed',
+    regular: 'bg-op-surface border border-op-border text-op-dim cursor-not-allowed',
     verified:
-      'bg-sig-green/10 border border-sig-green/40 text-sig-green hover:bg-sig-green/20 hover:border-sig-green/60 cursor-pointer',
+      'bg-op-accent border border-op-accent text-[#1a1206] font-bold hover:bg-op-accent-hi cursor-pointer',
   },
   cancelButton:
-    'bg-sig-dark border border-sig-border text-sig-dim hover:border-red-500/40 hover:text-red-400 cursor-pointer',
+    'bg-op-surface border border-op-border-bright text-op-text hover:border-red-500/50 hover:text-red-400 cursor-pointer',
 };
 
 const defaultFormState = {
@@ -170,32 +176,55 @@ export function ContactForm() {
 
   return (
     <FormContainer _ref={emailJsFormRef} onAction={formAction}>
-      <h1 className={styles.title}>{`Let's get in touch`}</h1>
+      <div className={styles.header}>
+        <h3 className={styles.title}>Send a message</h3>
+        <p className={styles.sub}>Open to roles, projects, or questions.</p>
+      </div>
+
       {showMessage ? (
-        <h2 className={`text-sm font-mono ${!sendError ? 'text-sig-green' : 'text-red-400'}`}>
-          {' '}
-          {message}{' '}
-        </h2>
+        <p
+          className={`${styles.status} ${
+            sendError ? 'text-red-400' : 'text-op-live'
+          }`}
+        >
+          {message}
+        </p>
       ) : (
         <></>
       )}
-      <ContactNameInput
-        onChange={handleFormStateChange}
-        currentValue={formState.user_name}
-        setValidated={setNameValidated}
-      />
 
-      <EmailInput
-        onChange={handleFormStateChange}
-        currentValue={formState.user_email}
-        setValidated={setEmailValidated}
-      />
+      <div className={styles.field}>
+        <label className={styles.label} htmlFor="contactName">
+          name
+        </label>
+        <ContactNameInput
+          onChange={handleFormStateChange}
+          currentValue={formState.user_name}
+          setValidated={setNameValidated}
+        />
+      </div>
 
-      <ContactMessage
-        onChange={handleFormStateChange}
-        currentValue={formState.message}
-        setValidated={setMessageValidated}
-      />
+      <div className={styles.field}>
+        <label className={styles.label} htmlFor="contactEmail">
+          email
+        </label>
+        <EmailInput
+          onChange={handleFormStateChange}
+          currentValue={formState.user_email}
+          setValidated={setEmailValidated}
+        />
+      </div>
+
+      <div className={styles.field}>
+        <label className={styles.label} htmlFor="contactMessage">
+          message
+        </label>
+        <ContactMessage
+          onChange={handleFormStateChange}
+          currentValue={formState.message}
+          setValidated={setMessageValidated}
+        />
+      </div>
 
       {formValidated ? (
         <section className={styles.buttonSection}>

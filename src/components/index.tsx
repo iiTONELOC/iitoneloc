@@ -1,7 +1,12 @@
-export { Header } from "./Header";
-export { NavBar } from "./NavBar";
+export { TelemetryBar } from "./TelemetryBar";
+export { SiteNav } from "./SiteNav";
+export { SectionHead } from "./SectionHead";
+export { RevealObserver } from "./RevealObserver";
+export { Hero } from "./Hero";
+export { FeaturedWork } from "./FeaturedWork";
+export { GithubStrip } from "./GithubStrip";
+export { AboutSection } from "./AboutSection";
+export { ContactSection } from "./ContactSection";
 export { Footer } from "./Footer";
-export { NavLink } from "./NavLink";
 export { ContactForm } from "./ContactForm";
 export { ResumeComponent } from "./Resume";
-export { ProjectCard } from "./ProjectCard";

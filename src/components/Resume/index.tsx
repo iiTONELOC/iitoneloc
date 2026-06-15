@@ -3,45 +3,45 @@ import resumeData from "@/data/resume.json";
 
 const s = {
   resume:
-    "w-full max-w-[900px] border border-sig-border rounded-lg bg-sig-dark-card p-6 md:p-10 flex flex-col gap-1 relative z-10",
+    "w-full max-w-[900px] border border-op-border rounded-lg bg-op-surface p-6 md:p-10 flex flex-col gap-1 relative z-10",
   name: "text-2xl md:text-3xl font-bold text-gray-100 text-center",
   contactRow:
-    "text-xs md:text-sm text-sig-dim font-mono text-center mt-1 flex flex-wrap justify-center gap-x-2",
-  contactSep: "text-sig-border hidden sm:inline",
+    "text-xs md:text-sm text-op-dim font-mono text-center mt-1 flex flex-wrap justify-center gap-x-2",
+  contactSep: "text-op-border hidden sm:inline",
   contactLink:
-    "text-sig-dim hover:text-sig-green transition-colors duration-200",
-  openTo: "text-xs text-sig-dim italic text-center mt-1",
+    "text-op-dim hover:text-op-accent transition-colors duration-200",
+  openTo: "text-xs text-op-dim italic text-center mt-1",
   sectionTitle:
-    "text-xs font-mono font-bold text-gray-200 uppercase tracking-[0.15em] mt-6 mb-1 pb-1 border-b border-sig-border",
+    "text-xs font-mono font-bold text-gray-200 uppercase tracking-[0.15em] mt-6 mb-1 pb-1 border-b border-op-border",
   summaryText: "text-sm text-gray-400 leading-relaxed mt-2",
   skillRow: "text-sm text-gray-400 mt-1.5",
   skillLabel: "text-gray-200 font-semibold",
   jobHeader:
     "flex flex-col sm:flex-row sm:items-baseline sm:justify-between mt-4 gap-0.5",
   jobOrg: "text-sm font-bold text-gray-200",
-  jobTitle: "text-sm italic text-sig-dim",
-  jobDate: "text-xs font-mono text-sig-dim",
-  jobLocation: "text-xs text-sig-dim mt-0.5",
+  jobTitle: "text-sm italic text-op-dim",
+  jobDate: "text-xs font-mono text-op-dim",
+  jobLocation: "text-xs text-op-dim mt-0.5",
   bullet:
-    "text-sm text-gray-400 leading-relaxed ml-4 relative before:content-['\\2022'] before:absolute before:-left-3 before:text-sig-green-muted",
+    "text-sm text-gray-400 leading-relaxed ml-4 relative before:content-['\\2022'] before:absolute before:-left-3 before:text-op-accent",
   eduHeader:
     "flex flex-col sm:flex-row sm:items-baseline sm:justify-between mt-4 gap-0.5",
   eduSchool: "text-sm font-bold text-gray-200",
-  eduDate: "text-xs font-mono text-sig-dim",
+  eduDate: "text-xs font-mono text-op-dim",
   eduDegree: "text-sm italic text-gray-400 mt-0.5",
-  eduDetails: "text-xs text-sig-dim mt-0.5",
+  eduDetails: "text-xs text-op-dim mt-0.5",
   certItem: "text-sm text-gray-400 mt-1.5",
   projHeader: "mt-4",
   projName: "text-sm font-bold text-gray-200",
-  projTech: "text-xs italic text-sig-dim",
+  projTech: "text-xs italic text-op-dim",
   projDesc: "text-sm text-gray-400 leading-relaxed mt-1",
   projLinks: "text-xs font-mono mt-1 flex flex-wrap gap-x-1",
   projLink:
-    "text-sig-green-dim hover:text-sig-green transition-colors duration-200 underline underline-offset-2",
-  projLinkSep: "text-sig-border",
+    "text-op-accent-hi hover:text-op-accent transition-colors duration-200 underline underline-offset-2",
+  projLinkSep: "text-op-border",
   honorsText: "text-sm text-gray-400 mt-2",
   inlineLink:
-    "text-sig-green-dim hover:text-sig-green transition-colors duration-200 underline underline-offset-2",
+    "text-op-accent-hi hover:text-op-accent transition-colors duration-200 underline underline-offset-2",
 };
 
 /**

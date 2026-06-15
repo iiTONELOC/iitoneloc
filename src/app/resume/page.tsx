@@ -10,7 +10,7 @@ const styles = {
     "w-full max-w-4xl flex flex-row items-center justify-between px-8 pt-8 pb-2",
   h1: "text-3xl md:text-4xl font-bold text-gray-100 tracking-tight",
   downloadBtn:
-    "flex items-center gap-2 text-sm font-mono px-4 py-2 border border-sig-green/40 bg-sig-green/5 rounded-md text-sig-green hover:bg-sig-green/10 hover:border-sig-green/60 transition-all duration-200",
+    "flex items-center gap-2 text-sm font-mono px-4 py-2 border border-op-accent/40 bg-op-accent/5 rounded-md text-op-accent hover:bg-op-accent/10 hover:border-op-accent/60 transition-all duration-200",
   downloadIcon: "w-4 h-4",
   section:
     "w-full max-w-4xl flex-1 flex flex-col items-center justify-start px-8 py-4",

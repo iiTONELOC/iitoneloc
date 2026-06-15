@@ -4,10 +4,13 @@
   "private": true,
   "scripts": {
     "postinstall": "npx next telemetry disable",
-    "dev": "node -r ts-node/register --env-file=.env.local server/index.ts",
+    "dev": "node -r ts-node/register --env-file=../.env.local server/index.ts",
     "build": "next build && tsc -p tsconfig.server.json",
     "start": "node dist/server/index.js",
     "lint": "next lint"
+  },
+  "overrides": {
+    "postcss": "$postcss"
   },
   "dependencies": {
     "next": "^16.0.7",
@@ -24,7 +27,7 @@
     "@types/react-google-recaptcha": "^2.1.9",
     "eslint": "^9.39.1",
     "eslint-config-next": "^16.0.7",
-    "postcss": "^8",
+    "postcss": "^8.5.10",
     "tailwindcss": "^3.4.1",
     "ts-node": "^10.9.2",
     "typescript": "^5"

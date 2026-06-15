@@ -33,3 +33,33 @@ export const getPinnedRepos = async (): Promise<{
     projectData: currentProjectData
   });
 };
+
+/**
+ * Fetches a curated, ordered set of repos by name (reusing the cached
+ * getRepoByName path). Used by the demoted `// from github` strip so the
+ * displayed repos are explicit instead of whatever happens to be pinned.
+ * @param names repo names in the desired display order
+ */
+export const getReposByNames = async (
+  names: string[]
+): Promise<{ projectData: ProjectData }> => {
+  let currentProjectData: ProjectData = [];
+
+  try {
+    const repoDataPromises = names.map(async name => {
+      const { data } = await githubAPI.getRepoSummary(name);
+      const repo = data as RepoData;
+      // Surface a dropped repo instead of silently shrinking the strip.
+      if (!repo?.name) {
+        console.warn(`github strip: dropped "${name}" (no data returned)`);
+      }
+      return repo;
+    });
+    const results = await Promise.all(repoDataPromises);
+    currentProjectData = results.filter(repo => repo?.name);
+  } catch (error) {
+    console.error('Failed to get curated repos', error);
+  }
+
+  return { projectData: currentProjectData };
+};

@@ -7,7 +7,7 @@ export default function FormContainer(
 ) {
   const { children, _ref } = props;
   return (
-    <div className="w-full max-w-lg border border-sig-border rounded-lg bg-sig-dark-card p-6">
+    <div className="w-full border border-op-border rounded-lg bg-op-surface p-6">
       {_ref ? (
         <form
           ref={_ref}
