@@ -22,14 +22,14 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://atropeano.com"),
   title: "Anthony Tropeano | Security Engineer",
   description:
-    "Security engineer who ships code. Applied cryptography and secure systems: cryptography in Rust, zero-trust architecture, and SOC/NOC infrastructure.",
+    "Security engineer tracing trust assumptions across applied cryptography, applications, infrastructure, networking, and operations.",
   openGraph: {
     type: "website",
     url: "https://atropeano.com",
     siteName: "atropeano.com",
     title: "Anthony Tropeano | Security Engineer",
     description:
-      "Security engineer who ships code. Applied cryptography and secure systems.",
+      "Security engineer building secure systems across cryptography, applications, infrastructure, and operations.",
     images: [
       {
         url: "/og.png",
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Anthony Tropeano | Security Engineer",
     description:
-      "Security engineer who ships code. Applied cryptography and secure systems.",
+      "Security engineer building secure systems across cryptography, applications, infrastructure, and operations.",
     images: ["/og.png"],
   },
   icons: {

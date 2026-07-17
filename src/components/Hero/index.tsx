@@ -17,16 +17,11 @@ const styles = {
   flag: "inline-flex items-center gap-[7px]",
   dot: "h-[6px] w-[6px] rounded-full bg-op-live shadow-[0_0_8px_var(--live)]",
   cta: "flex flex-wrap gap-3",
-  btn: "inline-flex items-center gap-[9px] rounded-[6px] border border-op-border-bright bg-op-surface px-[19px] py-[11px] font-mono text-[13px] font-medium text-op-text transition-all duration-150 hover:-translate-y-px hover:border-op-accent hover:text-op-accent",
+  btn: "inline-flex min-h-11 items-center gap-[9px] rounded-[6px] border border-op-border-bright bg-op-surface px-[19px] py-[11px] font-mono text-[13px] font-medium text-op-text transition-all duration-150 hover:-translate-y-px hover:border-op-accent hover:text-op-accent",
   btnPrimary:
-    "inline-flex items-center gap-[9px] rounded-[6px] border border-op-accent bg-op-accent px-[19px] py-[11px] font-mono text-[13px] font-bold text-[#1a1206] transition-all duration-150 hover:-translate-y-px hover:border-op-accent-hi hover:bg-op-accent-hi",
+    "inline-flex min-h-11 items-center gap-[9px] rounded-[6px] border border-op-accent bg-op-accent px-[19px] py-[11px] font-mono text-[13px] font-bold text-[#1a1206] transition-all duration-150 hover:-translate-y-px hover:border-op-accent-hi hover:bg-op-accent-hi",
 };
 
-/**
- * Hero: name / role / lede / availability / CTAs on the left, live globe on the
- * right. The globe canvas and its data-bound HUD readouts are added in Phase 4;
- * the right column renders the styled frame and projection label for now.
- */
 export const Hero = (): JSX.Element => {
   return (
     <header className={styles.hero} id="top">
@@ -43,9 +38,9 @@ export const Hero = (): JSX.Element => {
             <span>Security Engineer</span><span className={styles.sep}>&middot;</span><span>Applied Cryptography &amp; Secure Systems</span>
           </div>
           <p className={styles.lede}>
-            Security engineer who ships code. End-to-end builder across the
-            stack: cryptography in Rust, zero-trust architecture, SOC/NOC
-            infrastructure, and full-stack development.
+            Security engineer who ships code. I turn cross-layer trust
+            assumptions into deployable controls across cryptography,
+            applications, infrastructure, and operations.
           </p>
           <div className={styles.flags}>
             <span className={styles.flag}>
@@ -57,11 +52,9 @@ export const Hero = (): JSX.Element => {
           <div className={styles.cta}>
             <a
               className={styles.btnPrimary}
-              href={externalLinks.resumePdf}
-              target="_blank"
-              rel="noopener noreferrer"
+              href={externalLinks.resume}
             >
-              resume.pdf <span>&#8599;</span>
+              view resume <span>&#8594;</span>
             </a>
             <a className={styles.btn} href="#work">
               view work <span>&#8594;</span>

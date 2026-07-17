@@ -3,7 +3,6 @@ import type { Project, ProjectStatus } from "@/data/projects";
 
 const statusClass: Record<ProjectStatus, string> = {
   "open-source": "status-oss",
-  published: "status-oss",
   live: "status-live",
   "in-development": "status-dev",
   closed: "status-closed",

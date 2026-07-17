@@ -8,7 +8,7 @@ import {
 } from "@/lib/feedStatus";
 
 const styles = {
-  bar: "border-b border-op-border bg-op-bg/60 font-mono text-[11.5px] text-op-dim",
+  bar: "border-b border-op-border bg-op-bg/60 font-mono text-[11.5px] text-op-dim print:hidden",
   wrap: "mx-auto flex h-[34px] max-w-wrap items-center justify-between gap-5 overflow-hidden whitespace-nowrap px-5 sm:px-[30px]",
   left: "flex gap-6",
   feed: "inline-flex items-center gap-[6px]",

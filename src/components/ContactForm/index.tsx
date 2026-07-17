@@ -7,7 +7,7 @@ import ContactNameInput from './ContactName';
 import EmailInput from './inputs/EmailInput';
 import ContactMessage from './ContactMessage';
 import ReCAPTCHA from 'react-google-recaptcha';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 
 const styles = {
   header: 'flex flex-col gap-1 border-b border-op-border pb-4',
@@ -33,7 +33,6 @@ const defaultFormState = {
   user_name: '',
   user_email: '',
   message: '',
-  g_recaptcha_response: '',
 };
 
 const defaultEmailSentState = {
@@ -83,8 +82,6 @@ export function ContactForm() {
     setEmailValidated(false);
     setMessageValidated(false);
   };
-
-  const emailJsFormRef = useRef<HTMLFormElement>(null);
 
   const displayMessage = (message: string) => {
     setMessage(message);
@@ -175,7 +172,7 @@ export function ContactForm() {
   };
 
   return (
-    <FormContainer _ref={emailJsFormRef} onAction={formAction}>
+    <FormContainer onAction={formAction}>
       <div className={styles.header}>
         <h3 className={styles.title}>Send a message</h3>
         <p className={styles.sub}>Open to roles, projects, or questions.</p>

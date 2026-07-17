@@ -1,12 +1,9 @@
-/**
- * In-page navigation links for the single-scroll home page. The mockup nav
- * renders each as `// <label>` and points at an anchored section.
- */
 export const links = [
-  { to: "#work", text: "work" },
-  { to: "#github", text: "github" },
-  { to: "#about", text: "about" },
-  { to: "#contact", text: "contact" },
+  { to: "/#work", text: "work" },
+  { to: "/#github", text: "github" },
+  { to: "/#about", text: "about" },
+  { to: "/#contact", text: "contact" },
+  { to: "/resume", text: "resume" },
 ];
 
 export type Links = typeof links;
@@ -21,5 +18,6 @@ export const externalLinks = {
   linkedin: "https://linkedin.com/in/anthony-t-29353b201/",
   company: "https://wedefendit.com",
   email: "anthony@wedefendit.com",
+  resume: "/resume",
   resumePdf: "/documents/anthony_tropeano_resume.pdf",
 };
