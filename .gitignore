@@ -16,6 +16,7 @@
 # production
 /build
 /dist
+/public/workers/*.js
 
 # misc
 .DS_Store

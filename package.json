@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "postinstall": "npx next telemetry disable",
-    "dev": "node -r ts-node/register --env-file=../.env.local server/index.ts",
-    "build": "next build && tsc -p tsconfig.server.json",
+    "dev": "tsc -p tsconfig.worker.json && node -r ts-node/register --env-file=../.env.local server/index.ts",
+    "build": "next build && tsc -p tsconfig.server.json && tsc -p tsconfig.worker.json",
     "start": "node dist/server/index.js",
     "lint": "next lint"
   },

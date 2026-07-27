@@ -1,0 +1,27 @@
+{
+    "compilerOptions": {
+        "lib": [
+            "webworker",
+            "esnext"
+        ],
+        "skipLibCheck": true,
+        "strict": true,
+        "esModuleInterop": true,
+        "target": "ESNext",
+        "module": "ESNext",
+        "moduleResolution": "Node",
+        "resolveJsonModule": true,
+        "incremental": true,
+        "baseUrl": "./",
+        "outDir": "./public/workers",
+        "rootDir": "./src/workers",
+        "tsBuildInfoFile": "./tsconfig.worker.tsbuildinfo",
+        "forceConsistentCasingInFileNames": true
+    },
+    "include": [
+        "./src/workers/**/*"
+    ],
+    "exclude": [
+        "./node_modules"
+    ]
+}
