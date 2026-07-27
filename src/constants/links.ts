@@ -19,5 +19,5 @@ export const externalLinks = {
   company: "https://wedefendit.com",
   email: "anthony@wedefendit.com",
   resume: "/resume",
-  resumePdf: "/documents/anthony_tropeano_resume.pdf",
+  resumePdf: "/docs/anthony_tropeano_resume.pdf",
 };

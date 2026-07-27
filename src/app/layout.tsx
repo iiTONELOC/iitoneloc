@@ -22,17 +22,17 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://atropeano.com"),
   title: "Anthony Tropeano | Security Engineer",
   description:
-    "Security engineer tracing trust assumptions across applied cryptography, applications, infrastructure, networking, and operations.",
+    "Security engineer building secure software, infrastructure, and network defenses.",
   openGraph: {
     type: "website",
     url: "https://atropeano.com",
     siteName: "atropeano.com",
     title: "Anthony Tropeano | Security Engineer",
     description:
-      "Security engineer building secure systems across cryptography, applications, infrastructure, and operations.",
+      "Security engineer building secure software, infrastructure, and network defenses.",
     images: [
       {
-        url: "/og.png",
+        url: "/images/og.png",
         width: 2116,
         height: 1654,
         alt: "Anthony Tropeano, Security Engineer",
@@ -43,16 +43,16 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Anthony Tropeano | Security Engineer",
     description:
-      "Security engineer building secure systems across cryptography, applications, infrastructure, and operations.",
-    images: ["/og.png"],
+      "Security engineer building secure software, infrastructure, and network defenses.",
+    images: ["/images/og.png"],
   },
   icons: {
     icon: [
-      { url: "/favicon.svg", type: "image/svg+xml" },
-      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
-      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/images/favicon.svg", type: "image/svg+xml" },
+      { url: "/images/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/images/favicon-16x16.png", sizes: "16x16", type: "image/png" },
     ],
-    apple: "/apple-touch-icon.png",
+    apple: "/images/apple-touch-icon.png",
   },
 };
 

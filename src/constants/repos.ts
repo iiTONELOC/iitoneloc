@@ -21,7 +21,7 @@ export const githubStripRepos: GithubRepo[] = [
   {
     name: "safe-pc",
     description:
-      "Turns end-of-life x86_64 PCs into unattended SOHO security appliances using Proxmox, OPNsense, Suricata, and Python orchestration.",
+      "Turns older x86-64 computers into unattended security appliances for small networks. It uses Proxmox, OPNsense, Suricata, and Python automation.",
     language: "Python",
     url: "https://github.com/iiTONELOC/safe-pc",
     updated: "2025-11-26",
@@ -29,7 +29,7 @@ export const githubStripRepos: GithubRepo[] = [
   {
     name: "pveauto",
     description:
-      "Rust library and CLI that downloads Proxmox VE ISO images and verifies their cryptographic integrity.",
+      "Rust library and command-line tool that downloads Proxmox VE ISO images and verifies their integrity.",
     language: "Rust",
     url: "https://github.com/iiTONELOC/pveauto",
     updated: "2025-12-27",
@@ -37,7 +37,7 @@ export const githubStripRepos: GithubRepo[] = [
   {
     name: "threads-kernel",
     description:
-      "C implementations of core operating-system primitives in the THREADS teaching framework: scheduling, semaphores, mutexes, message passing, interrupt handling, and basic system calls.",
+      "Adds core operating system functions to the THREADS teaching framework. Written in C, the project covers scheduling, synchronization, message passing, interrupts, and system calls.",
     language: "C",
     url: "https://github.com/iiTONELOC/threads-kernel",
     updated: "2026-01-23",

@@ -30,8 +30,11 @@ const styles = {
   heading:
     "mb-4 font-mono text-[13px] font-bold uppercase tracking-[1.2px] text-op-accent",
   body: "text-[15px] leading-[1.72] text-op-text",
-  skills: "space-y-2 text-[14.5px] leading-[1.65] text-op-text",
-  skillLabel: "font-semibold text-op-text",
+  skills: "space-y-3 text-[14.5px] leading-[1.65] text-op-text",
+  skillRow: "flex flex-col gap-1 sm:flex-row sm:gap-5",
+  skillLabel:
+    "font-mono text-[12px] font-semibold uppercase tracking-[0.4px] text-op-muted sm:w-[190px] sm:shrink-0",
+  skillValue: "sm:flex-1",
   entry: "resume-entry mb-7 last:mb-0",
   entryHead:
     "flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-5",
@@ -53,7 +56,7 @@ const styles = {
 export const metadata: Metadata = {
   title: "Resume | Anthony Tropeano",
   description:
-    "Resume for Anthony Tropeano, a security engineer focused on applied cryptography and secure systems.",
+    "HTML resume for Anthony Tropeano, a security engineer focused on secure systems and infrastructure.",
   alternates: {
     canonical: "/resume",
   },
@@ -179,11 +182,9 @@ export default function ResumePage(): JSX.Element {
           </h2>
           <dl className={styles.skills}>
             {resume.skills.map((skill) => (
-              <div key={skill.label}>
-                <dt className={`${styles.skillLabel} inline`}>
-                  {skill.label}:
-                </dt>{" "}
-                <dd className="inline">{skill.value}</dd>
+              <div className={styles.skillRow} key={skill.label}>
+                <dt className={styles.skillLabel}>{skill.label}</dt>
+                <dd className={styles.skillValue}>{skill.value}</dd>
               </div>
             ))}
           </dl>
@@ -220,12 +221,16 @@ export default function ResumePage(): JSX.Element {
 
         <section
           className={styles.section}
-          aria-labelledby="resume-certification"
+          aria-labelledby="resume-certifications"
         >
-          <h2 className={styles.heading} id="resume-certification">
-            Certification
+          <h2 className={styles.heading} id="resume-certifications">
+            Certifications
           </h2>
-          <p className={styles.body}>{resume.certification}</p>
+          <ul className={styles.bullets}>
+            {resume.certifications.map((certification) => (
+              <li key={certification}>{certification}</li>
+            ))}
+          </ul>
         </section>
 
         <section className={styles.section} aria-labelledby="resume-projects">

@@ -1,4 +1,4 @@
-import { externalLinks } from "@/constants/links";
+import { externalLinks } from "../constants/links";
 
 type Link = {
   label: string;
@@ -45,13 +45,13 @@ type Resume = {
   skills: readonly SkillGroup[];
   experience: readonly Experience[];
   education: readonly Education[];
-  certification: string;
+  certifications: readonly string[];
   projects: readonly Project[];
 };
 
 export const resume = {
   name: "Anthony Tropeano",
-  title: "Security Engineer, Applied Cryptography & Secure Systems",
+  title: "Security Engineer | Secure Systems and Infrastructure",
   location: "Ocala, FL",
   phone: { label: "352.709.3931", href: "tel:+13527093931" },
   email: {
@@ -69,7 +69,7 @@ export const resume = {
     },
   ],
   summary:
-    "Security engineer focused on applied cryptography and secure systems who ships working software, operates infrastructure, and traces trust assumptions across application, network, and deployment boundaries to turn security requirements into maintainable code, deployed controls, and operational visibility.",
+    "Security engineer with experience in infrastructure automation, network defense, systems programming, and full-stack development.",
   skills: [
     {
       label: "Languages",
@@ -78,15 +78,10 @@ export const resume = {
     {
       label: "Security Engineering",
       value:
-        "Wazuh, Suricata, Zeek, network segmentation, Linux hardening, Burp Suite, NIST CSF, NIST SP 800-63B, OWASP ASVS, MITRE ATT&CK",
+        "Wazuh, Suricata, Zeek, network segmentation, Linux hardening, Burp Suite, GPG code signing, NIST CSF, NIST SP 800-63B, OWASP ASVS, MITRE ATT&CK",
     },
     {
-      label: "Cryptography and Identity",
-      value:
-        "ML-KEM, ML-DSA, Ed25519, AES-256-GCM-SIV, AES-256-GCM, ChaCha20-Poly1305, mTLS, OIDC/OAuth2, GPG code signing",
-    },
-    {
-      label: "Infrastructure and DevSecOps",
+      label: "Infrastructure / DevSecOps",
       value:
         "Proxmox VE, OPNsense, Docker, Ansible, Caddy, WireGuard, Grafana, Prometheus, GitHub Actions",
     },
@@ -103,21 +98,51 @@ export const resume = {
       dates: "May 2025 - Present",
       location: "Ocala, FL",
       bullets: [
-        "Built and now operate an Ansible-driven SOC/NOC across dual Proxmox nodes, deploying Wazuh SIEM to 12 agents, Suricata and Zeek network sensors, and Grafana/Prometheus monitoring.",
-        "Automated Proxmox security-appliance deployment, reducing manual provisioning from more than two hours to 15-47 minutes.",
-        "Deployed a two-tier OPNsense firewall topology with network segmentation, custom DDNS, Unbound DNS, Caddy reverse proxying, and automated internal CA certificate distribution.",
-        "Completed the open-source DIS-Crypto MVP in Rust, unifying Rust, C, C++, Python, Node.js, and Bun behind a generated C ABI.",
-        "Shipped O-Tether, a closed-source inline ARM security appliance; continue building TrashScanner toward OWASP ASVS Level 2 and NIST SP 800-63B AAL2 targets.",
+        "Built an Ansible-managed SOC/NOC on two Proxmox nodes: Wazuh (12 agents), Suricata, Zeek, Grafana, Prometheus.",
+        "Automated Proxmox appliance deployment, cutting setup time from 2+ hours to 15 minutes.",
+        "Deployed a two-tier OPNsense firewall with network segmentation, DDNS, Unbound DNS, Caddy, and automated CA distribution.",
+        "Shipped O-Tether, a closed-source inline security appliance for ARM hardware.",
       ],
     },
     {
       organization: "University of Arizona",
       role: "Python Course Assistant",
-      dates: "Dec 2024 - Dec 2025",
+      dates: "Nov 2024 - Dec 2025",
       location: "Remote",
       bullets: [
-        "Mentored cybersecurity undergraduates in Python programming, debugging methodology, and development-environment configuration.",
-        "Identified recurring programming and environment failures, then authored targeted reference material to support student completion.",
+        "Mentored cybersecurity students in Python, debugging, and dev environment setup.",
+        "Wrote guides for recurring code and environment issues.",
+      ],
+    },
+    {
+      organization: "Self-Employed",
+      role: "Freelance Full-Stack Developer",
+      dates: "Mar 2025 - Apr 2025",
+      location: "Remote",
+      bullets: [
+        "Rebuilt a legacy Wix site in Next.js/TypeScript/Tailwind, improving performance and SEO.",
+        "Cut hosting costs to zero via Vercel deployment.",
+      ],
+    },
+    {
+      organization: "edX/2U",
+      role: "Full-Stack Web Development Grader",
+      dates: "Aug 2021 - Nov 2023",
+      location: "Remote",
+      bullets: [
+        "Graded student MERN apps on code quality, architecture, and best practices.",
+        "Verified assignment integrity and enforced grading standards through curriculum changes.",
+      ],
+    },
+    {
+      organization: "Eco-Surfacing Foils",
+      role: "Project Manager",
+      dates: "May 2017 - Dec 2020",
+      location: "Ocala, FL",
+      bullets: [
+        "Managed scheduling, client communication, and cost control for $1M-$1.5M in annual projects.",
+        "Replaced paper workflows with GPS-based scheduling.",
+        "Redesigned the company logo and website.",
       ],
     },
   ],
@@ -136,55 +161,19 @@ export const resume = {
         "Summa Cum Laude | GPA 4.0 | NSA CAE-CO Designated Program | Outstanding Senior Award Nominee | Distinguished Undergraduate Scholar | Dean's List with Distinction",
     },
   ],
-  certification:
+  certifications: [
     "NSA Cyber Operations Program Certificate, University of Arizona (December 2025)",
+    "Full-Stack Web Development Certificate, University of Central Florida (August 2021)",
+  ],
   projects: [
-    {
-      name: "DIS-Crypto",
-      status: "Open source, MVP complete",
-      technologies: "Rust",
-      bullets: [
-        "Built the library in Rust behind one generated C ABI serving Rust, C, C++, Python, Node.js, and Bun.",
-        "Designed security-level-based selection; core asymmetric trust operations combine classical and post-quantum algorithms, while encryption modes are authenticated and key-committing.",
-      ],
-      links: [
-        {
-          label: "Source",
-          href: "https://github.com/wedefendit/dis-crypto",
-        },
-      ],
-    },
-    {
-      name: "TrashScanner",
-      status: "In development",
-      technologies: "TypeScript, Bun, Hono, React, MariaDB, Zitadel OIDC",
-      bullets: [
-        "Targets OWASP ASVS Level 2 and NIST SP 800-63B AAL2 with six per-request gates: identity, freshness, device, possession, entitlement, and ownership.",
-        "Implements single-use Ed25519 JWT rotation, dual-path mTLS/Web Crypto device authentication, signed code-manifest boot verification, and least-privilege database roles.",
-      ],
-      links: [],
-    },
-    {
-      name: "O-Tether",
-      status: "Shipped, closed source",
-      technologies: "ARM security appliance",
-      bullets: [
-        "Built an inline appliance for low-cost ARM hardware with a phone-tether bridge, default-deny firewall, threat-intelligence filtering, flow classification, inline intrusion prevention, signed releases, and fail-closed behavior.",
-      ],
-      links: [
-        {
-          label: "Case study",
-          href: "https://wedefendit.com/services/custom-solutions/o-tether",
-        },
-      ],
-    },
     {
       name: "SIGINT",
       status: "Live",
       technologies: "TypeScript, React, Bun, Canvas 2D, Web Workers",
       bullets: [
-        "Built an OSINT dashboard combining eight data sources on an interactive globe with a custom Canvas 2D and Web Worker rendering engine.",
-        "Implemented cross-source correlation, scored alerts, watch-mode notifications, PWA functionality, and offline capabilities.",
+        "Built an OSINT dashboard visualizing eight live data sources on an interactive globe.",
+        "Wrote a Canvas 2D rendering engine running in Web Workers.",
+        "Added cross-source correlation, scored alerts, watch notifications, and offline PWA support.",
       ],
       links: [
         { label: "Source", href: "https://github.com/iiTONELOC/sigint" },
@@ -195,11 +184,43 @@ export const resume = {
       ],
     },
     {
+      name: "O-Tether",
+      status: "Shipped, closed source",
+      technologies: "ARM security appliance",
+      bullets: [
+        "Shipped an inline security appliance for low-cost ARM hardware.",
+        "Combined a phone-tether bridge with a default-deny firewall, threat filtering, and intrusion prevention.",
+        "Added signed releases and fail-closed behavior.",
+      ],
+      links: [
+        {
+          label: "Case study",
+          href: "https://wedefendit.com/services/custom-solutions/o-tether",
+        },
+      ],
+    },
+    {
+      name: "SAFE-PC",
+      status: "Completed capstone prototype",
+      technologies: "Python, Proxmox VE, OPNsense, Suricata, Unbound DNS",
+      bullets: [
+        "Built a framework converting end-of-life x86-64 hardware into unattended security appliances.",
+        "Automated firewall, IDS, and DNS filtering setup via Python and REST APIs.",
+        "Cut setup time from 2+ hours to 15-47 minutes.",
+      ],
+      links: [
+        {
+          label: "Source",
+          href: "https://github.com/iiTONELOC/safe-pc",
+        },
+      ],
+    },
+    {
       name: "0xDL and pveauto",
       status: "Published Rust projects",
       technologies: "Rust",
       bullets: [
-        "Published 0xDL for asynchronous downloads with cryptographic integrity validation and pveauto for automated Proxmox VE ISO download and verification.",
+        "Published 0xDL (async downloads with integrity checks) and pveauto (Proxmox VE ISO download/verify) on crates.io.",
       ],
       links: [
         {
@@ -213,8 +234,8 @@ export const resume = {
       status: "CYBV 489 coursework",
       technologies: "C",
       bullets: [
-        "Implemented scheduling, synchronization, IPC, interrupt handling, system calls, and basic disk I/O within the academic THREADS teaching framework.",
-        "Co-authored Escamilla et al., “Investigating Covert IPC in THREADS,” Cyber Recon '25, contributing the round-robin scheduler and core OS primitives.",
+        "Implemented scheduling, synchronization, IPC, interrupts, syscalls, and disk I/O in the THREADS kernel.",
+        "Co-authored “Investigating Covert IPC in THREADS” for Cyber Recon '25.",
       ],
       links: [
         {

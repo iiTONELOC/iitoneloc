@@ -60,10 +60,10 @@ export const SiteNav = (): JSX.Element => {
   return (
     <nav className={styles.nav} aria-label="Primary navigation">
       <div className={styles.wrap}>
-        <div className={styles.brand}>
+        <a href="/" className={styles.brand}>
           <span className={styles.brandAccent}>$</span>{" "}
           atropeano<span className={styles.brandAccent}>_</span>
-        </div>
+        </a>
 
         <div className={styles.links}>
           {links.map((link: Link) => {

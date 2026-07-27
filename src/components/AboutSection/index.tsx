@@ -16,23 +16,24 @@ export const AboutSection = (): JSX.Element => {
         <SectionHead marker="about" />
         <div className={styles.about}>
           <p className={styles.p}>
-            Based in Ocala, Florida, I work across cryptography, application
-            architecture, infrastructure, networking, and operations. Because
-            security failures often emerge where those layers meet, I trace
-            trust assumptions through the full system and turn them into
-            constrained interfaces, fail-closed controls, and systems that
-            remain practical to deploy and operate.
+            Based in Ocala, Florida, I work across software, infrastructure,
+            networking, and security operations. That range helps me find
+            problems at the boundaries between systems. My approach is
+            practical: define trust boundaries, limit access, design safe
+            failure modes, and keep systems easy to operate.
           </p>
           <p className={styles.p}>
-            I founded <span className={styles.accent}>Defend I.T. Solutions</span>{" "}
-            and graduated summa cum laude from the University of Arizona&apos;s
-            NSA CAE-CO Cyber Operations program. I am starting an{" "}
+            Professional experience includes founding{" "}
+            <span className={styles.accent}>Defend I.T. Solutions</span>{" "}
+            and supporting Python courses at the University of Arizona. I
+            graduated summa cum laude from the university&apos;s NSA CAE-CO
+            Cyber Operations program. Graduate study in{" "}
             <span className={styles.accent}>
-              M.S. in Artificial Intelligence (Data Science)
+              Artificial Intelligence with a Data Science concentration
             </span>{" "}
-            at Nova Southeastern University in fall 2026. I am open to security
-            engineering, DevSecOps, and security-focused software engineering
-            roles.
+            begins at Nova Southeastern University in fall 2026. Target roles
+            include security engineering, DevSecOps, and secure software
+            development.
           </p>
         </div>
       </div>

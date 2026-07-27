@@ -35,12 +35,12 @@ export const Hero = (): JSX.Element => {
           </h1>
           <div className={styles.role}>
             {/* prettier-ignore */}
-            <span>Security Engineer</span><span className={styles.sep}>&middot;</span><span>Applied Cryptography &amp; Secure Systems</span>
+            <span>Security Engineer</span><span className={styles.sep}>&middot;</span><span>Secure Systems &amp; Infrastructure</span>
           </div>
           <p className={styles.lede}>
-            Security engineer who ships code. I turn cross-layer trust
-            assumptions into deployable controls across cryptography,
-            applications, infrastructure, and operations.
+            I build secure software, infrastructure, and network defenses for
+            real-world operations. Each project turns clear requirements into
+            systems that teams can deploy, monitor, and maintain.
           </p>
           <div className={styles.flags}>
             <span className={styles.flag}>
