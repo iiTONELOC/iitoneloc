@@ -1,39 +1,31 @@
 import { Input } from "./Input";
 import { validateEmail } from "./utils";
-import { InputProps, inputTypes } from "../inputs/types";
+import type { InputProps, ValidateFn } from "./types";
 
 export default function EmailInput({
-  //NOSONAR
   onChange,
   currentValue,
   setValidated,
-}: InputProps): JSX.Element | null {
-  const validate = (
-    e: React.SyntheticEvent,
-    setValidated: inputTypes["setValidated"],
-    _setError: React.Dispatch<React.SetStateAction<string | null>>,
-    _clearError: Function
-  ) => {
+}: Readonly<InputProps>): JSX.Element {
+  const validate: ValidateFn = (e, setFieldValidated, setError, clearError) => {
     const { value } = e.target as HTMLInputElement;
-    const len = value.length;
 
-    if (len === 0) {
-      _setError("Email is required");
-      setValidated(false);
-      _clearError();
+    if (value.length === 0) {
+      setError("Email is required");
+      setFieldValidated(false);
+      clearError();
+      return;
     }
 
-    if (len > 0) {
-      const isValid = validateEmail(value);
-      if (!isValid) {
-        _setError("Please enter a valid email address");
-        setValidated(false);
-        _clearError();
-      } else {
-        setValidated(true);
-        _setError(null);
-      }
+    if (validateEmail(value)) {
+      setError(null);
+      setFieldValidated(true);
+      return;
     }
+
+    setError("Please enter a valid email address");
+    setFieldValidated(false);
+    clearError();
   };
 
   return (
@@ -47,7 +39,7 @@ export default function EmailInput({
       validate={validate}
       currentValue={currentValue}
       setValidated={setValidated}
-      placeholder={`you@example.com`}
+      placeholder="you@example.com"
       description="Your email"
     />
   );

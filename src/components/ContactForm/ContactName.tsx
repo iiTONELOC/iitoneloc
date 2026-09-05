@@ -1,32 +1,27 @@
 import { Input } from "./inputs/Input";
-import { InputProps, inputTypes } from "./inputs/types";
+import type { InputProps, ValidateFn } from "./inputs/types";
+
+const MINIMUM_NAME_LENGTH = 3;
 
 export default function ContactNameInput({
-  //NOSONAR
   onChange,
   currentValue,
   setValidated,
-}: InputProps): JSX.Element | null {
-  const validate = (
-    e: React.SyntheticEvent,
-    setValidated: inputTypes["setValidated"],
-    _setError: React.Dispatch<React.SetStateAction<string | null>>,
-    _clearError: Function
-  ) => {
+}: Readonly<InputProps>): JSX.Element {
+  const validate: ValidateFn = (e, setFieldValidated, setError, clearError) => {
     const { value } = e.target as HTMLInputElement;
-    const len = value.length;
 
-    if (len === 0) {
-      _setError("A name is required");
-      setValidated(false);
-      _clearError();
-    } else if (len > 0 && len <= 2) {
-      _setError("Names must be at least 3 characters");
-      setValidated(false);
-      _clearError();
+    if (value.length === 0) {
+      setError("A name is required");
+      setFieldValidated(false);
+      clearError();
+    } else if (value.length < MINIMUM_NAME_LENGTH) {
+      setError(`Names must be at least ${MINIMUM_NAME_LENGTH} characters`);
+      setFieldValidated(false);
+      clearError();
     } else {
-      _setError(null);
-      setValidated(true);
+      setError(null);
+      setFieldValidated(true);
     }
   };
 
@@ -41,7 +36,7 @@ export default function ContactNameInput({
       validate={validate}
       currentValue={currentValue}
       setValidated={setValidated}
-      placeholder={`Your full name`}
+      placeholder="Your full name"
       description="Your name"
     />
   );

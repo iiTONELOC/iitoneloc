@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import type { JSX } from "react";
 
 import { externalLinks } from "@/constants/links";
@@ -6,6 +7,18 @@ import { resume } from "@/data/resume";
 
 type Experience = (typeof resume.experience)[number];
 type Project = (typeof resume.projects)[number];
+
+enum ResumeSectionId {
+  Certifications = "resume-certifications",
+  Education = "resume-education",
+  Experience = "resume-experience",
+  Projects = "resume-projects",
+  Skills = "resume-skills",
+  Summary = "resume-summary",
+}
+
+const EXTERNAL_LINK_TARGET = "_blank";
+const EXTERNAL_LINK_REL = "noopener noreferrer";
 
 const styles = {
   page: "resume-page min-h-screen px-4 py-8 sm:px-6 sm:py-12",
@@ -33,19 +46,21 @@ const styles = {
   skills: "space-y-3 text-[14.5px] leading-[1.65] text-op-text",
   skillRow: "flex flex-col gap-1 sm:flex-row sm:gap-5",
   skillLabel:
-    "font-mono text-[12px] font-semibold uppercase tracking-[0.4px] text-op-muted sm:w-[190px] sm:shrink-0",
+    "font-mono text-[12px] text-op-muted sm:w-[190px] sm:shrink-0",
   skillValue: "sm:flex-1",
   entry: "resume-entry mb-7 last:mb-0",
   entryHead:
     "flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-5",
   entryTitle: "text-[16px] font-semibold text-op-text",
   entryMeta: "font-mono text-[12px] text-op-muted sm:text-right",
-  location: "mt-1 font-mono text-[12px] italic text-op-dim",
+  degree: "mt-1 text-[14.5px] leading-[1.65] text-op-muted",
   bullets:
-    "mt-3 list-disc space-y-2 pl-5 text-[14.5px] leading-[1.65] text-op-text marker:text-op-accent",
+    "mt-3 list-disc space-y-2 pl-6 text-[14.5px] leading-[1.65] text-op-text marker:text-op-accent",
   educationEntry:
     "resume-entry border-b border-op-border py-4 first:pt-0 last:border-b-0 last:pb-0",
-  honors: "mt-3 text-[13.5px] leading-[1.65] text-op-muted",
+  honors: "mt-1 text-[13.5px] leading-[1.65] text-op-muted",
+  footer:
+    "mt-7 font-mono text-xs text-op-muted print:fixed print:inset-x-0 print:bottom-0 print:mt-0 print:border-t print:border-op-border print:pt-2",
   projectMeta:
     "mt-1 flex flex-wrap gap-x-2 gap-y-1 font-mono text-[11.5px] text-op-muted",
   projectLinks: "mt-1 flex flex-wrap gap-3 font-mono text-[12px]",
@@ -62,16 +77,15 @@ export const metadata: Metadata = {
   },
 };
 
-function ExperienceEntry({ item }: { item: Experience }): JSX.Element {
+function ExperienceEntry({ item }: Readonly<{ item: Experience }>): JSX.Element {
   return (
     <article className={styles.entry}>
       <div className={styles.entryHead}>
         <h3 className={styles.entryTitle}>
-          {item.organization} <span aria-hidden="true">|</span> {item.role}
+          {item.role} <span aria-hidden>|</span> {item.organization}
         </h3>
         <p className={styles.entryMeta}>{item.dates}</p>
       </div>
-      <p className={styles.location}>{item.location}</p>
       <ul className={styles.bullets}>
         {item.bullets.map((bullet) => (
           <li key={bullet}>{bullet}</li>
@@ -81,13 +95,10 @@ function ExperienceEntry({ item }: { item: Experience }): JSX.Element {
   );
 }
 
-function ProjectEntry({ project }: { project: Project }): JSX.Element {
+function ProjectEntry({ project }: Readonly<{ project: Project }>): JSX.Element {
   return (
     <article className={styles.entry}>
-      <div className={styles.entryHead}>
-        <h3 className={styles.entryTitle}>{project.name}</h3>
-        <p className={styles.entryMeta}>{project.status}</p>
-      </div>
+      <h3 className={styles.entryTitle}>{project.name}</h3>
       <p className={styles.projectMeta}>{project.technologies}</p>
       {project.links.length > 0 ? (
         <nav
@@ -99,10 +110,10 @@ function ProjectEntry({ project }: { project: Project }): JSX.Element {
               className={styles.projectLink}
               href={link.href}
               key={link.href}
-              target="_blank"
-              rel="noopener noreferrer"
+              target={EXTERNAL_LINK_TARGET}
+              rel={EXTERNAL_LINK_REL}
             >
-              {link.label} <span aria-hidden="true">&#8599;</span>
+              {link.label} <span aria-hidden>↗</span>
             </a>
           ))}
         </nav>
@@ -122,15 +133,15 @@ export default function ResumePage(): JSX.Element {
   return (
     <main className={styles.page}>
       <nav className={styles.actions} aria-label="Resume actions">
-        <a className={styles.action} href="/">
-          <span aria-hidden="true">&#8592;</span> portfolio
-        </a>
+        <Link className={styles.action} href="/">
+          <span aria-hidden>←</span> portfolio
+        </Link>
         <a
           className={styles.actionPrimary}
           href={externalLinks.resumePdf}
           download="Anthony_Tropeano_Resume.pdf"
         >
-          download PDF <span aria-hidden="true">&#8595;</span>
+          download PDF <span aria-hidden>↓</span>
         </a>
       </nav>
 
@@ -140,7 +151,7 @@ export default function ResumePage(): JSX.Element {
           <p className={styles.title}>{resume.title}</p>
           <p className={styles.availability}>
             <span>{resume.location}</span>
-            <span aria-hidden="true">|</span>
+            <span aria-hidden>|</span>
             <span>{resume.availability}</span>
           </p>
           <address>
@@ -155,8 +166,8 @@ export default function ResumePage(): JSX.Element {
                       href={link.href}
                       {...(external
                         ? {
-                            target: "_blank",
-                            rel: "noopener noreferrer",
+                            target: EXTERNAL_LINK_TARGET,
+                            rel: EXTERNAL_LINK_REL,
                           }
                         : {})}
                     >
@@ -169,15 +180,21 @@ export default function ResumePage(): JSX.Element {
           </address>
         </header>
 
-        <section className={styles.section} aria-labelledby="resume-summary">
-          <h2 className={styles.heading} id="resume-summary">
+        <section
+          className={styles.section}
+          aria-labelledby={ResumeSectionId.Summary}
+        >
+          <h2 className={styles.heading} id={ResumeSectionId.Summary}>
             Summary
           </h2>
           <p className={styles.body}>{resume.summary}</p>
         </section>
 
-        <section className={styles.section} aria-labelledby="resume-skills">
-          <h2 className={styles.heading} id="resume-skills">
+        <section
+          className={styles.section}
+          aria-labelledby={ResumeSectionId.Skills}
+        >
+          <h2 className={styles.heading} id={ResumeSectionId.Skills}>
             Technical Skills
           </h2>
           <dl className={styles.skills}>
@@ -190,8 +207,11 @@ export default function ResumePage(): JSX.Element {
           </dl>
         </section>
 
-        <section className={styles.section} aria-labelledby="resume-experience">
-          <h2 className={styles.heading} id="resume-experience">
+        <section
+          className={styles.section}
+          aria-labelledby={ResumeSectionId.Experience}
+        >
+          <h2 className={styles.heading} id={ResumeSectionId.Experience}>
             Professional Experience
           </h2>
           {resume.experience.map((item) => (
@@ -199,19 +219,20 @@ export default function ResumePage(): JSX.Element {
           ))}
         </section>
 
-        <section className={styles.section} aria-labelledby="resume-education">
-          <h2 className={styles.heading} id="resume-education">
+        <section
+          className={styles.section}
+          aria-labelledby={ResumeSectionId.Education}
+        >
+          <h2 className={styles.heading} id={ResumeSectionId.Education}>
             Education
           </h2>
           {resume.education.map((item) => (
             <article className={styles.educationEntry} key={item.institution}>
               <div className={styles.entryHead}>
-                <h3 className={styles.entryTitle}>
-                  {item.institution} <span aria-hidden="true">|</span>{" "}
-                  {item.program}
-                </h3>
+                <h3 className={styles.entryTitle}>{item.institution}</h3>
                 <p className={styles.entryMeta}>{item.dates}</p>
               </div>
+              <p className={styles.degree}>{item.program}</p>
               {item.honors ? (
                 <p className={styles.honors}>{item.honors}</p>
               ) : null}
@@ -221,9 +242,9 @@ export default function ResumePage(): JSX.Element {
 
         <section
           className={styles.section}
-          aria-labelledby="resume-certifications"
+          aria-labelledby={ResumeSectionId.Certifications}
         >
-          <h2 className={styles.heading} id="resume-certifications">
+          <h2 className={styles.heading} id={ResumeSectionId.Certifications}>
             Certifications
           </h2>
           <ul className={styles.bullets}>
@@ -233,14 +254,18 @@ export default function ResumePage(): JSX.Element {
           </ul>
         </section>
 
-        <section className={styles.section} aria-labelledby="resume-projects">
-          <h2 className={styles.heading} id="resume-projects">
+        <section
+          className={styles.section}
+          aria-labelledby={ResumeSectionId.Projects}
+        >
+          <h2 className={styles.heading} id={ResumeSectionId.Projects}>
             Selected Projects
           </h2>
           {resume.projects.map((project) => (
             <ProjectEntry project={project} key={project.name} />
           ))}
         </section>
+        <footer className={styles.footer}>{resume.name}</footer>
       </div>
     </main>
   );

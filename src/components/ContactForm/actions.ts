@@ -1,6 +1,16 @@
 "use server";
 
-export async function sendEmail(prevState: any, formData: FormData) {
+type SendEmailState = {
+  sent: boolean | null;
+};
+
+const EMAILJS_ENDPOINT = "https://api.emailjs.com/api/v1.0/email/send";
+const HTTP_OK = 200;
+
+export async function sendEmail(
+  _prevState: SendEmailState,
+  formData: FormData
+): Promise<SendEmailState> {
   const data = {
     service_id: process.env.EMAIL_SERVICE_ID,
     template_id: process.env.EMAIL_TEMPLATE_ID,
@@ -15,33 +25,15 @@ export async function sendEmail(prevState: any, formData: FormData) {
   };
 
   try {
-    const response = await fetch(
-      "https://api.emailjs.com/api/v1.0/email/send",
-      {
-        method: "POST",
-        body: JSON.stringify(data),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const response = await fetch(EMAILJS_ENDPOINT, {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: { "Content-Type": "application/json" },
+    });
 
-    if (response.status === 200) {
-      return {
-        message: "Email sent successfully!",
-        status: 200,
-      };
-    } else {
-      return {
-        message: "Error",
-        status: 500,
-      };
-    }
+    return { sent: response.status === HTTP_OK };
   } catch (error) {
     console.error("Error sending email", error);
-    return {
-      message: "Error",
-      status: 500,
-    };
+    return { sent: false };
   }
 }

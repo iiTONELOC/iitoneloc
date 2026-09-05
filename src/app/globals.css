@@ -11,7 +11,10 @@
   --text: #e9eaed;
   --muted: #888d99;
   --dim: #565b67;
-  --accent: #ffb454;
+  --accent-rgb: 255, 180, 84;
+  --accent: rgb(var(--accent-rgb));
+  --fire-rgb: 255, 107, 61;
+  --fire: rgb(var(--fire-rgb));
   --live: #74cf86;
   --cyan: #69c2d6;
 
@@ -150,23 +153,31 @@ a {
 @media print {
   :root {
     --bg: #ffffff;
-    --surface: #ffffff;
+    --surface: var(--bg);
     --border: #b8b8b8;
     --border-bright: #8a8a8a;
     --text: #111111;
     --muted: #333333;
     --dim: #444444;
-    --accent: #111111;
-    --live: #111111;
-    --cyan: #111111;
+    --accent-rgb: 17, 17, 17;
+    --fire-rgb: var(--accent-rgb);
+    --live: var(--text);
+    --cyan: var(--live);
     --print-block-space: 0.12in;
+    color-scheme: light;
   }
 
   body {
     background-image: none;
   }
 
-  .resume-page {
+  body:has(.resume-page) {
+    background: var(--bg);
+    color: var(--text);
+    color-scheme: light;
+  }
+
+  body .resume-page {
     min-height: auto;
     padding: 0;
   }
@@ -175,11 +186,21 @@ a {
     display: none;
   }
 
-  .resume-document {
+  .resume-page .resume-document {
     max-width: none;
     border: 0;
     border-radius: 0;
     padding: 0;
+    background: var(--bg);
+    color: var(--text);
+  }
+
+  .resume-document :is(h1, h2, h3, p, li, dt, dd, span, footer) {
+    color: var(--text);
+  }
+
+  .resume-document li::marker {
+    color: var(--text);
   }
 
   .resume-document > header {
@@ -191,6 +212,7 @@ a {
   }
 
   .resume-document a {
+    color: var(--text);
     min-height: auto;
     padding-bottom: 0;
     padding-top: 0;

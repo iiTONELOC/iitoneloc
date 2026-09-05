@@ -1,17 +1,20 @@
 # Anthony Tropeano
 
-**Security Engineer | Secure Systems & Infrastructure**
+**Security Engineer | Network Defense, Secure Infrastructure, and Automation**
 
-I build secure software, infrastructure, and network defenses for real-world operations. Each project turns clear requirements into systems that teams can deploy, monitor, and maintain.
+I design, build, and operate Linux infrastructure, network security appliances, and web applications. My work includes deployment automation, applied cryptography, and controls for coding agents. I also research and author engineering standards that turn security requirements into implementation and verification criteria.
 
-Professional experience includes founding [Defend I.T. Solutions](https://wedefendit.com) and supporting Python courses at the University of Arizona. I graduated summa cum laude from the university's NSA CAE-CO Cyber Operations program. Graduate study in Artificial Intelligence with a Data Science concentration begins at Nova Southeastern University in fall 2026.
+I graduated summa cum laude from the University of Arizona's Cyber Operations program in December 2025. I now study full time toward an M.S. in Artificial Intelligence with a Data Science concentration at Nova Southeastern University.
 
-[Portfolio](https://atropeano.com) | [HTML resume](https://atropeano.com/resume) | [PDF resume](https://atropeano.com/documents/anthony_tropeano_resume.pdf) | [LinkedIn](https://linkedin.com/in/anthony-t-29353b201/)
+[Portfolio](https://atropeano.com) | [HTML resume](https://atropeano.com/resume) | [PDF resume](https://atropeano.com/docs/anthony_tropeano_resume.pdf) | [LinkedIn](https://www.linkedin.com/in/atrop/)
 
-## Selected work
+## Current work
 
-- **[SIGINT](https://github.com/iiTONELOC/sigint)**: Live OSINT dashboard that combines eight data feeds on an interactive globe. Cross-source correlation produces scored alerts and watch notifications. The dashboard also supports offline use.
-- **[O-Tether](https://wedefendit.com/services/custom-solutions/o-tether)**: Shipped, closed-source security appliance for low-cost ARM hardware. Features include a default-deny firewall, threat filtering, flow classification, inline intrusion prevention, signed releases, and fail-closed behavior.
+- **VUTM** provides the network security plane for DIS-Computer, a Linux virtualization platform with automated provisioning, hardening, and backups. It protects KVM and LXC networks with shared DNS, threat filtering, and Suricata inspection. I operate it daily in IDS mode; inline blocking remains pending.
+- **Agentic Engineering Harness** checks commands and filesystem access before Claude Code or Codex executes them. Malware inspection, secret filtering, ownership checks, and change receipts support safer development and review.
+- **[TrashScanner](https://trashscanner.wedefendit.com)** is a live offline-first progressive web application (PWA) for Defend I.T. Solutions. It turns product scans into shopping lists across phones, desktops, and USB-scanner kiosks. Ordered synchronization preserves offline changes, while device signatures and database ownership checks protect account resources.
+
+Public work: [Lucerna](https://github.com/iiTONELOC/lucerna) · [SIGINT](https://github.com/iiTONELOC/sigint) · [SAFE-PC](https://github.com/iiTONELOC/safe-pc) · [O-Tether case study](https://wedefendit.com/services/custom-solutions/o-tether)
 
 ## Published Rust projects
 

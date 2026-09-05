@@ -1,11 +1,14 @@
-/**
- * Tiny shared feed-status store so the telemetry bar can reflect the globe's
- * real feed state instead of a hardcoded "feeds: live". The globe publishes its
- * USGS fetch result; the telemetry bar subscribes. No dependency, no fake state.
- */
 export type FeedStatus = "sync" | "live" | "offline";
 
-let current: FeedStatus = "sync";
+export const INITIAL_FEED_STATUS: FeedStatus = "sync";
+
+export const feedStatusColor: Record<FeedStatus, string> = {
+  live: "var(--live)",
+  offline: "var(--cyan)",
+  sync: "var(--dim)",
+};
+
+let current: FeedStatus = INITIAL_FEED_STATUS;
 const listeners = new Set<(s: FeedStatus) => void>();
 
 export function setFeedStatus(s: FeedStatus): void {

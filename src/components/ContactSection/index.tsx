@@ -21,7 +21,7 @@ type Row = { k: string; v: string; href?: string };
 const rows: Row[] = [
   { k: "email", v: externalLinks.email, href: `mailto:${externalLinks.email}` },
   { k: "github", v: "github.com/iiTONELOC", href: externalLinks.github },
-  { k: "linkedin", v: "/in/anthony-t", href: externalLinks.linkedin },
+  { k: "linkedin", v: "/in/atrop", href: externalLinks.linkedin },
   { k: "company", v: "wedefendit.com", href: externalLinks.company },
   { k: "location", v: "Ocala, FL" },
 ];

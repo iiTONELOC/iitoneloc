@@ -1,5 +1,6 @@
 "use client";
 
+import NextLink from "next/link";
 import { usePathname } from "next/navigation";
 import type { JSX } from "react";
 import { useEffect, useState } from "react";
@@ -23,6 +24,14 @@ const styles = {
 };
 
 const getSectionId = (href: string): string => href.split("#")[1] ?? "";
+
+const ariaCurrentFor = (
+  isActive: boolean,
+  id: string
+): "location" | "page" | undefined => {
+  if (!isActive) return undefined;
+  return id ? "location" : "page";
+};
 
 const sectionIds = links
   .map((link) => getSectionId(link.to))
@@ -60,10 +69,10 @@ export const SiteNav = (): JSX.Element => {
   return (
     <nav className={styles.nav} aria-label="Primary navigation">
       <div className={styles.wrap}>
-        <a href="/" className={styles.brand}>
+        <NextLink href="/" className={styles.brand}>
           <span className={styles.brandAccent}>$</span>{" "}
           atropeano<span className={styles.brandAccent}>_</span>
-        </a>
+        </NextLink>
 
         <div className={styles.links}>
           {links.map((link: Link) => {
@@ -74,7 +83,7 @@ export const SiteNav = (): JSX.Element => {
                 key={link.to}
                 href={link.to}
                 className={isActive ? styles.linkActive : styles.link}
-                aria-current={isActive ? (id ? "location" : "page") : undefined}
+                aria-current={ariaCurrentFor(isActive, id)}
                 onClick={() => onPick(id)}
               >
                 {`// ${link.text}`}
@@ -129,9 +138,7 @@ export const SiteNav = (): JSX.Element => {
                   className={`${styles.panelLink} ${
                     isActive ? "text-op-accent" : "text-op-muted"
                   }`}
-                  aria-current={
-                    isActive ? (id ? "location" : "page") : undefined
-                  }
+                  aria-current={ariaCurrentFor(isActive, id)}
                   onClick={() => onPick(id)}
                 >
                   {`// ${link.text}`}

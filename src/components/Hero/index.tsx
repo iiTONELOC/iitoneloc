@@ -38,9 +38,10 @@ export const Hero = (): JSX.Element => {
             <span>Security Engineer</span><span className={styles.sep}>&middot;</span><span>Secure Systems &amp; Infrastructure</span>
           </div>
           <p className={styles.lede}>
-            I build secure software, infrastructure, and network defenses for
-            real-world operations. Each project turns clear requirements into
-            systems that teams can deploy, monitor, and maintain.
+            I design, build, and operate Linux infrastructure, network security
+            appliances, and web applications. My work connects security
+            requirements with the practical demands of deployment, daily use,
+            and recovery when something fails.
           </p>
           <div className={styles.flags}>
             <span className={styles.flag}>

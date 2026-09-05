@@ -15,6 +15,17 @@ const cspHeader = `
   `;
 
 const isProduction = process.env.NODE_ENV === "production";
+const appleTouchIconPath = "/images/apple-touch-icon.png";
+const appleTouchIconRoutes = [
+  {
+    source: "/apple-touch-icon.png",
+    destination: appleTouchIconPath,
+  },
+  {
+    source: "/apple-touch-icon-precomposed.png",
+    destination: appleTouchIconPath,
+  },
+];
 const securityHeaders = [
   {
     key: "Content-Security-Policy",
@@ -31,6 +42,7 @@ const securityHeaders = [
 ];
 
 const nextConfig = {
+  rewrites: async () => appleTouchIconRoutes,
   headers: async () => {
     return [
       {

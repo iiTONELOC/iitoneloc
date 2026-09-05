@@ -1,13 +1,12 @@
 'use client';
 
 import { sendEmail } from './actions';
-import { useActionState } from 'react';
+import { useActionState, useEffect, useState } from 'react';
 import FormContainer from './FormContainer';
 import ContactNameInput from './ContactName';
 import EmailInput from './inputs/EmailInput';
 import ContactMessage from './ContactMessage';
 import ReCAPTCHA from 'react-google-recaptcha';
-import { useState, useEffect } from 'react';
 
 const styles = {
   header: 'flex flex-col gap-1 border-b border-op-border pb-4',
@@ -36,10 +35,17 @@ const defaultFormState = {
 };
 
 const defaultEmailSentState = {
-  message: '',
+  sent: null,
 };
 
-type formButton = {
+const SENDING_MESSAGE = 'Sending email...';
+const SUCCESS_MESSAGE = 'Email sent successfully!';
+const FAILURE_MESSAGE =
+  'There was an error sending your email. Please try again later.';
+const MESSAGE_TIMEOUT_MS = 5000;
+const REDIRECT_DELAY_MS = 750;
+
+type FormButton = {
   name: string;
   type: 'submit' | 'reset';
   className: string;
@@ -47,7 +53,6 @@ type formButton = {
 };
 
 export function ContactForm() {
-  //NOSONAR
   const [formState, setFormState] =
     useState<typeof defaultFormState>(defaultFormState);
   const [messageValidated, setMessageValidated] = useState<boolean>(false);
@@ -90,23 +95,17 @@ export function ContactForm() {
     setTimeout(() => {
       setShowMessage(false);
       setMessage(null);
-    }, 5000);
+    }, MESSAGE_TIMEOUT_MS);
   };
 
   const handleSubmitForm = (e: React.SyntheticEvent) => {
-    if (formValidated && capResponse && capResponse !== '') {
-      try {
-        displayMessage('Sending email...');
-      } catch (error) {
-        setSendError(true);
-        displayMessage(
-          'There was an error sending your email. Please try again later.'
-        );
-      }
-    } else {
-      e.preventDefault();
-      e.stopPropagation();
+    if (formValidated && capResponse) {
+      setSendError(false);
+      displayMessage(SENDING_MESSAGE);
+      return;
     }
+    e.preventDefault();
+    e.stopPropagation();
   };
 
   const handleResetForm = (e: React.SyntheticEvent) => {
@@ -121,26 +120,23 @@ export function ContactForm() {
   }, [formState]);
 
   useEffect(() => {
-    emailSent.message !== '' && console.log('Email sent', emailSent);
-    emailSent.message === 'Email sent successfully!' &&
-      (() => {
-        displayMessage('Email sent successfully!');
-        resetState();
-        setTimeout(() => {
-          window.location.assign('/');
-        }, 750);
-      })();
-    emailSent.message === 'Error' &&
-      (() => {
-        setSendError(true);
-        displayMessage(
-          'There was an error sending your email. Please try again later.'
-        );
-        setCapResponse(null);
-      })();
+    if (emailSent.sent === null) return;
+
+    if (emailSent.sent) {
+      displayMessage(SUCCESS_MESSAGE);
+      resetState();
+      setTimeout(() => {
+        window.location.assign('/');
+      }, REDIRECT_DELAY_MS);
+      return;
+    }
+
+    setSendError(true);
+    displayMessage(FAILURE_MESSAGE);
+    setCapResponse(null);
   }, [emailSent]);
 
-  const formButtons: formButton[] = [
+  const formButtons: FormButton[] = [
     {
       name: 'Cancel',
       type: 'reset',
@@ -162,8 +158,8 @@ export function ContactForm() {
     return (
       <div className={styles.buttonContainer}>
         {' '}
-        {formButtons.map(({ name, type, className, onClick }, i) => (
-          <button key={i} type={type} className={className} onClick={onClick}>
+        {formButtons.map(({ name, type, className, onClick }) => (
+          <button key={name} type={type} className={className} onClick={onClick}>
             {name}
           </button>
         ))}{' '}

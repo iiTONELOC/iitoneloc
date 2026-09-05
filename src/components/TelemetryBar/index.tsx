@@ -1,8 +1,9 @@
 "use client";
 
-import { JSX, useEffect, useState } from "react";
+import { JSX, useEffect, useState, useSyncExternalStore } from "react";
 import {
-  type FeedStatus,
+  INITIAL_FEED_STATUS,
+  feedStatusColor,
   getFeedStatus,
   subscribeFeedStatus,
 } from "@/lib/feedStatus";
@@ -12,12 +13,6 @@ const styles = {
   wrap: "mx-auto flex h-[34px] max-w-wrap items-center justify-between gap-5 overflow-hidden whitespace-nowrap px-5 sm:px-[30px]",
   left: "flex gap-6",
   feed: "inline-flex items-center gap-[6px]",
-};
-
-const feedColor: Record<FeedStatus, string> = {
-  live: "var(--live)",
-  offline: "var(--cyan)",
-  sync: "var(--dim)",
 };
 
 function pad(n: number): string {
@@ -37,20 +32,23 @@ function utcNow(): string {
  */
 export const TelemetryBar = (): JSX.Element => {
   const [clock, setClock] = useState<string>("--:--:-- utc");
-  const [feed, setFeed] = useState<FeedStatus>(getFeedStatus());
+  const feed = useSyncExternalStore(
+    subscribeFeedStatus,
+    getFeedStatus,
+    () => INITIAL_FEED_STATUS
+  );
 
   useEffect(() => {
-    setClock(utcNow());
-    const id = setInterval(() => setClock(utcNow()), 1000);
-    return () => clearInterval(id);
+    const tick = () => setClock(utcNow());
+    const first = setTimeout(tick, 0);
+    const id = setInterval(tick, 1000);
+    return () => {
+      clearTimeout(first);
+      clearInterval(id);
+    };
   }, []);
 
-  useEffect(() => {
-    setFeed(getFeedStatus());
-    return subscribeFeedStatus(setFeed);
-  }, []);
-
-  const color = feedColor[feed];
+  const color = feedStatusColor[feed];
 
   return (
     <div className={styles.bar}>

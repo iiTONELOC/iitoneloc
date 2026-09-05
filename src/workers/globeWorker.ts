@@ -1,22 +1,11 @@
 /// <reference lib="webworker" />
-/// <reference path="./globeProtocol.ts" />
+/// <reference path="./globeProtocol.d.ts" />
 
-// Off-main-thread globe renderer. Owns the OffscreenCanvas transferred from the
-// main thread and ships a finished ImageBitmap back each frame; the main thread
-// only blits it.
-//
-// Each point's rotation-invariant terms (u, v, cosPhi) are derived once — for
-// the graticule at module load, for quakes/fires when their buffer arrives — so
-// a frame costs exactly two trig calls total (cos/sin of the current rotation)
-// and four multiply-adds per point. Projection buffers are allocated once per
-// dataset and overwritten in place, so a frame allocates nothing.
+// Direct OffscreenCanvas renderer for the passive globe.
 
 const TILT_RADIANS = 0.24;
 const COS_TILT = Math.cos(TILT_RADIANS);
 const SIN_TILT = Math.sin(TILT_RADIANS);
-const ACCENT_RGB = "255,180,84";
-const FIRE_RGB = "255,107,61";
-
 const TWO_PI = Math.PI * 2;
 const DEGREES_PER_RADIAN = 180 / Math.PI;
 const HALF_CIRCLE_DEGREES = 180;
@@ -29,14 +18,7 @@ const ROTATION_RADIANS_PER_MS = 0.000075;
 // so a 44k-point fire set never lands as a single hitch.
 const REVEAL_POINTS_PER_FRAME = 2000;
 
-/**
- * Per-point terms that do not change as the globe spins, derived once from
- * (lat, lon). Since theta = theta0 + ry, the angle-sum identity turns the
- * per-frame projection into a 2x2 rotation matrix applied to these — cos(ry)
- * and sin(ry) are computed once per frame, never per point. Algebraically
- * identical to projecting from raw degrees every frame; only the derivation
- * changed.
- */
+// Rotation-invariant projection terms.
 type StaticTerms = {
   readonly u: Float32Array;
   readonly v: Float32Array;
@@ -48,7 +30,7 @@ function computeStaticTerms(lats: Float64Array, lons: Float64Array): StaticTerms
   const u = new Float32Array(pointCount);
   const v = new Float32Array(pointCount);
   const cosPhi = new Float32Array(pointCount);
-  for (const i of u.keys()) {
+  for (let i = 0; i < pointCount; i++) {
     const phi = (QUARTER_CIRCLE_DEGREES - lats[i]) / DEGREES_PER_RADIAN;
     const theta0 = (lons[i] + HALF_CIRCLE_DEGREES) / DEGREES_PER_RADIAN;
     const sinPhi = Math.sin(phi);
@@ -74,7 +56,6 @@ function allocateProjectedPoints(pointCount: number): ProjectedPoints {
   };
 }
 
-/** The one projection step, shared by graticule, quakes, and fires alike. */
 function rotateProject(
   terms: StaticTerms,
   rotationRadians: number,
@@ -87,7 +68,7 @@ function rotateProject(
   const cosRy = Math.cos(rotationRadians);
   const sinRy = Math.sin(rotationRadians);
   const { u, v, cosPhi } = terms;
-  for (const i of u.subarray(0, count).keys()) {
+  for (let i = 0; i < count; i++) {
     const x = -v[i] * cosRy + u[i] * sinRy;
     const z = u[i] * cosRy + v[i] * sinRy;
     const y = cosPhi[i];
@@ -98,23 +79,16 @@ function rotateProject(
   }
 }
 
-// ── Graticule ─────────────────────────────────────────────────────────────
-
 const LAT_RING_STEP_DEG = 20;
 const LAT_RING_MIN_DEG = -80;
 const LAT_RING_MAX_DEG = 80;
-const LAT_RING_SAMPLE_STEP_DEG = 3;
-const LAT_RING_SAMPLE_MIN_DEG = -180;
-const LAT_RING_SAMPLE_MAX_DEG = 180;
 const LAT_RING_ALPHA = 0.11;
 
 const LON_MERIDIAN_STEP_DEG = 30;
-const LON_MERIDIAN_MIN_DEG = -180;
-const LON_MERIDIAN_MAX_DEG_EXCLUSIVE = 180;
-const LON_MERIDIAN_SAMPLE_STEP_DEG = 3;
 const LON_MERIDIAN_SAMPLE_MIN_DEG = -90;
 const LON_MERIDIAN_SAMPLE_MAX_DEG = 90;
 const LON_MERIDIAN_ALPHA = 0.09;
+const GRATICULE_SAMPLE_STEP_DEG = 3;
 
 const GRATICULE_LINE_WIDTH = 1;
 const LIMB_ALPHA = 0.22;
@@ -138,9 +112,9 @@ function buildGraticuleGrid(): {
   for (let lat = LAT_RING_MIN_DEG; lat <= LAT_RING_MAX_DEG; lat += LAT_RING_STEP_DEG) {
     const start = lats.length;
     for (
-      let lon = LAT_RING_SAMPLE_MIN_DEG;
-      lon <= LAT_RING_SAMPLE_MAX_DEG;
-      lon += LAT_RING_SAMPLE_STEP_DEG
+      let lon = -HALF_CIRCLE_DEGREES;
+      lon <= HALF_CIRCLE_DEGREES;
+      lon += GRATICULE_SAMPLE_STEP_DEG
     ) {
       lats.push(lat);
       lons.push(lon);
@@ -148,15 +122,15 @@ function buildGraticuleGrid(): {
     rings.push({ start, size: lats.length - start, alpha: LAT_RING_ALPHA });
   }
   for (
-    let lon = LON_MERIDIAN_MIN_DEG;
-    lon < LON_MERIDIAN_MAX_DEG_EXCLUSIVE;
+    let lon = -HALF_CIRCLE_DEGREES;
+    lon < HALF_CIRCLE_DEGREES;
     lon += LON_MERIDIAN_STEP_DEG
   ) {
     const start = lats.length;
     for (
       let lat = LON_MERIDIAN_SAMPLE_MIN_DEG;
       lat <= LON_MERIDIAN_SAMPLE_MAX_DEG;
-      lat += LON_MERIDIAN_SAMPLE_STEP_DEG
+      lat += GRATICULE_SAMPLE_STEP_DEG
     ) {
       lats.push(lat);
       lons.push(lon);
@@ -173,7 +147,7 @@ const GRATICULE_POINT_COUNT = GRATICULE_GRID.lats.length;
 const graticulePoints = allocateProjectedPoints(GRATICULE_POINT_COUNT);
 
 function strokeGraticuleRing(points: ProjectedPoints, ring: GraticuleRing): void {
-  ctx.strokeStyle = `rgba(${ACCENT_RGB},${ring.alpha})`;
+  ctx.strokeStyle = `rgba(${palette.accentRgb},${ring.alpha})`;
   ctx.lineWidth = GRATICULE_LINE_WIDTH;
   ctx.beginPath();
   let penDown = false;
@@ -195,12 +169,10 @@ function drawGraticule(centerX: number, centerY: number, radius: number): void {
   for (const ring of GRATICULE_GRID.rings) strokeGraticuleRing(graticulePoints, ring);
   ctx.beginPath();
   ctx.arc(centerX, centerY, radius, 0, TWO_PI);
-  ctx.strokeStyle = `rgba(${ACCENT_RGB},${LIMB_ALPHA})`;
+  ctx.strokeStyle = `rgba(${palette.accentRgb},${LIMB_ALPHA})`;
   ctx.lineWidth = LIMB_LINE_WIDTH;
   ctx.stroke();
 }
-
-// ── Live datasets ─────────────────────────────────────────────────────────
 
 const QUAKE_FIELDS_PER_POINT = 4; // [lat, lon, mag, ageFactor]
 const QUAKE_EXTRA_FIELDS_PER_POINT = 2; // [mag, ageFactor]
@@ -234,7 +206,7 @@ function loadQuakesBuffer(buf: ArrayBuffer): void {
   const lats = new Float64Array(pointCount);
   const lons = new Float64Array(pointCount);
   const extra = new Float32Array(pointCount * QUAKE_EXTRA_FIELDS_PER_POINT);
-  for (const i of lats.keys()) {
+  for (let i = 0; i < pointCount; i++) {
     const base = i * QUAKE_FIELDS_PER_POINT;
     const extraBase = i * QUAKE_EXTRA_FIELDS_PER_POINT;
     lats[i] = flat[base];
@@ -249,6 +221,7 @@ function loadQuakesBuffer(buf: ArrayBuffer): void {
     points: allocateProjectedPoints(pointCount),
   };
   revealedQuakeCount = Math.min(revealedQuakeCount, pointCount);
+  scheduleRender();
 }
 
 function loadFiresBuffer(buf: ArrayBuffer): void {
@@ -256,7 +229,7 @@ function loadFiresBuffer(buf: ArrayBuffer): void {
   const pointCount = Math.floor(flat.length / FIRE_FIELDS_PER_POINT);
   const lats = new Float64Array(pointCount);
   const lons = new Float64Array(pointCount);
-  for (const i of lats.keys()) {
+  for (let i = 0; i < pointCount; i++) {
     const base = i * FIRE_FIELDS_PER_POINT;
     lats[i] = flat[base];
     lons[i] = flat[base + 1];
@@ -268,21 +241,19 @@ function loadFiresBuffer(buf: ArrayBuffer): void {
     points: allocateProjectedPoints(pointCount),
   };
   revealedFireCount = Math.min(revealedFireCount, pointCount);
+  scheduleRender();
 }
 
-// Every revealed, front-facing fire as a speckle at low alpha. Drawn
-// individually (not one batched fill) so overlapping detections ACCUMULATE:
-// isolated fires stay faint, dense regions build into brighter orange - a
-// density read, not a solid blanket.
+// Individual draws preserve density through alpha accumulation.
 const FIRE_SPECKLE_ALPHA = 0.28;
 const FIRE_SPECKLE_SIZE = 1;
 const FIRE_SPECKLE_HALF_SIZE = FIRE_SPECKLE_SIZE / 2;
 const OPAQUE_ALPHA = 1;
 
 function drawFires(points: ProjectedPoints, revealedCount: number): void {
-  ctx.fillStyle = `rgb(${FIRE_RGB})`;
+  ctx.fillStyle = `rgb(${palette.fireRgb})`;
   ctx.globalAlpha = FIRE_SPECKLE_ALPHA;
-  for (const i of points.z.subarray(0, revealedCount).keys()) {
+  for (let i = 0; i < revealedCount; i++) {
     if (points.z[i] <= 0) continue;
     ctx.fillRect(
       points.x[i] - FIRE_SPECKLE_HALF_SIZE,
@@ -312,8 +283,6 @@ function quakeSize(magnitude: number): number {
   return QUAKE_SIZE_ABOVE_ALL_CEILINGS;
 }
 
-// Points facing the viewer (z near 1) render near-full strength; points near
-// the limb (z near 0) fade toward the floor.
 const DEPTH_ALPHA_FLOOR = 0.4;
 const DEPTH_ALPHA_RANGE = 1 - DEPTH_ALPHA_FLOOR;
 const QUAKE_CORE_ALPHA_SCALE = 0.85;
@@ -332,17 +301,14 @@ const QUAKE_GLOW_OUTER_ALPHA = 0;
 const REDUCED_MOTION_PULSE = 1;
 const MAX_PULSE_INTENSITY = 1;
 
-/**
- * `clockMs` is the accumulated render clock, not a per-frame delta: the pulse
- * phase has to advance continuously across frames.
- */
+// Pulse phase uses accumulated render time.
 function drawQuakes(
   points: ProjectedPoints,
   revealedCount: number,
   clockMs: number,
   reducedMotion: boolean
 ): void {
-  for (const i of points.z.subarray(0, revealedCount).keys()) {
+  for (let i = 0; i < revealedCount; i++) {
     const z = points.z[i];
     if (z <= 0) continue;
     const magnitude = quakes.extra[i * QUAKE_EXTRA_FIELDS_PER_POINT];
@@ -365,8 +331,8 @@ function drawQuakes(
       const glowRadius =
         size * (QUAKE_GLOW_BASE_RADIUS_SCALE + intensity * QUAKE_GLOW_INTENSITY_RADIUS_SCALE) * pulse;
       const gradient = ctx.createRadialGradient(px, py, 0, px, py, glowRadius);
-      gradient.addColorStop(0, `rgba(${ACCENT_RGB},${QUAKE_GLOW_INNER_ALPHA})`);
-      gradient.addColorStop(1, `rgba(${ACCENT_RGB},${QUAKE_GLOW_OUTER_ALPHA})`);
+      gradient.addColorStop(0, `rgba(${palette.accentRgb},${QUAKE_GLOW_INNER_ALPHA})`);
+      gradient.addColorStop(1, `rgba(${palette.accentRgb},${QUAKE_GLOW_OUTER_ALPHA})`);
       ctx.globalAlpha = depthAlpha * ageFactor * QUAKE_GLOW_ALPHA_SCALE;
       ctx.fillStyle = gradient;
       ctx.beginPath();
@@ -375,7 +341,7 @@ function drawQuakes(
     }
 
     ctx.globalAlpha = depthAlpha * ageFactor * QUAKE_CORE_ALPHA_SCALE;
-    ctx.fillStyle = `rgb(${ACCENT_RGB})`;
+    ctx.fillStyle = `rgb(${palette.accentRgb})`;
     ctx.beginPath();
     ctx.arc(px, py, size, 0, TWO_PI);
     ctx.fill();
@@ -383,21 +349,49 @@ function drawQuakes(
   ctx.globalAlpha = OPAQUE_ALPHA;
 }
 
-// ── Frame loop ────────────────────────────────────────────────────────────
-
 const GLOBE_RADIUS_SCALE = 0.4;
 const MIN_CANVAS_DIMENSION_PX = 1;
 
 let canvas: OffscreenCanvas | null = null;
 let ctx: OffscreenCanvasRenderingContext2D;
+let palette: GlobePalette;
 let canvasWidth = 0;
 let canvasHeight = 0;
 let canvasDevicePixelRatio = 1;
 let rotationRadians = 0;
 let clockMs = 0;
+let reducedMotion = false;
+let renderingEnabled = false;
+let frameRequestId: number | null = null;
+let lastFrameTimeMs = 0;
 
-function renderFrame(elapsedMs: number, reducedMotion: boolean): void {
-  if (!canvas || canvasWidth === 0 || canvasHeight === 0) return;
+function revealIsComplete(): boolean {
+  return revealedQuakeCount === quakes.count && revealedFireCount === fires.count;
+}
+
+function scheduleRender(): void {
+  if (!renderingEnabled || frameRequestId !== null || !canvas) return;
+  if (canvasWidth === 0 || canvasHeight === 0) return;
+  frameRequestId = requestAnimationFrame(renderFrame);
+}
+
+function setRendering(enabled: boolean): void {
+  renderingEnabled = enabled;
+  lastFrameTimeMs = 0;
+  if (enabled) {
+    scheduleRender();
+    return;
+  }
+  if (frameRequestId !== null) cancelAnimationFrame(frameRequestId);
+  frameRequestId = null;
+}
+
+function renderFrame(nowMs: number): void {
+  frameRequestId = null;
+  if (!renderingEnabled || !canvas || canvasWidth === 0 || canvasHeight === 0) return;
+
+  const elapsedMs = lastFrameTimeMs === 0 ? 0 : nowMs - lastFrameTimeMs;
+  lastFrameTimeMs = nowMs;
 
   clockMs += elapsedMs;
   if (!reducedMotion) rotationRadians += elapsedMs * ROTATION_RADIANS_PER_MS;
@@ -442,17 +436,20 @@ function renderFrame(elapsedMs: number, reducedMotion: boolean): void {
   drawFires(fires.points, revealedFireCount);
   drawQuakes(quakes.points, revealedQuakeCount, clockMs, reducedMotion);
 
-  const bitmap = canvas.transferToImageBitmap();
-  const message: GlobeWorkerToMainMessage = { type: "frame", bitmap };
-  self.postMessage(message, [bitmap]);
+  if (!reducedMotion || !revealIsComplete()) scheduleRender();
 }
 
-function handleInit(canvasFromMain: OffscreenCanvas): void {
+function handleInit(
+  canvasFromMain: OffscreenCanvas,
+  paletteFromMain: GlobePalette,
+  prefersReducedMotion: boolean
+): void {
   canvas = canvasFromMain;
+  palette = paletteFromMain;
+  reducedMotion = prefersReducedMotion;
   ctx = canvas.getContext("2d") as OffscreenCanvasRenderingContext2D;
 }
 
-// Nothing is cached against the viewport, so a resize is just three numbers.
 function handleResize(width: number, height: number, dpr: number): void {
   canvasWidth = width;
   canvasHeight = height;
@@ -461,27 +458,26 @@ function handleResize(width: number, height: number, dpr: number): void {
     canvas.width = Math.max(MIN_CANVAS_DIMENSION_PX, Math.round(width * dpr));
     canvas.height = Math.max(MIN_CANVAS_DIMENSION_PX, Math.round(height * dpr));
   }
+  scheduleRender();
 }
 
 self.onmessage = (event: MessageEvent<GlobeMainToWorkerMessage>) => {
   const data = event.data;
-  switch (data.type) {
-    case "init":
-      handleInit(data.canvas);
-      break;
-    case "resize":
-      handleResize(data.width, data.height, data.dpr);
-      break;
-    case "quakes":
-      loadQuakesBuffer(data.buf);
-      break;
-    case "fires":
-      loadFiresBuffer(data.buf);
-      break;
-    case "frame":
-      renderFrame(data.elapsedMs, data.reduced);
-      break;
-    default:
-      break;
+  if ("enabled" in data) {
+    setRendering(data.enabled);
+    return;
   }
+  if ("canvas" in data) {
+    handleInit(data.canvas, data.palette, data.reducedMotion);
+    return;
+  }
+  if ("width" in data) {
+    handleResize(data.width, data.height, data.dpr);
+    return;
+  }
+  if ("quakes" in data) {
+    loadQuakesBuffer(data.quakes);
+    return;
+  }
+  loadFiresBuffer(data.fires);
 };

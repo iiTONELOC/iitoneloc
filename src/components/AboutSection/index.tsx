@@ -6,7 +6,6 @@ const styles = {
   wrap: "mx-auto max-w-wrap px-5 sm:px-[30px]",
   about: "reveal max-w-[760px]",
   p: "mb-4 text-[16.5px] leading-[1.8] text-[#c5c8cf]",
-  accent: "font-medium text-op-accent",
 };
 
 export const AboutSection = (): JSX.Element => {
@@ -16,24 +15,21 @@ export const AboutSection = (): JSX.Element => {
         <SectionHead marker="about" />
         <div className={styles.about}>
           <p className={styles.p}>
-            Based in Ocala, Florida, I work across software, infrastructure,
-            networking, and security operations. That range helps me find
-            problems at the boundaries between systems. My approach is
-            practical: define trust boundaries, limit access, design safe
-            failure modes, and keep systems easy to operate.
+            My work starts with a practical problem: keeping a network usable
+            during travel, protecting virtual workloads, or making an
+            application work when its connection drops. I work through the
+            constraints, build the system, and take responsibility for its
+            deployment and operation. That includes deciding what happens when
+            a component fails and how the system can recover safely.
           </p>
           <p className={styles.p}>
-            Professional experience includes founding{" "}
-            <span className={styles.accent}>Defend I.T. Solutions</span>{" "}
-            and supporting Python courses at the University of Arizona. I
-            graduated summa cum laude from the university&apos;s NSA CAE-CO
-            Cyber Operations program. Graduate study in{" "}
-            <span className={styles.accent}>
-              Artificial Intelligence with a Data Science concentration
-            </span>{" "}
-            begins at Nova Southeastern University in fall 2026. Target roles
-            include security engineering, DevSecOps, and secure software
-            development.
+            Software development and Linux administration are the foundation
+            of my security work. As a Python course assistant, I also helped
+            students understand their code and work through problems. I
+            graduated summa cum laude from the University of Arizona&apos;s Cyber
+            Operations program. I am now pursuing a master&apos;s in Artificial
+            Intelligence with a Data Science concentration at Nova Southeastern
+            University.
           </p>
         </div>
       </div>

@@ -1,0 +1,189 @@
+{
+  "name": "Anthony Tropeano",
+  "title": "Security Engineer | Network Defense, Secure Infrastructure, and Automation",
+  "location": "Ocala, FL",
+  "phone": {
+    "label": "352.709.3931",
+    "href": "tel:+13527093931"
+  },
+  "email": {
+    "label": "anthony@wedefendit.com",
+    "href": "mailto:anthony@wedefendit.com"
+  },
+  "availability": "Open to remote or relocation",
+  "profiles": [
+    {
+      "label": "atropeano.com",
+      "href": "https://atropeano.com"
+    },
+    {
+      "label": "github.com/iiTONELOC",
+      "href": "https://github.com/iiTONELOC"
+    },
+    {
+      "label": "linkedin.com/in/atrop",
+      "href": "https://www.linkedin.com/in/atrop/"
+    }
+  ],
+  "summary": "Security engineer designing and operating Linux infrastructure, network security appliances, and web applications. Combines deployment automation, applied cryptography, and fail-safe design with responsibility for implementation and operation.",
+  "skills": [
+    {
+      "label": "Languages",
+      "value": "Rust, Python, TypeScript/JavaScript, C/C++, Bash, SQL"
+    },
+    {
+      "label": "Security Engineering",
+      "value": "Network segmentation, Linux hardening, applied cryptography, authentication and authorization, threat modeling, fail-safe design"
+    },
+    {
+      "label": "Security / Infrastructure",
+      "value": "Wazuh, Suricata, Zeek, nftables/UFW, OPNsense, Proxmox VE, Docker, Ansible, WireGuard, Grafana, Prometheus"
+    },
+    {
+      "label": "Application Development",
+      "value": "React, Next.js, Tailwind CSS, Bun, Hono, Node.js, PostgreSQL, MariaDB, REST/GraphQL"
+    }
+  ],
+  "experience": [
+    {
+      "organization": "Defend I.T. Solutions",
+      "role": "Independent Security Engineer",
+      "dates": "May 2025 - Present",
+      "location": "Ocala, FL",
+      "bullets": [
+        "Designed and operate a Linux virtualization platform with automated VM provisioning and VUTM protection for KVM and LXC networks. Built validation, rollback, and fail-closed handling into network changes and inspection transitions.",
+        "Built an Ansible-managed SOC/NOC across two Proxmox nodes. Combined Wazuh host telemetry, network inspection, and operational dashboards to support investigation and ongoing administration.",
+        "Developed a shared safety harness to enforce policy at coding agents' tool boundaries. It checks commands and filesystem access before execution, scans introduced content for malware, and filters secrets. Ownership checks and change receipts support review.",
+        "Researched and authored security governance and cryptographic engineering standards using NIST, FIPS, and RFC sources. Defined implementation requirements and verification criteria for applications, infrastructure, and agent-assisted development."
+      ]
+    },
+    {
+      "organization": "University of Arizona",
+      "role": "Python Course Assistant",
+      "dates": "Nov 2024 - Dec 2025",
+      "location": "Remote",
+      "bullets": [
+        "Mentored cybersecurity students in Python, debugging, and development environment setup.",
+        "Created reusable guides for recurring Python and environment problems, extending support beyond individual sessions."
+      ]
+    },
+    {
+      "organization": "Self-Employed",
+      "role": "Freelance Full-Stack Developer",
+      "dates": "Mar 2025 - Apr 2025",
+      "location": "Remote",
+      "bullets": [
+        "Eliminated hosting costs by rebuilding a legacy Wix site with Next.js, TypeScript, and Tailwind, then deploying it to Vercel."
+      ]
+    },
+    {
+      "organization": "edX/2U",
+      "role": "Full-Stack Web Development Grader",
+      "dates": "Aug 2021 - Nov 2023",
+      "location": "Remote",
+      "bullets": [
+        "Reviewed MERN applications across partner programs for architecture, code quality, and assignment requirements.",
+        "Maintained consistent grading standards through curriculum changes and verified the integrity of submitted work."
+      ]
+    },
+    {
+      "organization": "Eco-Surfacing Foils",
+      "role": "Project Manager",
+      "dates": "May 2017 - Dec 2020",
+      "location": "Ocala, FL",
+      "bullets": [
+        "Managed scheduling, client communication, and cost control for $1M-$1.5M in annual projects."
+      ]
+    }
+  ],
+  "education": [
+    {
+      "institution": "Nova Southeastern University",
+      "program": "M.S. Artificial Intelligence, Data Science",
+      "dates": "2026 - Present | Expected 2028",
+      "honors": null
+    },
+    {
+      "institution": "University of Arizona",
+      "program": "B.A.S., Cyber Operations (Cyber Engineering Emphasis)",
+      "dates": "December 2025",
+      "honors": "Summa Cum Laude | GPA 4.0 | NSA CAE-CO Designated Program | Distinguished Undergraduate Scholar"
+    }
+  ],
+  "certifications": [
+    "NSA Cyber Operations Program Certificate, University of Arizona (December 2025)",
+    "Full-Stack Web Development Certificate, University of Central Florida (August 2021)"
+  ],
+  "projects": [
+    {
+      "name": "TrashScanner",
+      "status": "Defend I.T. Solutions, live",
+      "technologies": "TypeScript, Bun, Hono, React, MariaDB, Ed25519",
+      "bullets": [
+        "Developed and launched an offline-first progressive web application (PWA) using TypeScript, React, and Bun. Users scan products as they run out to maintain shopping lists across phones, desktops, and USB-scanner kiosks.",
+        "Designed offline support for list creation, scanning, and item editing. Changes synchronize in order when connectivity returns, with MariaDB operation records preventing duplicate writes during retries.",
+        "Built account protection around verified sessions, Ed25519 device signatures, and ownership checks within database queries. These controls bind protected operations to the requesting account and its authorized resources."
+      ],
+      "links": []
+    },
+    {
+      "name": "VUTM",
+      "status": "Daily IDS operation",
+      "technologies": "Ubuntu, KVM, LXC, Suricata, nftables, Unbound, WireGuard",
+      "bullets": [
+        "Built a shared network security layer for KVM virtual machines and LXC containers on an Ubuntu virtualization host. Centralized encrypted DNS, threat filtering, and Suricata inspection across protected virtual networks.",
+        "Designed an IDS-to-IPS transition that derives candidate rules from observed workload traffic and validates them before activation. Added fail-closed handling during transitions and recovery. Operate the platform daily in IDS mode; inline blocking remains pending."
+      ],
+      "links": []
+    },
+    {
+      "name": "SAFE-PC",
+      "status": "Operational since November 2025",
+      "technologies": "Python, Proxmox VE, OPNsense, Suricata, ZFS",
+      "bullets": [
+        "Developed an automated security-appliance framework to repurpose obsolete PCs for small-office and home-office networks. A Proxmox and OPNsense deployment has operated since November 2025.",
+        "Automated media verification and unattended firewall installation using asynchronous Python and serial-console control. The hardware case study completed automated configuration in 27 minutes."
+      ],
+      "links": [
+        {
+          "label": "Source",
+          "href": "https://github.com/iiTONELOC/safe-pc"
+        }
+      ]
+    },
+    {
+      "name": "O-Tether",
+      "status": "Tested RV deployment, private source",
+      "technologies": "Linux, Bash, nftables, Suricata, Unbound, systemd",
+      "bullets": [
+        "Engineered and deployed an ARM network-security appliance for RV use. Automated iPhone USB tethering and teardown so devices retain their existing Wi-Fi configuration without routine network administration.",
+        "Resolved older Linux kernel limitations with transactional nftables updates. Integrated encrypted DNS and Suricata inspection with fail-closed activation, enabling forwarding only after the protected network path is ready."
+      ],
+      "links": [
+        {
+          "label": "Case study",
+          "href": "https://www.wedefendit.com/services/custom-solutions/o-tether"
+        }
+      ]
+    },
+    {
+      "name": "SIGINT",
+      "status": "Live",
+      "technologies": "TypeScript, React, Bun, Canvas 2D, Web Workers",
+      "bullets": [
+        "Built and deployed an OSINT dashboard that brings fragmented public event feeds into one global view. Added source correlation and scored alerts to help users interpret related reports.",
+        "Designed a custom Canvas 2D globe rendered in Web Workers. Moving continuous rendering off the main thread keeps React available for interaction as live data changes."
+      ],
+      "links": [
+        {
+          "label": "Source",
+          "href": "https://github.com/iiTONELOC/sigint"
+        },
+        {
+          "label": "Live demo",
+          "href": "https://sigint-5154d935429b.herokuapp.com"
+        }
+      ]
+    }
+  ]
+}

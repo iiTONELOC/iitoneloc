@@ -17,10 +17,10 @@ export const SectionHead = (props: {
 }): JSX.Element => {
   const { marker, count } = props;
   return (
-    <div className={styles.head}>
-      <span className={styles.marker}>// {marker}</span>
-      <span className={styles.line} />
+    <h2 className={styles.head}>
+      <span className={styles.marker}>{`// ${marker}`}</span>
+      <span className={styles.line} aria-hidden="true" />
       {count ? <span className={styles.count}>{count}</span> : null}
-    </div>
+    </h2>
   );
 };

@@ -6,7 +6,7 @@ export const links = [
   { to: "/resume", text: "resume" },
 ];
 
-export type Links = typeof links;
+type Links = typeof links;
 
 export type Link = Links[number];
 
@@ -15,9 +15,14 @@ export type Link = Links[number];
  */
 export const externalLinks = {
   github: "https://github.com/iiTONELOC",
-  linkedin: "https://linkedin.com/in/anthony-t-29353b201/",
+  linkedin: "https://www.linkedin.com/in/atrop/",
   company: "https://wedefendit.com",
   email: "anthony@wedefendit.com",
+  sigint: "https://sigint-5154d935429b.herokuapp.com",
+  trashscanner: "https://trashscanner.wedefendit.com",
+  trashscannerSource: "https://github.com/wedefendit/trashscanner",
+  oTetherCaseStudy:
+    "https://www.wedefendit.com/services/custom-solutions/o-tether",
   resume: "/resume",
   resumePdf: "/docs/anthony_tropeano_resume.pdf",
 };

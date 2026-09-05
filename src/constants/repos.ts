@@ -21,7 +21,7 @@ export const githubStripRepos: GithubRepo[] = [
   {
     name: "safe-pc",
     description:
-      "Turns older x86-64 computers into unattended security appliances for small networks. It uses Proxmox, OPNsense, Suricata, and Python automation.",
+      "Repurposes older x86-64 PCs as security appliances for small networks. Python automation verifies installation media and drives unattended Proxmox and OPNsense setup.",
     language: "Python",
     url: "https://github.com/iiTONELOC/safe-pc",
     updated: "2025-11-26",

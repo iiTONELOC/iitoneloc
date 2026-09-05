@@ -1,38 +1,31 @@
 import { Input } from "./inputs/Input";
 import { validateMessage } from "./inputs/utils";
-import { InputProps, inputTypes } from "./inputs/types";
+import type { InputProps, ValidateFn } from "./inputs/types";
 
 export default function ContactMessage({
-  //NOSONAR
   onChange,
   currentValue,
   setValidated,
-}: InputProps): JSX.Element {
-  const validate = (
-    e: React.SyntheticEvent,
-    setValidated: inputTypes["setValidated"],
-    _setError: React.Dispatch<React.SetStateAction<string | null>>,
-    _clearError: Function
-  ) => {
-    const { value } = e.target as HTMLInputElement;
-    const len = value.length;
+}: Readonly<InputProps>): JSX.Element {
+  const validate: ValidateFn = (e, setFieldValidated, setError, clearError) => {
+    const { value } = e.target as HTMLTextAreaElement;
 
-    if (len === 0) {
-      _setError("A message is required");
-      setValidated(false);
-      _clearError();
+    if (value.length === 0) {
+      setError("A message is required");
+      setFieldValidated(false);
+      clearError();
+      return;
     }
-    if (len > 0) {
-      const isValid = validateMessage(value);
-      if (!isValid) {
-        _setError("Please enter a valid message");
-        setValidated(false);
-        _clearError();
-      } else {
-        setValidated(true);
-        _setError(null);
-      }
+
+    if (validateMessage(value)) {
+      setError(null);
+      setFieldValidated(true);
+      return;
     }
+
+    setError("Please enter a valid message");
+    setFieldValidated(false);
+    clearError();
   };
 
   return (
@@ -46,7 +39,7 @@ export default function ContactMessage({
       validate={validate}
       currentValue={currentValue}
       setValidated={setValidated}
-      placeholder={`What can I help with?`}
+      placeholder="What can I help with?"
       description="Enter your message"
     />
   );
