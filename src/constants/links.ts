@@ -18,7 +18,7 @@ export const externalLinks = {
   linkedin: "https://www.linkedin.com/in/atrop/",
   company: "https://wedefendit.com",
   email: "anthony@wedefendit.com",
-  sigint: "https://sigint-5154d935429b.herokuapp.com",
+  sigint: "https://sigint.atropeano.com",
   trashscanner: "https://trashscanner.wedefendit.com",
   trashscannerSource: "https://github.com/wedefendit/trashscanner",
   oTetherCaseStudy:
