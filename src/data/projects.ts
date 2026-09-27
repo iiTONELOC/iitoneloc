@@ -61,7 +61,7 @@ export const projects: Project[] = [
     ],
     meta: [{ label: ProjectMetaLabel.Type, value: "Offline-first PWA" }],
     links: [
-      { label: "live app", href: "https://iitoneloc.github.io/lucerna/" },
+      { label: "live app", href: "https://praylucerna.com" },
       { label: "source", href: "https://github.com/iiTONELOC/lucerna" },
     ],
   },
