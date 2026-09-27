@@ -2,11 +2,11 @@
 const cspHeader = `
   default-src 'self';
   img-src 'self' data:;
-  script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.google.com https://www.gstatic.com;
+  script-src 'self' 'unsafe-inline' 'unsafe-eval';
   style-src 'self' 'unsafe-inline';
   connect-src 'self' https://earthquake.usgs.gov;
   worker-src 'self' blob:;
-  frame-src 'self' https://www.google.com;
+  frame-src 'self';
   font-src 'self';
   object-src 'self';
   base-uri 'self';

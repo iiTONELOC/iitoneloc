@@ -8,9 +8,6 @@ COPY package.json package-lock.json .npmrc ./
 RUN npm ci --ignore-scripts
 
 FROM deps AS build
-ARG NEXT_PUBLIC_CAPTCHA_SITE_KEY
-RUN test -n "$NEXT_PUBLIC_CAPTCHA_SITE_KEY" \
-  || { echo "NEXT_PUBLIC_CAPTCHA_SITE_KEY build arg is required" >&2; exit 1; }
 COPY next.config.mjs postcss.config.mjs tailwind.config.ts tsconfig.json tsconfig.server.json tsconfig.worker.json ./
 COPY server ./server
 COPY src ./src
