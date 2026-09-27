@@ -1,5 +1,7 @@
 "use server";
 
+import { SecretName, getSecret } from "@/lib/secrets";
+
 type SendEmailState = {
   sent: boolean | null;
 };
@@ -12,10 +14,10 @@ export async function sendEmail(
   formData: FormData
 ): Promise<SendEmailState> {
   const data = {
-    service_id: process.env.EMAIL_SERVICE_ID,
-    template_id: process.env.EMAIL_TEMPLATE_ID,
-    user_id: process.env.EMAIL_PUB_TOKEN,
-    accessToken: process.env.EMAIL_ACCESS_TOKEN,
+    service_id: getSecret(SecretName.EmailServiceId),
+    template_id: getSecret(SecretName.EmailTemplateId),
+    user_id: getSecret(SecretName.EmailPubToken),
+    accessToken: getSecret(SecretName.EmailAccessToken),
     template_params: {
       user_name: formData.get("user_name"),
       from_Email: formData.get("user_email"),

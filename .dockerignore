@@ -1,0 +1,17 @@
+*
+!package.json
+!package-lock.json
+!.npmrc
+!next.config.mjs
+!postcss.config.mjs
+!tailwind.config.ts
+!tsconfig.json
+!tsconfig.server.json
+!tsconfig.worker.json
+!server
+!src
+!public
+**/.env*
+**/*.tsbuildinfo
+**/.DS_Store
+public/workers/*.js

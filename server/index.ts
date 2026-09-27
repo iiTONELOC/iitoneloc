@@ -2,6 +2,7 @@ import next from 'next';
 import { createServer } from 'http';
 import type { UrlWithParsedQuery } from 'url';
 import { externalLinks } from '../src/constants/links';
+import { loadSecrets } from '../src/lib/secrets';
 
 const canonicalHost = 'atropeano.com';
 const wwwHost = `www.${canonicalHost}`;
@@ -96,6 +97,7 @@ const refreshFires = async (): Promise<void> => {
 };
 
 const startServer = async () => {
+    await loadSecrets();
     const port = Number.parseInt(process.env.PORT ?? '5500', 10);
     const dev = process.env.NODE_ENV !== 'production';
 
@@ -105,7 +107,6 @@ const startServer = async () => {
 
 
     app.prepare().then(() => {
-        // Warm the fire cache at boot, then keep it fresh on an interval.
         void refreshFires();
         setInterval(() => {
             void refreshFires();
