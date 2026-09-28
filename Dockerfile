@@ -1,3 +1,4 @@
+# syntax=docker/dockerfile:1
 # node:24-bookworm-slim, Node v24.21.0
 FROM node@sha256:0e0ff40c39bc087845bfb27465a0df4ea419520094bc35842ff83dd8cbe6f9b6 AS base
 ENV NEXT_TELEMETRY_DISABLED=1
@@ -27,8 +28,8 @@ RUN if getent passwd 712 || getent group 712; then \
   && groupadd --system --gid 712 app \
   && useradd --system --uid 712 --gid 712 --home-dir /nonexistent \
        --no-create-home --shell /usr/sbin/nologin app
-ENV NODE_ENV=production PORT=5000
-COPY package.json next.config.mjs ./
+ENV NODE_ENV=production
+COPY package.json app.json next.config.mjs ./
 COPY --from=prod-deps /app/node_modules ./node_modules
 COPY --from=build /app/dist ./dist
 COPY --from=build /app/public ./public

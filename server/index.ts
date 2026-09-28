@@ -1,11 +1,9 @@
 import next from 'next';
-import { createServer } from 'http';
-import type { UrlWithParsedQuery } from 'url';
+import { createServer, type IncomingMessage, type ServerResponse } from 'http';
 import { externalLinks } from '../src/constants/links';
 
 const canonicalHost = 'atropeano.com';
 const wwwHost = `www.${canonicalHost}`;
-const strictTransportSecurity = 'max-age=31536000; includeSubDomains';
 const HTTP_STATUS_SERVICE_UNAVAILABLE = 503;
 type HeaderValue = string | string[] | undefined;
 
@@ -34,6 +32,9 @@ const SIGINT_AUTH_URL = new URL('/api/auth/token', externalLinks.sigint).toStrin
 const SIGINT_FIRES_URL = new URL('/api/fires/latest', externalLinks.sigint).toString();
 const FIRE_REFRESH_MS = 30 * 60 * 1000;
 const FIRE_FETCH_TIMEOUT_MS = 30_000;
+const FIRE_STARTUP_RETRY_MS = 60_000;
+const MAX_LISTEN_PORT = 65535;
+const INVALID_PORT_MESSAGE = `PORT must be set to an integer from 1 to ${MAX_LISTEN_PORT}`;
 let fireBuffer: Buffer = Buffer.alloc(0);
 
 const isRecord = (value: unknown): value is Record<string, unknown> =>
@@ -88,96 +89,62 @@ const fetchFireBuffer = async (): Promise<Buffer | null> => {
 
 const refreshFires = async (): Promise<void> => {
     const nextBuffer = await fetchFireBuffer();
-    if (nextBuffer) {
-        fireBuffer = nextBuffer;
-        return;
+    if (nextBuffer) fireBuffer = nextBuffer;
+    else console.warn('SIGINT fire refresh failed; retaining the previous cache');
+    const delay = fireBuffer.byteLength ? FIRE_REFRESH_MS : FIRE_STARTUP_RETRY_MS;
+    setTimeout(() => { void refreshFires(); }, delay).unref();
+};
+
+const serveFires = (res: ServerResponse): void => {
+    if (fireBuffer.byteLength === 0) {
+        res.statusCode = HTTP_STATUS_SERVICE_UNAVAILABLE;
+        res.setHeader('Cache-Control', 'no-store');
+    } else {
+        res.setHeader('Content-Type', 'application/octet-stream');
+        res.setHeader('Cache-Control', 'public, max-age=300');
     }
-    console.warn('SIGINT fire refresh failed; retaining the previous cache');
+    res.end(fireBuffer);
 };
 
-const startServer = async () => {
-    const port = Number.parseInt(process.env.PORT ?? '5500', 10);
+const redirectCanonical = (req: IncomingMessage, res: ServerResponse): boolean => {
+    const requestHost = getRequestHost(req.headers['x-forwarded-host'] ?? req.headers.host);
+    const forwardedProto = getForwardedProto(req.headers['x-forwarded-proto']);
+    if (requestHost !== wwwHost && !(requestHost === canonicalHost && forwardedProto === 'http')) return false;
+    const location = new URL(`https://${canonicalHost}${req.url?.startsWith('/') ? req.url : '/'}`);
+    res.statusCode = 308;
+    res.setHeader('Location', location.toString());
+    res.setHeader('Vary', 'Host, X-Forwarded-Proto');
+    res.end();
+    return true;
+};
+
+const startServer = async (): Promise<void> => {
+    const rawPort = process.env.PORT ?? '';
+    const port = Number(rawPort);
+    if (!/^\d+$/.test(rawPort) || port < 1 || port > MAX_LISTEN_PORT) {
+        throw new RangeError(INVALID_PORT_MESSAGE);
+    }
     const dev = process.env.NODE_ENV !== 'production';
-
     const app = next({ dev });
+    await app.prepare();
     const handle = app.getRequestHandler();
-
-
-
-    app.prepare().then(() => {
-        void refreshFires();
-        setInterval(() => {
-            void refreshFires();
-        }, FIRE_REFRESH_MS);
-
-        createServer((req, res) => {
-            // WHATWG URL parsing (legacy url.parse is deprecated, DEP0169). The
-            // base is only used to satisfy the parser; we read path/query only.
-            const url = new URL(req.url ?? '/', `http://${req.headers.host ?? 'localhost'}`);
-
-            // Served straight from the in-memory FIRMS cache (always-on process).
-            if (url.pathname === '/api/fires') {
-                if (fireBuffer.byteLength === 0) {
-                    res.statusCode = HTTP_STATUS_SERVICE_UNAVAILABLE;
-                    res.setHeader('Cache-Control', 'no-store');
-                    res.end();
-                    return;
-                }
-                res.statusCode = 200;
-                res.setHeader('Content-Type', 'application/octet-stream');
-                res.setHeader('Cache-Control', 'public, max-age=300');
-                res.end(fireBuffer);
-                return;
-            }
-
-            const requestHost = getRequestHost(
-                req.headers['x-forwarded-host'] ?? req.headers.host
-            );
-            const forwardedProto = getForwardedProto(req.headers['x-forwarded-proto']);
-            const shouldRedirectHost = requestHost === wwwHost;
-            const shouldRedirectProto =
-                requestHost === canonicalHost && forwardedProto === 'http';
-
-            if (!dev && (shouldRedirectHost || shouldRedirectProto)) {
-                const location = new URL(req.url ?? '/', `https://${canonicalHost}`);
-
-                res.statusCode = 308;
-                res.setHeader('Location', location.toString());
-                res.setHeader('Vary', 'Host, X-Forwarded-Proto');
-
-                if (forwardedProto !== 'http') {
-                    res.setHeader('Strict-Transport-Security', strictTransportSecurity);
-                }
-
-                res.end();
-                return;
-            }
-
-            const parsedUrl = {
-                pathname: url.pathname,
-                search: url.search,
-                path: url.pathname + url.search,
-                href: url.pathname + url.search,
-                query: Object.fromEntries(url.searchParams),
-            } as unknown as UrlWithParsedQuery;
-            handle(req, res, parsedUrl);
-        }).listen(port)
-
-        console.log(
-            `> Server listening at http://localhost:${port} as ${dev ? 'development' : process.env.NODE_ENV
-            }`
-        )
+    const server = createServer((req, res) => {
+        const url = new URL(req.url ?? '/', 'http://localhost');
+        if (url.pathname === '/api/fires') { serveFires(res); return; }
+        if (!dev && redirectCanonical(req, res)) return;
+        void handle(req, res);
     });
+    await new Promise<void>((resolve, reject) => {
+        server.once('error', reject);
+        server.listen(port, '0.0.0.0', resolve);
+    });
+    void refreshFires();
+    console.log(`> Server listening on port ${port}`);
 };
-
 
 if (require.main === module) {
-    (async () => {
-        try {
-            await startServer();
-        } catch (error) {
-            console.error(error);
-            process.exit(1);
-        }
-    })()
+    startServer().catch((error: unknown) => {
+        console.error(error);
+        process.exit(1);
+    });
 }

@@ -14,7 +14,6 @@ const cspHeader = `
   frame-ancestors 'self';
   `;
 
-const isProduction = process.env.NODE_ENV === "production";
 const appleTouchIconPath = "/images/apple-touch-icon.png";
 const appleTouchIconRoutes = [
   {
@@ -31,14 +30,6 @@ const securityHeaders = [
     key: "Content-Security-Policy",
     value: cspHeader.replaceAll("\n", "").trim(),
   },
-  ...(isProduction
-    ? [
-        {
-          key: "Strict-Transport-Security",
-          value: "max-age=31536000; includeSubDomains",
-        },
-      ]
-    : []),
 ];
 
 const nextConfig = {
