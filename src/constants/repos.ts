@@ -19,12 +19,12 @@ export interface GithubRepo {
 
 export const githubStripRepos: GithubRepo[] = [
   {
-    name: "safe-pc",
+    name: "0xDL",
     description:
-      "Repurposes older x86-64 PCs as security appliances for small networks. Python automation verifies installation media and drives unattended Proxmox and OPNsense setup.",
-    language: "Python",
-    url: "https://github.com/iiTONELOC/safe-pc",
-    updated: "2025-11-26",
+      "Rust library for fast, reliable asynchronous file downloads, with optional SHA-256 verification and atomic placement of the finished file. Published on crates.io.",
+    language: "Rust",
+    url: "https://github.com/iiTONELOC/0xDL",
+    updated: "2025-12-13",
   },
   {
     name: "pveauto",
