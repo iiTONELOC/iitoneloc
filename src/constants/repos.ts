@@ -24,7 +24,7 @@ export const githubStripRepos: GithubRepo[] = [
       "Rust library for fast, reliable asynchronous file downloads, with optional SHA-256 verification and atomic placement of the finished file. Published on crates.io.",
     language: "Rust",
     url: "https://github.com/iiTONELOC/0xDL",
-    updated: "2025-12-13",
+    updated: "2026-10-19",
   },
   {
     name: "pveauto",
@@ -32,7 +32,15 @@ export const githubStripRepos: GithubRepo[] = [
       "Rust library and command-line tool that downloads Proxmox VE ISO images and verifies their integrity.",
     language: "Rust",
     url: "https://github.com/iiTONELOC/pveauto",
-    updated: "2025-12-27",
+    updated: "2026-10-19",
+  },
+  {
+    name: "rusty_list",
+    description:
+      "no_std intrusive doubly linked list with a safe public API, O(1) linking, one node per list through type tags, and Miri and fuzzing in CI. Published on crates.io.",
+    language: "Rust",
+    url: "https://github.com/iiTONELOC/rusty_list",
+    updated: "2026-10-19",
   },
   {
     name: "threads-kernel",

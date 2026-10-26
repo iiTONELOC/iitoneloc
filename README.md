@@ -20,6 +20,7 @@ Public work: [Lucerna](https://github.com/iiTONELOC/lucerna) · [SIGINT](https:/
 
 - **[0xDL](https://crates.io/crates/oxdl)**: Rust library for asynchronous downloads with cryptographic integrity checks.
 - **[pveauto](https://crates.io/crates/pveauto)**: Rust library and command-line tool that downloads Proxmox VE ISO images and verifies their integrity.
+- **[RustyList](https://crates.io/crates/rusty_list)**: `no_std` intrusive doubly linked list with a safe public API, O(1) linking, and one node per list through type tags.
 
 ## Systems and research
 
