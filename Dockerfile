@@ -1,4 +1,4 @@
-# syntax=docker/dockerfile:1
+# syntax=docker/dockerfile:1@sha256:4edf897a3ffa55b89f906fc8cc78afdb3f1834cc9c7083565e611a8a7d5fe99e
 # node:24-bookworm-slim, Node v24.21.0
 FROM node@sha256:0e0ff40c39bc087845bfb27465a0df4ea419520094bc35842ff83dd8cbe6f9b6 AS base
 ENV NEXT_TELEMETRY_DISABLED=1
@@ -27,7 +27,8 @@ RUN if getent passwd 712 || getent group 712; then \
     fi \
   && groupadd --system --gid 712 app \
   && useradd --system --uid 712 --gid 712 --home-dir /nonexistent \
-       --no-create-home --shell /usr/sbin/nologin app
+       --no-create-home --shell /usr/sbin/nologin app \
+  && : > /etc/machine-id
 ENV NODE_ENV=production
 COPY package.json app.json next.config.mjs ./
 COPY --from=prod-deps /app/node_modules ./node_modules
@@ -36,4 +37,5 @@ COPY --from=build /app/public ./public
 COPY --from=build /app/.next ./.next
 RUN ln -s /tmp .next/cache
 USER 712:712
-CMD ["node", "dist/server/index.js"]
+ENTRYPOINT ["/usr/local/bin/node"]
+CMD ["dist/server/index.js"]
